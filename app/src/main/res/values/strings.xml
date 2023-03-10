@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">alcoholRecipe</string>
+
+    <string name="txt_login_btn">로그인</string>
+    <string name="txt_register_btn">신규 계정 생성</string>
+    <string name="txt_register_btn2">카카오 계정 생성</string>
+
+
+</resources>
