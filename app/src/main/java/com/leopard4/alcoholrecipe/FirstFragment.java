@@ -67,7 +67,7 @@ public class FirstFragment extends Fragment {
         btnRecipe = view.findViewById(R.id.btnMyRecipe);
         btnGame = view.findViewById(R.id.btnGame);
         btnDogam = view.findViewById(R.id.btnDogam);
-        btnToast = view.findViewById(R.id.btnMyToast);
+        btnToast = view.findViewById(R.id.btnToast);
         // Inflate the layout for this fragment
 
         btnRecipe.setOnClickListener(new View.OnClickListener() {

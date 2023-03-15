@@ -18,47 +18,15 @@
             android:layout_margin="7dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#AAA8A8"
-                android:background="@drawable/boxline_24"
-                android:src="@drawable/baseline_search_24"/>
-
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/boxline_24"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:orientation="horizontal">
-
             <Button
                 android:id="@+id/btnMyRecipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
-                android:backgroundTint="#E91E63"
-                android:text="레시피" />
+                android:backgroundTint="#4A1A9F"
+                android:text="레시피"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnGame"
@@ -66,8 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
-                android:backgroundTint="#E91E63"
-                android:text="오락실" />
+                android:backgroundTint="#4A1A9F"
+                android:text="오락실"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnDogam"
@@ -75,8 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
-                android:backgroundTint="#E91E63"
-                android:text="술도감" />
+                android:backgroundTint="#4A1A9F"
+                android:text="술도감"
+                android:textSize="16sp" />
+
         </LinearLayout>
 
         <ScrollView
@@ -90,30 +61,57 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="제조기" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_surround_sound_24" />
+                        <TextView
+                            android:id="@+id/textView86"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="건배사 제조기"
+                            android:textColor="#FFC107"
+                            android:textColorHighlight="#FFC107"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/imageView24"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/baseline_volume_up_24" />
+
+                        <Button
+                            android:id="@+id/btnToast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:backgroundTint="#332E2E"
+                            android:text="+ 더보기"
+                            android:textColor="#FFC107" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView84"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:text="재미있고 편리한 건배사 제조" />
+                    </LinearLayout>
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="우리 수석 주방장이 직접 알려준다!" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -145,7 +143,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="7dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -168,6 +166,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -192,40 +191,22 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="국내 최초"
-                    android:textColor="#E91E63" />
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="인공지능이 제조하는 맛깔나는 건배사! 손님이 원하는 단어를 제시하면 우리의 수석 주방장 '김인공'씨가 멋진 건배사를 만들어 줄게 ! 어때?" />
-
-                <Button
-                    android:id="@+id/btnMyToast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="7dp"
-                    android:backgroundTint="#03A9F4"
-                    android:text="제조기 가동" />
-
-                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오늘의 추천" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="오늘의 실험"
+                    android:textColor="#FFC107"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="주인장이 직접 추천한다!" />
+                    android:layout_marginTop="3dp"
+                    android:text="주인장이 직접 추천하는 공식 레시피" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
@@ -236,18 +217,27 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="명예 주인장" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="명예 주인장"
+                    android:textColor="#FFC107"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="우리들이 인정한 주인장의 레시피!" />
+                    android:layout_marginTop="3dp"
+                    android:text="우리들이 인정한 손님들의 창작 레시피" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp" />
 
             </LinearLayout>
         </ScrollView>
