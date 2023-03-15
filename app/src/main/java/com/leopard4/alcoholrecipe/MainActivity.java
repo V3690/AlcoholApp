@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        getSupportActionBar().setTitle("홈");
+//        getSupportActionBar().setTitle("홈");
 
         navigationView = findViewById(R.id.bottomNavigationView);
 
@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if(itemId == R.id.firstFragment) {
                     fragment = firstFragment;
-                    getSupportActionBar().setTitle("홈");
+//                    getSupportActionBar().setTitle("홈");
                 } else if(itemId == R.id.secondFragment) {
                     fragment = secondFragment;
-                    getSupportActionBar().setTitle("즐겨찾기");
+//                    getSupportActionBar().setTitle("즐겨찾기");
                 } else {
                     fragment = thirdFragment;
-                    getSupportActionBar().setTitle("마이 페이지");
+//                    getSupportActionBar().setTitle("마이 페이지");
                 }
                 return loadFragment(fragment);
             }
