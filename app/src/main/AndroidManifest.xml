@@ -42,7 +42,7 @@
             android:name=".GameFaceActivity"
             android:exported="false" />
         <activity
-            android:name=".GameToastMakerActivity"
+            android:name=".GameToastFactoryActivity"
             android:exported="false" />
         <activity
             android:name=".GameToastActivity"

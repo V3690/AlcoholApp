@@ -9,19 +9,19 @@ import android.widget.Button;
 
 public class GameToastActivity extends AppCompatActivity {
 
-    Button btnToast;
+    Button btnMyToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_toast);
 
-        btnToast = findViewById(R.id.btnMyToast);
+        btnMyToast = findViewById(R.id.btnMyToast);
 
-        btnToast.setOnClickListener(new View.OnClickListener() {
+        btnMyToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameToastActivity.this, GameToastMakerActivity.class);
+                Intent intent = new Intent(GameToastActivity.this, GameToastFactoryActivity.class);
                 startActivity(intent);
                 finish();
             }
