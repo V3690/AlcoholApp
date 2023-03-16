@@ -21,6 +21,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".MyRecipeWriteSecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipeWriteFirstActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipeActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterInfoActivity"
             android:exported="false" />
         <activity

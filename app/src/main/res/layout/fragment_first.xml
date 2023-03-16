@@ -211,7 +211,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="150dp" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -234,7 +234,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="150dp"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="3dp" />

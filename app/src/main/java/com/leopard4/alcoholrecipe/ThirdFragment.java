@@ -1,5 +1,6 @@
 package com.leopard4.alcoholrecipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,14 @@ public class ThirdFragment extends Fragment {
         btnSecession = view.findViewById(R.id.btnSecession);
         btnEdit = view.findViewById(R.id.btnEdit);
         editName = view.findViewById(R.id.editName);
+
+        btnMyRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
