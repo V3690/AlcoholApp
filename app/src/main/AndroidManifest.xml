@@ -20,6 +20,17 @@
         android:theme="@style/Theme.AlcoholRecipe"
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
+
+        <provider
+            android:authorities="com.leopard4.alcoholrecipe.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider"/>
+        </provider>
+
         <activity
             android:name=".MyRecipeWriteSecondActivity"
             android:exported="false" />

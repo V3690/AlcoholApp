@@ -5,5 +5,12 @@
     <string name="txt_register_btn">신규 계정 생성</string>
     <string name="txt_register_btn2">카카오 계정 생성</string>
 
+    <string name="alert_title">선택하세요</string>
+
+    <string-array name="alert_photo">
+        <item>카메라로 사진찍기</item>
+        <item>앨범에서 가져오기</item>
+    </string-array>
+
 
 </resources>

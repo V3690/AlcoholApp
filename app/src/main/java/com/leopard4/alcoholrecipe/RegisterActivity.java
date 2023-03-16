@@ -71,8 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 // 닉네임 체크
-                String username = editNickName.getText().toString().trim();
-                if(username.length() < 2 || username.length() > 12){
+                String nickname = editNickName.getText().toString().trim();
+                if(nickname.length() < 2 || nickname.length() > 12){
                     Toast.makeText(RegisterActivity.this, "닉네임 길이를 확인하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserApi api = retrofit.create(UserApi.class); // 레트로핏으로 서버에 요청할 객체 생성
 
 
-                User user = new User(username, email, password); // User 객체 생성
+                User user = new User(email, password, nickname); // User 객체 생성
                 Call<UserRes> call = api.register(user); // 서버에 요청
 
                 call.enqueue(new Callback<UserRes>() { // 비동기로 서버에 요청
