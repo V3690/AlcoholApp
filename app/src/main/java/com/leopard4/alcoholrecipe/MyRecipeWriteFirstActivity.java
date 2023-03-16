@@ -168,63 +168,63 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                 showProgress("포스팅 업로드 중...");
 
-//                Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
-//                CreatingApi api = retrofit.create(CreatingApi.class);
+                Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
+                CreatingApi api = retrofit.create(CreatingApi.class);
 
 
                 // title, engTitle, intro, percent, content, img
                 // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-//                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
-//                MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
+                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
+                MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
 
 
 
                 // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터를 만든다.
                 // title
-//                RequestBody titleBody = RequestBody.create(title, MediaType.parse("text/plain"));
-//                //engTitle
-//                RequestBody engTitleBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
-//                //intro
-//                RequestBody introBody = RequestBody.create(intro, MediaType.parse("text/plain"));
-//                // percent
-//                RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
-//                // content
-//                RequestBody contentBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
-//
-//                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-//                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+                RequestBody titleBody = RequestBody.create(title, MediaType.parse("text/plain"));
+                //engTitle
+                RequestBody engTitleBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
+                //intro
+                RequestBody introBody = RequestBody.create(intro, MediaType.parse("text/plain"));
+                // percent
+                RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
+                // content
+                RequestBody contentBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
+
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
                 // title, engTitle, intro, percent, content, img
 
-//                Call<Res> call = api.addRecipe(accessToken,
-//                        titleBody,
-//                        engTitleBody,
-//                        introBody,
-//                        percentBody,
-//                        contentBody,
-//                        img);
+                Call<Res> call = api.addRecipe(accessToken,
+                        titleBody,
+                        engTitleBody,
+                        introBody,
+                        percentBody,
+                        contentBody,
+                        img);
 
-//                call.enqueue(new Callback() {
-//                    @Override
-//                    public void onResponse(Call call, Response response) {
-//                        dismissProgress();
-//                        if (response.isSuccessful()){
-//
-//                            Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
-//                            startActivity(intent);
-//
-//                        } else {
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call call, Throwable t) {
-//                        dismissProgress();
-//
-//                    }
-//                });
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        dismissProgress();
+                        if (response.isSuccessful()){
+
+                            Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
+                            startActivity(intent);
+
+                        } else {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        dismissProgress();
+
+                    }
+                });
 
 
             }
