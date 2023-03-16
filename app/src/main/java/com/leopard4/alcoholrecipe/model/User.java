@@ -9,10 +9,10 @@ public class User implements Serializable {
 //            "email": "TTT@naver.com",
 //            "password": "1234"
 //    }
-
-    private String username;
     private String email;
     private String password;
+
+    private String nickname;
 
     public User() {
     }
@@ -22,10 +22,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User( String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
+
     }
 
 }
