@@ -95,7 +95,7 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
 
 //                    Log.i("SELETED_INDEX", alcohol.getId() + " " +alcohol.getName());
 
-                    Intent intent = new Intent(context, SeletedAlcoholAdapter.ViewHolder);
+//                    Intent intent = new Intent(context, SeletedAlcoholAdapter.ViewHolder);
 
 
 

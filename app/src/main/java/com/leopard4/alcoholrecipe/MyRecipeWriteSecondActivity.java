@@ -41,6 +41,8 @@ import retrofit2.Retrofit;
 public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
     // 알콜 부분 //
+    // xml 파일에서는 현재 textview 로 되어있기 때문에
+    // 코드 작성할 때 xml 을 recyclerView 로 수정하고 작성해야함
     RecyclerView alcoholListRecyclerView;
     TextView txtAlcoholCount;
     EditText editSearchAlcohol;
@@ -92,7 +94,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_recipe_write_second);
 
         // 알콜 부분
-        alcoholListRecyclerView = findViewById(R.id.alcoholListRecyclerView);
+//        alcoholListRecyclerView = findViewById(R.id.alcoholListRecyclerView);
         txtAlcoholCount = findViewById(R.id.txtAlcoholCount);
         editSearchAlcohol = findViewById(R.id.editSearchAlcohol);
         imgSearchAlcohol = findViewById(R.id.imgSearchAlcohol);

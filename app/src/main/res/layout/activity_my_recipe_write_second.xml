@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     tools:context=".MyRecipeWriteSecondActivity">
 
     <ScrollView
@@ -83,8 +82,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
-
-
             <TextView
                 android:id="@+id/txtAlcohol"
                 android:layout_width="match_parent"
@@ -94,7 +91,6 @@
                 android:paddingBottom="10dp"
                 android:text="TextView"
                 android:textSize="14sp" />
-
 
         </LinearLayout>
 
@@ -120,8 +116,7 @@
                 android:textSize="14sp" />
 
             <TextView
-
-                android:id="@+id/txtCount1"
+                android:id="@+id/txtAlcoholCount"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -130,7 +125,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editSearch1"
+                android:id="@+id/editSearchAlcohol"
                 android:layout_width="215dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -142,13 +137,13 @@
                 android:textSize="14sp" />
 
             <ImageButton
-                android:id="@+id/btnSearch1"
+                android:id="@+id/imgSearchAlcohol"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#00FFFFFF"
-                android:tint="#FFFFFF"
-                app:srcCompat="@drawable/baseline_search_24" />
+                app:srcCompat="@drawable/baseline_search_24"
+                app:tint="#FFFFFF" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -181,7 +176,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtIngredient"
+                android:id="@+id/txtIngreList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -214,7 +209,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/txtCount2"
+                android:id="@+id/txtIngreCount"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -223,7 +218,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editSearch2"
+                android:id="@+id/editSearchIngre"
                 android:layout_width="215dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -235,17 +230,17 @@
                 android:textSize="14sp" />
 
             <ImageButton
-                android:id="@+id/btnSearch2"
+                android:id="@+id/imgSearchIngre"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#00FFFFFF"
-                android:tint="#FFFFFF"
-                app:srcCompat="@drawable/baseline_search_24" />
+                app:srcCompat="@drawable/baseline_search_24"
+                app:tint="#FFFFFF" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ingredientlRecyclerView"
+            android:id="@+id/ingreRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="165dp"
             android:layout_marginLeft="32dp"
