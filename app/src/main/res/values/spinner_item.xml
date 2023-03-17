@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string-array name="spinner_item">
-            <item>전체 레시피</item>
-            <item>공식 레시피</item>
-            <item>창작 레시피</item>
-        </string-array>
-        <string-array name="spinner_item3">
-            <item>메인 주종</item>
-            <item>소주</item>
-            <item>맥주</item>
-        </string-array>
-        <string-array name="spinner_item4">
-            <item>도수</item>
-            <item>20도</item>
-            <item>10도</item>
-        </string-array>
-        <string-array name="spinner_item5">
-            <item>인기순</item>
-            <item>최신순</item>
-            <item>최근항목순</item>
-        </string-array>
+
+    -<string-array name="spinner_item">
+
+    <item>전체 레시피</item>
+
+    <item>공식 레시피</item>
+
+    <item>창작 레시피</item>
+
+</string-array>
+
+
+    -<string-array name="spinner_item4">
+
+    <item>도수</item>
+
+    <item>약</item>
+
+    <item>중</item>
+
+    <item>강</item>
+
+    <item>"?"</item>
+
+</string-array>
+
+
+    -<string-array name="spinner_item5">
+
+
+    <item>최신순</item>
+
+    <item>인기순</item>
+
+</string-array>
+
 </resources>

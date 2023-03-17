@@ -20,49 +20,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_android_black_24dp" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="13dp"
         android:text="한글이름"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintBottom_toTopOf="@+id/imgUrl"
+        app:layout_constraintStart_toStartOf="@+id/imgUrl" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/txtEngTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="9dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        android:layout_marginTop="4dp"
+        android:text="영어이름"
+        app:layout_constraintStart_toStartOf="@+id/imgUrl"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/imgUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="131dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView41"
-        app:layout_constraintTop_toTopOf="@+id/textView41"
+        android:layout_marginEnd="131dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/txtLikeCnt"
         app:srcCompat="@drawable/baseline_favorite_24" />
 
     <TextView
@@ -70,61 +71,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/imageView17"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+        android:text="도수 : "
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtPercent"
+        app:layout_constraintStart_toStartOf="@+id/imageView17" />
 
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView36"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        android:text="주종 : "
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtAlcoholType"
+        app:layout_constraintEnd_toStartOf="@+id/txtAlcoholType" />
 
     <TextView
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView37"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        android:layout_marginTop="6dp"
+        android:text="레시피 소유 : "
+        app:layout_constraintEnd_toStartOf="@+id/txtPercent"
+        app:layout_constraintStart_toStartOf="@+id/txtPercent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAlcoholType" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/txtUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView38"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        android:layout_marginBottom="25dp"
+        android:text="레시피주인은누구"
+        app:layout_constraintBottom_toTopOf="@+id/txtIntro"
+        app:layout_constraintStart_toStartOf="@+id/textView38" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/txtLikeCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginBottom="110dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-        app:layout_constraintStart_toEndOf="@+id/imageView16" />
+        android:layout_marginBottom="36dp"
+        android:text="999"
+        app:layout_constraintBottom_toTopOf="@+id/textView37"
+        app:layout_constraintEnd_toEndOf="@+id/textView36"
+        app:layout_constraintStart_toEndOf="@+id/textView36" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/txtIntro"
         android:layout_width="283dp"
         android:layout_height="68dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="109dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="24dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView44"
+        app:layout_constraintBottom_toTopOf="@+id/textView43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        app:layout_constraintTop_toTopOf="@+id/txtEngTitle" />
 
     <TextView
         android:id="@+id/textView43"
@@ -133,7 +132,7 @@
         android:layout_marginStart="23dp"
         android:layout_marginBottom="7dp"
         android:text="재료"
-        app:layout_constraintBottom_toTopOf="@+id/textView45"
+        app:layout_constraintBottom_toTopOf="@+id/txtIngredient"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -144,30 +143,54 @@
         android:layout_marginTop="11dp"
         android:text="레시피"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView45" />
+        app:layout_constraintTop_toBottomOf="@+id/txtIngredient" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/txtIngredient"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="278dp"
+        android:layout_marginTop="277dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="278dp"
+        android:layout_marginBottom="277dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView46"
-        app:layout_constraintStart_toStartOf="@+id/textView42"
-        app:layout_constraintTop_toTopOf="@+id/textView41" />
+        app:layout_constraintEnd_toEndOf="@+id/txtContent"
+        app:layout_constraintStart_toStartOf="@+id/txtIntro"
+        app:layout_constraintTop_toTopOf="@+id/imgUrl" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/txtContent"
         android:layout_width="315dp"
         android:layout_height="74dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textView44"
         app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <TextView
+        android:id="@+id/txtPercent"
+        android:layout_width="33dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="29dp"
+        android:text="쌤"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAlcoholType"
+        app:layout_constraintEnd_toEndOf="@+id/txtAlcoholType"
+        app:layout_constraintStart_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
+    <TextView
+        android:id="@+id/txtAlcoholType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="35dp"
+        android:text="무슨무슨주"
+        app:layout_constraintBottom_toTopOf="@+id/txtUserId"
+        app:layout_constraintStart_toEndOf="@+id/textView36" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
