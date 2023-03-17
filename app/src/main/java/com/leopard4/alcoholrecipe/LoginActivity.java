@@ -31,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText editEmail;
     EditText editPassword;
     Button btnLogin;
-    TextView txtRegister;
+    Button btnRegister;
+    Button btnRegister2;
     ProgressDialog dialog;
 
     @Override
@@ -42,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnOk);
-        txtRegister = findViewById(R.id.txtRegister);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnRegister2 = findViewById(R.id.btnRegister2);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,13 +112,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        txtRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
 
+            }
+        });
+
+        btnRegister2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, PreKakaoActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
