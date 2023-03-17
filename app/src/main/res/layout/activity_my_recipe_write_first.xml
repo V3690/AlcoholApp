@@ -3,34 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MyRecipeWriteFirstActivity">
 
+    <ImageView
+        android:id="@+id/imageView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/a_e_recipe_posting_1" />
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView27">
 
-        <ImageButton
-            android:id="@+id/imgBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                android:tint="#FFFFFF"
+                app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+
+            <TextView
+                android:id="@+id/textView96"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="240dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/puradakGentleGothic"
+                android:gravity="center"
+                android:text="레시피"
+                android:textColor="#D3BA87"
+                android:textColorHint="#D3AA91"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView51"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
             android:text="없는 레시피가 있다면 직접 등록하세요"
             android:textColor="#FFC107"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView53"
@@ -38,182 +69,213 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-medium"
             android:text="중복 레시피의 경우 삭제될 수 있습니다."
             android:textColor="#FFC107"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView83"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="한글 이름"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="1"
+                android:layout_marginRight="25dp"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="sans-serif-medium"
                 android:hint="레시피의 이름을 입력하세요."
+                android:includeFontPadding="false"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView85"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="영문 이름"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editEngTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="1"
+                android:layout_marginRight="25dp"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="sans-serif-medium"
                 android:hint="(선택) 레시피 이름을 입력하세요."
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView88"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="도수"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioOne"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:text="약" />
+                    android:fontFamily="sans-serif-black"
+                    android:text="약"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioTwo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="중" />
+                    android:fontFamily="sans-serif-black"
+                    android:text="중"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioThree"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="강" />
+                    android:fontFamily="sans-serif-black"
+                    android:text="강"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioFour"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:fontFamily="sans-serif-black"
                     android:gravity="center_vertical"
-                    android:text="?" />
+                    android:text="?"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="18sp" />
 
             </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView89"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="소개"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editIntro"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="20dp"
                 android:ems="13"
-                android:inputType="textPersonName" />
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="13dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView90"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="레시피"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editContent"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="20dp"
                 android:ems="13"
-                android:inputType="textPersonName" />
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textPersonName"
+                android:textColorHint="#FFFFFF"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="160dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
@@ -223,21 +285,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btnImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#5E5E5E"
                     android:gravity="center"
-                    android:text="이미지 첨부" />
+                    android:text="이미지 첨부"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView95"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="* 필수항목" />
+                    android:gravity="center"
+                    android:text="* 필수항목"
+                    android:textColor="#E91E63"
+                    android:textColorHint="#E91E63"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -245,17 +313,22 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/outline_image_24" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="23dp"
             android:layout_marginBottom="5dp"
-            android:text="다음 단계" />
+            android:backgroundTint="#E7527B"
+            android:fontFamily="sans-serif-black"
+            android:text="다음 단계"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

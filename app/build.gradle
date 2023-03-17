@@ -48,4 +48,6 @@ dependencies {
     // 탭바용 라이브러리
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
+    // 하단바
+    implementation 'com.google.android.material:material:1.0.0'
 }

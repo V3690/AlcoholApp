@@ -2,8 +2,8 @@
     <string name="app_name">alcoholRecipe</string>
 
     <string name="txt_login_btn">로그인</string>
-    <string name="txt_register_btn">신규 계정 생성</string>
-    <string name="txt_register_btn2">카카오 계정 생성</string>
+    <string name="txt_register_btn">신규 계정 만들기</string>
+    <string name="txt_register_btn2">카카오 계정으로 시작</string>
 
     <string name="alert_title">선택하세요</string>
 
