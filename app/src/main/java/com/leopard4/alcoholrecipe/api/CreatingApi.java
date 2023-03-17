@@ -2,6 +2,7 @@ package com.leopard4.alcoholrecipe.api;
 
 import com.leopard4.alcoholrecipe.model.Res;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
+import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
 
 import java.io.Serializable;
 
@@ -30,11 +31,18 @@ public interface CreatingApi extends Serializable {
                          @Part MultipartBody.Part img);
 
 
-    // 알콜 재료 리스트 가져오는 API
+    // 알콜 리스트 가져오는 API
     @GET("/creating/search/alcohol")
     Call<AlcoholList> getAlcoholList(@Header("Authorization") String token,
-                                 @Query("keyword") int keyword,
+                                 @Query("keyword") String Keyword,
                                  @Query("offset") int offset,
                                  @Query("limit") int limit);
+
+    // 재료 리스트 가져오는 API
+    @GET("/creating/search/ingredient")
+    Call<IngredientList> getIngrelList(@Header("Authorization") String token,
+                                        @Query("keyword") String Keyword,
+                                        @Query("offset") int offset,
+                                        @Query("limit") int limit);
 
 }

@@ -1,6 +1,6 @@
-package com.leopard4.alcoholrecipe.model.alcohol;
+package com.leopard4.alcoholrecipe.model.ingredient;
 
-public class Alcohol {
+public class Ingredient {
 
 
     private int id;
@@ -9,15 +9,8 @@ public class Alcohol {
     private String createdAt;
     private String updatedAt;
 
-    private String selectedAlcohol;
 
-    public String getSelectedAlcohol() {
-        return selectedAlcohol;
-    }
 
-    public void setSelectedAlcohol(String selectedAlcohol) {
-        this.selectedAlcohol = selectedAlcohol;
-    }
 
     public int getId() {
         return id;

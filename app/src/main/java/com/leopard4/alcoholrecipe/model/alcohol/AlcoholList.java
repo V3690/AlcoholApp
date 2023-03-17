@@ -4,24 +4,16 @@ import java.util.List;
 
 public class AlcoholList {
 
-    private String result;
-    private List<Alcohol> items;
+    private List<Alcohol> result;
     private int count;
 
-    public String getResult() {
+
+    public List<Alcohol> getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(List<Alcohol> result) {
         this.result = result;
-    }
-
-    public List<Alcohol> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Alcohol> items) {
-        this.items = items;
     }
 
     public int getCount() {

@@ -3,6 +3,8 @@ package com.leopard4.alcoholrecipe.adapter;
 
 // 2. 상속받은 클래스가 abstract 이므로, unimplemented method 오버라이드!
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.leopard4.alcoholrecipe.MyRecipeWriteSecondActivity;
 import com.leopard4.alcoholrecipe.R;
 import com.leopard4.alcoholrecipe.model.alcohol.Alcohol;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // 7. 빨간색 에러가 뜨면, 우리가 만든 ViewHolder 로
@@ -24,10 +28,15 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
 
     Context context;
     ArrayList<Alcohol> alcoholList;
-    Alcohol selectedAlcohol;
 
+    ArrayList<String> selectedAlcohol = new ArrayList<>();
 
-    // 8. 오버라이드 함수 3개를 전부 구현 해주면 끝!
+    public AlcoholAdapter(Context context, ArrayList<Alcohol> alcoholList) {
+        this.context = context;
+        this.alcoholList = alcoholList;
+    }
+
+// 8. 오버라이드 함수 3개를 전부 구현 해주면 끝!
 
     @NonNull
     @Override
@@ -44,6 +53,7 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
 //        Memo memo = memoList.get(position);
 
         Alcohol alcohol = alcoholList.get(position);
+
         holder.txtAlcoholName.setText( alcohol.getName() );
 
     }
@@ -68,6 +78,30 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
             super(itemView);
 
             txtAlcoholName = itemView.findViewById(R.id.txtAlcoholName);
+
+            txtAlcoholName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = getAdapterPosition();
+
+//                    Alcohol alcohol = alcoholList.get(index);
+                    alcoholList.get(index);
+                    
+//                    selectedAlcohol.add(String.valueOf(alcohol));
+
+//                    Intent intent;//인텐트 선언
+//                    intent = new Intent(context, MyRecipeWriteSecondActivity.class); //look_memo.class부분에 원하는 화면 연결
+//                    intent.putExtra("selectedAlcohol", (Serializable) alcohol);
+
+//                    Log.i("SELETED_INDEX", alcohol.getId() + " " +alcohol.getName());
+
+                    Intent intent = new Intent(context, SeletedAlcoholAdapter.ViewHolder);
+
+
+
+
+                }
+            });
 
         }
     }
