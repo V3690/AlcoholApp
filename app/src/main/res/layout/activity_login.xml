@@ -21,27 +21,55 @@
         android:id="@+id/editEmail"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginTop="384dp"
         android:ems="7"
         android:hint="email ID"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/txtRegister"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#E2507B"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
+        android:gravity="center"
+        android:text="@string/txt_register_btn"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="566dp" />
+
+    <Button
+        android:id="@+id/txtRegister2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#F9E000"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
+        android:gravity="center"
+        android:text="@string/txt_register_btn2"
+        android:textColor="#615019"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="632dp" />
 
     <EditText
         android:id="@+id/editPassword"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginTop="440dp"
         android:ems="7"
         android:hint="password"
         android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,39 +79,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#404040"
-        android:fontFamily="@font/kaiGenGothicKR_Bold"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
         android:text="로그인"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="426dp" />
-
-    <Button
-        android:id="@+id/txtRegister"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#E2507B"
-        android:fontFamily="@font/kaiGenGothicKR_Bold"
-        android:gravity="center"
-        android:text="@string/txt_register_btn"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="492dp" />
-
-    <Button
-        android:id="@+id/txtRegister2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#F9E000"
-        android:fontFamily="@font/kaiGenGothicKR_Bold"
-        android:gravity="center"
-        android:text="@string/txt_register_btn2"
-        android:textColor="#615019"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="558dp" />
+        tools:layout_editor_absoluteX="261dp"
+        tools:layout_editor_absoluteY="493dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
