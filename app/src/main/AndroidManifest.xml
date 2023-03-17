@@ -32,6 +32,7 @@
         </provider>
 
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".MyRecipeWriteSecondActivity"
             android:exported="false" />
         <activity
