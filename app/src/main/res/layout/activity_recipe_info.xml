@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
 
     <TextView
-        android:id="@+id/txtTitle"
+        android:id="@+id/txtRecipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -150,7 +150,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtAlcoholType"
             app:layout_constraintStart_toEndOf="@+id/textView36"
-            app:layout_constraintTop_toBottomOf="@+id/txtLikeCnt" />
+            app:layout_constraintTop_toBottomOf="@+id/txtRecipeTitle" />
 
         <TextView
             android:id="@+id/textView37"

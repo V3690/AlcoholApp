@@ -2,7 +2,6 @@ package com.leopard4.alcoholrecipe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,7 +27,7 @@ import retrofit2.Retrofit;
 public class RecipeInfoActivity extends AppCompatActivity {
 
     ImageView imgUrl;
-    TextView txtTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
+    TextView txtRecipeTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
     Button btnReturnRecipe;
     ImageView imgBack;
     private String accessToken;
@@ -43,7 +42,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
         imgBack = findViewById(R.id.imgBack);
         btnReturnRecipe = findViewById(R.id.btnReturnRecipe);
-        txtTitle = findViewById(R.id.txtTitle);
+        txtRecipeTitle = findViewById(R.id.txtRecipeTitle);
         imgUrl = findViewById(R.id.imgUrl);
         txtLikeCnt = findViewById(R.id.txtLikeCnt);
         txtPercent = findViewById(R.id.txtPercent);
@@ -87,7 +86,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RecipeOneResponse> call, Response<RecipeOneResponse> response) {
                 if (response.isSuccessful()) {
-                    Log.i("레시피 정보", response.body().toString());
+
                     RecipeOne recipeOne = new RecipeOne();
 //                    recipeOneList.addAll(response.body().getRecipeOne());
 
@@ -134,8 +133,10 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     }
 
                     // todo: 나중에 지워야댐 근데 레시피 db에는 주종이라는게 없는데 ??
+                    Log.i("레시피 정보", response.body().toString());
                     Log.i("레시피 정보", recipeOne.toString()+"");
                     Log.i("레시피 정보", recipeOne.getImgUrl()+"");
+                    Log.i("레시피 정보", recipeOne.getTitle()+"");
                     Log.i("레시피 정보", recipeOne.getLikeCnt()+"");
                     Log.i("레시피 정보", recipeOne.getPercent()+"");
                     Log.i("레시피 정보", recipeOne.getAlcoholType()+"");
@@ -147,7 +148,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     Log.i("레시피 정보", recipeOne.getNickname()+ "");
 
 //                    imgUrl.setImageResource(Integer.parseInt(recipeOne.getImgUrl()));
-                    txtTitle.setText(recipeOne.getTitle()+"");
+                    txtRecipeTitle.setText(recipeOne.getTitle()+"");
                     txtLikeCnt.setText(recipeOne.getLikeCnt()+"");
                     txtAlcoholType.setText(recipeOne.getAlcoholType()+"");
 
