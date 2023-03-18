@@ -34,10 +34,25 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editPassword2, editNickName;
     Button btnOk;
 
+    // todo: 테스트를위한 로그인 버튼을 만들어놓았습니다.
+    // 나중에 삭제해주세요.
+    Button btnTest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // todo: 테스트를위한 로그인 버튼을 만들어놓았습니다.
+        // 나중에 삭제해주세요.
+        btnTest = findViewById(R.id.btnTest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }); // 여기까지만 지우면됩니다.
 
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
