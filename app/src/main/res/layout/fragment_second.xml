@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/a_a_basic"
     tools:context=".SecondFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="7dp"
+        android:hapticFeedbackEnabled="false"
         android:orientation="vertical">
 
         <TextView
@@ -15,25 +18,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
-            android:text="즐겨찾기" />
+            android:layout_margin="7dp"
+            android:text="즐겨찾기"
+            android:textColor="#E3C635"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top|left"
-            android:text="손님들이 좋아하는 레시피와 건배사입니다" />
+            android:layout_margin="7dp"
+            android:text="내가 관심을 표시한 레시피"
+            android:textColor="#F8F6F6"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="7dp"
             android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="7dp"
                 android:layout_weight="1"
+                android:backgroundTint="#0E0E0E"
+                android:backgroundTintMode="src_in"
+                android:hapticFeedbackEnabled="false"
                 android:spinnerMode="dropdown" />
             <!-- 스피너의 텍스트가 길어지면 텍스트가 잘리는 현상이 발생하기 때문에 -->
             <!-- android:layout_width="wrap_content" -->
@@ -45,18 +60,26 @@
             <!-- android:layout_weight="1" -->
             <!-- 로 변경 -->
 
+            <!-- android:hapticFeedbackEnabled="false"이기 때문에 터치시 진동이 발생하지 않음 -->
+
             <Spinner
                 android:id="@+id/spinner4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="7dp"
                 android:layout_weight="1"
+                android:backgroundTint="#0E0E0E"
+                android:backgroundTintMode="src_in"
                 android:spinnerMode="dropdown" />
 
             <Spinner
                 android:id="@+id/spinner5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="7dp"
                 android:layout_weight="1"
+                android:backgroundTint="#0E0E0E"
+                android:backgroundTintMode="src_in"
                 android:spinnerMode="dropdown" />
 
         </LinearLayout>
@@ -67,12 +90,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_margin="7dp"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            android:background="#34ECE3E3" />
 
 
     </LinearLayout>

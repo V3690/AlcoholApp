@@ -15,6 +15,15 @@ public class RecipeOne implements Serializable {
     private String ingredient;
     private String createdAt;
     private String updatedAt;
+    private String nickname;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getTitle() {
         return title;
