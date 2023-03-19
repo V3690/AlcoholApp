@@ -1,9 +1,10 @@
 # alcoholRecipe3
 
-1.알려주고싶은 TIP
+1.알게된 TIP
 컨스트레인 레이아웃에서 화면 상단에 마법봉같은것 눌르면 자동으로 자리를 고정해줌
 컨스트레인 꾸 버벅일때 R 버튼 누를시 화면갱신 빠름
-
+플래그먼트끼리 이동할때도 플래그먼트의 멤버변수값이 초기화 됨
+이것으로 추측할수있는건 화면이 전환되면 모든 메모리가 리셋될수 있을것같다는것. 추측임
 
 2.깃허브 로그인이 자꾸 뜨는데? 나만그런가??
 Auto fetch failed remote: Repository not found. Authentication failed for 'https://github.com/V3690/AlcoholApp.git/'
