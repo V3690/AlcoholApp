@@ -17,24 +17,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.leopard4.alcoholrecipe.adapter.RecipeFavoriteAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeHonorAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeMasterAdapter;
 import com.leopard4.alcoholrecipe.api.GameApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeApi;
-import com.leopard4.alcoholrecipe.api.RecipeFavoriteApi;
 import com.leopard4.alcoholrecipe.config.Config;
 import com.leopard4.alcoholrecipe.model.CheersMent;
 import com.leopard4.alcoholrecipe.model.CheersMentRes;
+import com.leopard4.alcoholrecipe.model.LandomMent;
 import com.leopard4.alcoholrecipe.model.Ment;
-import com.leopard4.alcoholrecipe.model.RecipeFavorite;
-import com.leopard4.alcoholrecipe.model.RecipeFavoriteList;
 import com.leopard4.alcoholrecipe.model.RecipeHonor;
 import com.leopard4.alcoholrecipe.model.RecipeHonorList;
 import com.leopard4.alcoholrecipe.model.RecipeMaster;
 import com.leopard4.alcoholrecipe.model.RecipeMasterList;
-import com.leopard4.alcoholrecipe.model.Res;
 
 import java.util.ArrayList;
 
@@ -50,15 +46,14 @@ import retrofit2.Retrofit;
  */
 public class FirstFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: 매개변수 인수 이름 바꾸기, 프래그먼트 초기화 매개변수와 일치하는 이름 선택, 예: ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // TODO: 매개변수 이름 바꾸기 및 유형 변경
     private String mParam1;
     private String mParam2;
-
+    // 멘트를 불러오기위한 단어를 저장하기 위한변수
     Button btnMyRecipe, btnGame, btnDogam, btnToast;
     TextView txtFirst, txtLast;
     int count1 = 0;
@@ -80,6 +75,7 @@ public class FirstFragment extends Fragment {
 
     private boolean isLoading1 = false;
     private boolean isLoading2 = false;
+
 
     public FirstFragment() {
         // Required empty public constructor
@@ -121,6 +117,8 @@ public class FirstFragment extends Fragment {
         btnGame = rootView.findViewById(R.id.btnGame);
         btnDogam = rootView.findViewById(R.id.btnDogam);
         btnToast = rootView.findViewById(R.id.btnToast);
+        txtFirst = rootView.findViewById(R.id.txtFirst);
+        txtLast = rootView.findViewById(R.id.txtLast);
 
         recyclerView1 = rootView.findViewById(R.id.recyclerView1);
         recyclerView1.setHasFixedSize(true);
@@ -397,7 +395,6 @@ public class FirstFragment extends Fragment {
 
             @Override
             public void onFailure(Call<RecipeHonorList> call, Throwable t) {
-
                 Log.d("TAG", "onFailure: " + t.getMessage());
             }
         });
@@ -407,16 +404,10 @@ public class FirstFragment extends Fragment {
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
         GameApi api = retrofit.create(GameApi.class);
-        Ment ment = new Ment("회식");
-        // 서버로 보낼 단어가 랜덤하게 셋팅되어야 하기 때문에
-        // 랜덤한 문자열을 생성해서 보내야한다
-        // 그래서 단어를 생성해주는 라이브러리를 사용해서
-        // 랜덤한 단어를 생성해준다
-        //
-// 랜덤한 단어를 생성해주는 라이브러리
-        RandomWord randomWord = new RandomWord();
-        String randomString = randomWord.getRandomWord();
 
+        Ment ment = new Ment(); // 이 객체는 이 함수가 끝나면 사라진다.
+        // 랜덤으로 창조말 가져오기
+        ment.LandomMent();
 
         Call<CheersMentRes> call = api.getCheers(accessToken,2, ment ); // 2는 선창 후창임
 
@@ -428,12 +419,19 @@ public class FirstFragment extends Fragment {
                     txtFirst.setText( response.body().getItem().getFirst() );
                     txtLast.setText( response.body().getItem().getLast() );
 
-                }
+
+                }else{
+                    // response가 에러를 가져왔다면 여기서 처리
+                    txtFirst.setText("이미 집에 가기는");
+                    txtLast.setText("너무 늦었어요");
+
+                 }
             }
 
             @Override
             public void onFailure(Call<CheersMentRes> call, Throwable t) {
                 Log.d("TAG", "onFailure: " + t.getMessage());
+
             }
         });
     }

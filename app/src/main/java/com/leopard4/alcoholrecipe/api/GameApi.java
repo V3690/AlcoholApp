@@ -2,13 +2,11 @@ package com.leopard4.alcoholrecipe.api;
 
 import com.leopard4.alcoholrecipe.model.CheersMentRes;
 import com.leopard4.alcoholrecipe.model.Ment;
-import com.leopard4.alcoholrecipe.model.Res;
 
 import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
