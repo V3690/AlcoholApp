@@ -20,10 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.leopard4.alcoholrecipe.adapter.RecipeFavoriteAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeHonorAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeMasterAdapter;
+import com.leopard4.alcoholrecipe.api.GameApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeApi;
 import com.leopard4.alcoholrecipe.api.RecipeFavoriteApi;
 import com.leopard4.alcoholrecipe.config.Config;
+import com.leopard4.alcoholrecipe.model.CheersMent;
+import com.leopard4.alcoholrecipe.model.CheersMentRes;
+import com.leopard4.alcoholrecipe.model.Ment;
 import com.leopard4.alcoholrecipe.model.RecipeFavorite;
 import com.leopard4.alcoholrecipe.model.RecipeFavoriteList;
 import com.leopard4.alcoholrecipe.model.RecipeHonor;
@@ -72,6 +76,7 @@ public class FirstFragment extends Fragment {
     RecipeHonorAdapter adapter2;
     ArrayList<RecipeMaster> recipeMasterList = new ArrayList<>();
     ArrayList<RecipeHonor> recipeHonorList = new ArrayList<>();
+    ArrayList<CheersMent> cheersMentList = new ArrayList<>();
 
     private boolean isLoading1 = false;
     private boolean isLoading2 = false;
@@ -127,6 +132,7 @@ public class FirstFragment extends Fragment {
 
         getNetworkData1();
         getNetworkData2();
+        getCheersMentResNetworkData();
 
         recyclerView1.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -358,9 +364,6 @@ public class FirstFragment extends Fragment {
         Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
         RecipeApi api = retrofit.create(RecipeApi.class);
 
-        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME, getActivity().MODE_PRIVATE);
-        accessToken = "Bearer "  + sp.getString(Config.ACCESS_TOKEN, "");// 액세스 토큰이 없으면 "" 리턴
-
         // 오프셋 초기화는, 함수 호출하기 전에!!
         offset2 = 0;
         count2 = 0;
@@ -395,6 +398,41 @@ public class FirstFragment extends Fragment {
             @Override
             public void onFailure(Call<RecipeHonorList> call, Throwable t) {
 
+                Log.d("TAG", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void getCheersMentResNetworkData(){
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
+        GameApi api = retrofit.create(GameApi.class);
+        Ment ment = new Ment("회식");
+        // 서버로 보낼 단어가 랜덤하게 셋팅되어야 하기 때문에
+        // 랜덤한 문자열을 생성해서 보내야한다
+        // 그래서 단어를 생성해주는 라이브러리를 사용해서
+        // 랜덤한 단어를 생성해준다
+        //
+// 랜덤한 단어를 생성해주는 라이브러리
+        RandomWord randomWord = new RandomWord();
+        String randomString = randomWord.getRandomWord();
+
+
+        Call<CheersMentRes> call = api.getCheers(accessToken,2, ment ); // 2는 선창 후창임
+
+        call.enqueue(new Callback<CheersMentRes>() {
+            @Override
+            public void onResponse(Call<CheersMentRes> call, Response<CheersMentRes> response) {
+
+                if(response.isSuccessful()){
+                    txtFirst.setText( response.body().getItem().getFirst() );
+                    txtLast.setText( response.body().getItem().getLast() );
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CheersMentRes> call, Throwable t) {
                 Log.d("TAG", "onFailure: " + t.getMessage());
             }
         });
