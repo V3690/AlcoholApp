@@ -43,7 +43,6 @@ import java.util.Date;
 
 public class OwnerRequestActivity extends AppCompatActivity {
 
-    CheckBox addCheckBox, editCheckBox;
 
     EditText editName, editPercent, editContent;
     ImageView imageView;
@@ -57,8 +56,6 @@ public class OwnerRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_request);
 
-        addCheckBox = findViewById(R.id.addCheckBox);
-        editCheckBox = findViewById(R.id.editCheckBox);
 
         editName = findViewById(R.id.editName);
         editPercent = findViewById(R.id.editPercent);
