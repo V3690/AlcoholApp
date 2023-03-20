@@ -1,6 +1,7 @@
 package com.leopard4.alcoholrecipe.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class UserPreference implements Serializable {
     // 포스트맨 body 부분

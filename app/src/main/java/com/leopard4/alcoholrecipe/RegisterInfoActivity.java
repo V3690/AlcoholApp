@@ -84,72 +84,84 @@ public class RegisterInfoActivity extends AppCompatActivity {
         btnPass = findViewById(R.id.btnPass);
         btnOk = findViewById(R.id.btnOk);
 
+
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String alcoholType = ""; // String 값 초기화
+                ArrayList<String> alcoholTypeList = new ArrayList<>();
                 if(checkBox1_1.isChecked()){
-                    alcoholType += 1;
+                    alcoholTypeList.add("1");
                 }
                 if(checkBox1_2.isChecked()){
-                    alcoholType += 2;
+                    alcoholTypeList.add("2");
                 }
                 if(checkBox1_3.isChecked()){
-                    alcoholType += 3;
+                    alcoholTypeList.add("3");
                 }
                 if(checkBox1_4.isChecked()){
-                    alcoholType += 4;
+                    alcoholTypeList.add("4");
                 }
                 if(checkBox1_5.isChecked()){
-                    alcoholType += 5;
+                    alcoholTypeList.add("5");
                 }
                 if(checkBox1_6.isChecked()){
-                    alcoholType += 6;
+                    alcoholTypeList.add("6");
                 }
-                String withs = ""; // String 값 초기화
+                String alcoholType = alcoholTypeList.toString();
+                Log.i("alcoholType", alcoholType);
+
+                ArrayList<String> withsList = new ArrayList<>();
                 if(checkBox3_1.isChecked()){
-                    withs += 1;
+                    withsList.add("1");
                 }
                 if(checkBox3_2.isChecked()){
-                    withs += 2;
+                    withsList.add("2");
                 }
                 if(checkBox3_3.isChecked()){
-                    withs += 3;
+                    withsList.add("3");
                 }
                 if(checkBox3_4.isChecked()){
-                    withs += 4;
+                    withsList.add("4");
                 }
                 if(checkBox3_5.isChecked()){
-                    withs += 5;
+                    withsList.add("5");
                 }
                 if(checkBox3_6.isChecked()){
-                    withs += 6;
+                    withsList.add("6");
                 }
+                String withs = withsList.toString();
+                Log.i("withs", withs);
+
                 int percent = seekBar.getProgress();
+
 
                 // 1. 다이얼로그를 화면에 보여준다.
                 showProgress("정보 등록 중...");
 
                 // 2-1. 레트로핏 변수 생성
-                Retrofit retrofit =
-                        NetworkClient.getRetrofitClient(RegisterInfoActivity.this);
+                Retrofit retrofit = NetworkClient.getRetrofitClient(RegisterInfoActivity.this);
                 UserApi api = retrofit.create(UserApi.class); // 레트로핏으로 서버에 요청할 객체 생성
 
+                // 2-2. 토큰 가져오기
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+                // 3. 저장
                 UserPreference userPreference = new UserPreference(alcoholType,withs,percent); // UserPreference 객체 생성
                 Call<Res> call = api.registerInfo(accessToken, userPreference); // 서버에 요청
-
-                call.enqueue(new Callback<Res>() { // 비동기로 서버에 요청
+                call.enqueue(new Callback<Res>() {
                     @Override
                     public void onResponse(@NonNull Call<Res> call, @NonNull Response<Res> response) {
                         dismissProgress(); // 다이얼로그 사라짐
 
                         if(response.isSuccessful()) {
 
-                            Res res = response.body(); // 응답받은 데이터 == Res 객체
-
                             Intent intent = new Intent(RegisterInfoActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }else{
+                            Toast.makeText(RegisterInfoActivity.this, "내용을 모두 입력해 주세요.", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -170,10 +182,8 @@ public class RegisterInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
     }
+
 
 
     // 로직처리가 시작되면 화면에 보여지는 함수
