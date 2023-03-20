@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.leopard4.alcoholrecipe.adapter.AlcoholAdapter;
@@ -26,10 +24,6 @@ import com.leopard4.alcoholrecipe.model.alcohol.Alcohol;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.Ingredient;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -104,6 +98,8 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
 
 
+
+
         alcoholRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -145,7 +141,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
 
         // 체크박스
-        checkBox = findViewById(R.id.checkBox);
+        checkBox = findViewById(R.id.checkBox1);
 
         // 저장
         btnSave = findViewById(R.id.btnSave);
