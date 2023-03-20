@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
         String accessToken = sp.getString(Config.ACCESS_TOKEN, "");
         if(accessToken.isEmpty()){
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
             return;

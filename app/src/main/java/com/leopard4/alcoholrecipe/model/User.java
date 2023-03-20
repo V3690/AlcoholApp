@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class User implements Serializable {
     // 포스트맨 body 부분
 //    {
-//        "username": "TITI",
-//            "email": "TTT@naver.com",
-//            "password": "1234"
+//        "nickname": "TITI",
+//         "email": "TTT@naver.com",
+//         "password": "1234"
 //    }
     private String email;
     private String password;
