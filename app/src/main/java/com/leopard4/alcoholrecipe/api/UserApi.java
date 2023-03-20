@@ -37,4 +37,8 @@ public interface UserApi extends Serializable {
     // 회원탈퇴 api
     @DELETE("/user/detail")
     Call<Void> delete(@Header("Authorization") String token);  //  만약 Void를 쓰면 리턴값이 없다는 뜻
+    // 유저 추가 정보 api
+    @POST("/user/preference")
+    Call<Res> registerInfo(@Header("Authorization") String token,
+                           @Body UserPreference userPreference);
 }
