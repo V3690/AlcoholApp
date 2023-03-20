@@ -194,7 +194,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnMyToast"
+            android:id="@+id/btnPassEdit"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_gravity="center"

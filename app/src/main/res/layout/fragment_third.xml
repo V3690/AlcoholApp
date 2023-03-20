@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/a_a_basic"
     tools:context=".ThirdFragment">
 
     <LinearLayout
@@ -12,28 +13,47 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_weight="0">
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:text="마이 페이지" />
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0"
+                android:background="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right|end"
                 android:layout_margin="10dp"
-                android:text="로그아웃" />
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0"
+                android:background="@drawable/baseline_logout_24"
+                android:gravity="right|end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="마이페이지"
+            android:textColor="#DFC620"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,72 +66,114 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="손님: " />
+                android:text="손님 : "
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/boxline_24"
                 android:ems="5"
                 android:hint="Name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="#D7554C4C"
+                android:textStyle="bold" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="수정" />
+                android:background="#EDE1E1"
+                android:padding="8dp"
+                android:text="수정"
+                android:textColor="#D7554C4C"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnMyRecipe"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="나의 레시피" />
+            android:background="#C8EDE1E1"
+            android:padding="8dp"
+            android:text="나의 레시피"
+            android:textColor="#D7554C4C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnMyToast"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPassEdit"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="나의 건배사" />
+            android:background="#C8EDE1E1"
+            android:padding="8dp"
+            android:text="비밀번호 변경"
+            android:textColor="#D7554C4C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_android_black_24dp" />
+            android:layout_weight="0"
+            android:src="@drawable/ic_android_black_24dp"
+            android:visibility="visible" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLisence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="이용약관" />
+            android:background="#C8EDE1E1"
+            android:gravity="center|left"
+            android:padding="8dp"
+            android:text="이용약관"
+            android:textColor="#736161"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="0">
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/txtAppVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="앱버전 (1.0.0)" />
+                android:layout_marginStart="172dp"
+                android:layout_marginTop="10dp"
+                android:text="앱버전 (1.0.0)"
+                android:textColor="#736161"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSecession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="탈퇴하기" />
-        </LinearLayout>
+                android:layout_gravity="right"
+                android:layout_marginTop="2dp"
+                android:background="#00EDE1E1"
+                android:text="탈퇴하기"
+                android:textColor="#C5B5B5"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -15,6 +15,7 @@ public class RecipeOne implements Serializable {
     private String ingredient;
     private String createdAt;
     private String updatedAt;
+
     private String nickname;
 
     public String getNickname() {
