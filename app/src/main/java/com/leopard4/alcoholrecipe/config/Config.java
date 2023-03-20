@@ -7,5 +7,6 @@ public class Config {
     public static final String DOMAIN_TEST = "http://localhost:5000";
     public static final String PREFERENCE_NAME = "alcoholRecipe_app";
     public static final String ACCESS_TOKEN = "access_token";
+    public static final String NICKNAME = "nickname";
 
 }

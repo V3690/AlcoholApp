@@ -16,7 +16,7 @@ public class GameToastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_toast);
 
-        btnMyToast = findViewById(R.id.btnMyToast);
+        btnMyToast = findViewById(R.id.btnPassEdit);
 
         btnMyToast.setOnClickListener(new View.OnClickListener() {
             @Override
