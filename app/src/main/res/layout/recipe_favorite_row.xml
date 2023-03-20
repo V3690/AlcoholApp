@@ -11,7 +11,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#EBE8DFE3"
@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtTitle"
+                    android:id="@+id/txtRecipeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
