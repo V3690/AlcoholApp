@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment firstFragment;
     Fragment secondFragment;
     Fragment thirdFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,15 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
     // 탭바를 누르면 동작하는 코드
-    private boolean loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
         if(fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment, fragment)
-                    .commit();
+            getSupportFragmentManager() // 프래그먼트 매니저를 가져온다.
+                    .beginTransaction() // 트랜잭션을 시작한다.
+                    .replace(R.id.fragment, fragment) // fragment를 가져온다.
+                    .commit(); // 트랜잭션을 커밋한다.
             return true;
         }else {
             return false;
         }
     }
+
 }

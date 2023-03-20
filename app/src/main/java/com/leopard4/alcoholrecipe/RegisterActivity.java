@@ -121,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                             SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putString(Config.ACCESS_TOKEN, res.getAccess_token());
+                            editor.putString(Config.NICKNAME, editNickName.getText().toString().trim());
                             editor.apply(); // 저장
 
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);

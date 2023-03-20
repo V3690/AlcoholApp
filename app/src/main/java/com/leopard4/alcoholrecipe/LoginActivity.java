@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences sp =
                                     getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
+                            editor.putString(Config.NICKNAME, res.getNickname() );
                             editor.putString(Config.ACCESS_TOKEN, res.getAccess_token() );
                             editor.apply();
 

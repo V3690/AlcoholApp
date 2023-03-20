@@ -7,8 +7,16 @@ public class UserRes implements Serializable {
 //    {
 //        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjMzNjU3OSwianRpIjoiZDA5OTFiNjAtMGNkZC00OTc0LWIzODAtNmUzYzQxOGYzNjMyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MTEsIm5iZiI6MTY3NjMzNjU3OX0.oL3WMva7R5Hkl8jAPDQqOVO57w17eyLKwyfRHy5YyQ0"
 //    }
-
+    String nickname;
     String access_token;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getAccess_token() {
         return access_token;
