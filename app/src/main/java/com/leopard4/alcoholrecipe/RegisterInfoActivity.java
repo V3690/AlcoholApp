@@ -108,8 +108,8 @@ public class RegisterInfoActivity extends AppCompatActivity {
                 if(checkBox1_6.isChecked()){
                     alcoholTypeList.add("6");
                 }
-                String alcoholType = alcoholTypeList.toString();
-                Log.i("alcoholType", alcoholType);
+                String alcoholType = String.join(",",alcoholTypeList);
+//                Log.i("alcoholType", alcoholType);
 
                 ArrayList<String> withsList = new ArrayList<>();
                 if(checkBox3_1.isChecked()){
@@ -130,8 +130,8 @@ public class RegisterInfoActivity extends AppCompatActivity {
                 if(checkBox3_6.isChecked()){
                     withsList.add("6");
                 }
-                String withs = withsList.toString();
-                Log.i("withs", withs);
+                String withs = String.join(",",withsList);
+//                Log.i("withs", withs);
 
                 int percent = seekBar.getProgress();
 
