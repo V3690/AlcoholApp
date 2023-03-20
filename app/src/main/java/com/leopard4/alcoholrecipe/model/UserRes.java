@@ -9,6 +9,7 @@ public class UserRes implements Serializable {
 //    }
     String nickname;
     String access_token;
+    String error;
 
     public String getNickname() {
         return nickname;
@@ -24,5 +25,13 @@ public class UserRes implements Serializable {
 
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

@@ -1,7 +1,8 @@
-package com.leopard4.alcoholrecipe.api;
-
+패키지 com.leopard4.alcoholrecipe.api
+.
 import com.leopard4.alcoholrecipe.model.Res;
 import com.leopard4.alcoholrecipe.model.User;
+import com.leopard4.alcoholrecipe.model.UserPreference;
 import com.leopard4.alcoholrecipe.model.UserRes;
 
 import java.io.Serializable;
@@ -9,7 +10,9 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+
 import retrofit2.http.DELETE;
+
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -36,7 +39,7 @@ public interface UserApi extends Serializable {
     Call<Res> editNickname(@Header("Authorization") String token, @Body Map<String, String> nicknameMap);
     // 회원탈퇴 api
     @DELETE("/user/detail")
-    Call<Void> delete(@Header("Authorization") String token);  //  만약 Void를 쓰면 리턴값이 없다는 뜻
+    Call<Void> delete(@Header("Authorization") String token); // 만약 Void를 반환값
     // 유저 추가 정보 api
     @POST("/user/preference")
     Call<Res> registerInfo(@Header("Authorization") String token,
