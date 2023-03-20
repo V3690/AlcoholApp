@@ -215,15 +215,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-//        // 로그인 화면으로 이동
-//        txtLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+
 
     }
     // 로직처리가 시작되면 화면에 보여지는 함수

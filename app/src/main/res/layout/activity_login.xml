@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,6 +30,34 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
+
+        android:layout_gravity="center"
+        android:backgroundTint="#E2507B"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
+        android:gravity="center"
+        android:text="@string/txt_register_btn"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtRegister2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/txtRegister2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="33dp"
+        android:backgroundTint="#F9E000"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
+        android:gravity="center"
+        android:text="@string/txt_register_btn2"
+        android:textColor="#615019"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txtRegister"
+        app:layout_constraintStart_toStartOf="@+id/txtRegister" />
+
 
             <ImageView
                 android:id="@+id/imageView23"
@@ -122,5 +151,19 @@
             tools:layout_editor_absoluteX="96dp"
             tools:layout_editor_absoluteY="632dp" />
     </LinearLayout>
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="7dp"
+        android:backgroundTint="#404040"
+        android:fontFamily="@font/kai_gen_gothic_kr_bold"
+        android:text="로그인"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtRegister"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </RelativeLayout>

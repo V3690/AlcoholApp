@@ -1,16 +1,20 @@
 package com.leopard4.alcoholrecipe.api;
 
 import com.leopard4.alcoholrecipe.model.Res;
+import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
+import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
 
 import java.io.Serializable;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface CreatingApi extends Serializable {
 
@@ -25,5 +29,20 @@ public interface CreatingApi extends Serializable {
                          @Part("percent")RequestBody percent,
                          @Part("content")RequestBody content,
                          @Part MultipartBody.Part img);
+
+
+    // 알콜 리스트 가져오는 API
+    @GET("/creating/search/alcohol")
+    Call<AlcoholList> getAlcoholList(@Header("Authorization") String token,
+                                 @Query("keyword") String Keyword,
+                                 @Query("offset") int offset,
+                                 @Query("limit") int limit);
+
+    // 재료 리스트 가져오는 API
+    @GET("/creating/search/ingredient")
+    Call<IngredientList> getIngrelList(@Header("Authorization") String token,
+                                        @Query("keyword") String Keyword,
+                                        @Query("offset") int offset,
+                                        @Query("limit") int limit);
 
 }
