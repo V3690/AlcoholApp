@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"></LinearLayout>
+
     <TextView
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
@@ -30,11 +36,10 @@
         android:id="@+id/ibtnToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toTopOf="@+id/textView47"
-        app:layout_constraintStart_toStartOf="@+id/textView47"
-        app:srcCompat="@drawable/baseline_videogame_asset_24" />
+        app:srcCompat="@drawable/baseline_videogame_asset_24"
+        tools:layout_editor_absoluteX="160dp" />
 
     <TextView
         android:id="@+id/textView47"
@@ -50,33 +55,27 @@
         android:id="@+id/ibtnFace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textView48"
-        app:layout_constraintStart_toStartOf="@+id/textView48"
-        app:srcCompat="@drawable/baseline_videogame_asset_24" />
+        app:srcCompat="@drawable/baseline_videogame_asset_24"
+        tools:layout_editor_absoluteX="81dp" />
 
     <TextView
         android:id="@+id/textView48"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginEnd="76dp"
         android:text="지금 내 얼굴은"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="76dp" />
 
     <ImageButton
         android:id="@+id/ibtnDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView49"
-        app:layout_constraintStart_toStartOf="@+id/textView49"
-        app:srcCompat="@drawable/baseline_videogame_asset_24" />
+        app:srcCompat="@drawable/baseline_videogame_asset_24"
+        tools:layout_editor_absoluteX="254dp"
+        tools:layout_editor_absoluteY="304dp" />
 
     <TextView
         android:id="@+id/textView49"
