@@ -1,12 +1,15 @@
 package com.leopard4.alcoholrecipe.api;
 
+import com.leopard4.alcoholrecipe.model.Res;
 import com.leopard4.alcoholrecipe.model.User;
+import com.leopard4.alcoholrecipe.model.UserPreference;
 import com.leopard4.alcoholrecipe.model.UserRes;
 
 import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface UserApi extends Serializable {
@@ -18,6 +21,13 @@ public interface UserApi extends Serializable {
     // 로그인 api
     @POST("/user/login")
     Call<UserRes> login(@Body User user);
+    // 유저 추가 정보 api
+    @POST("/user/preference")
+    Call<Res> registerInfo(@Header("Authorization") String token,
+                           @Body UserPreference userPreference);
+
+
+
 
 
 }

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,8 @@ import com.leopard4.alcoholrecipe.config.Config;
 import com.leopard4.alcoholrecipe.model.User;
 import com.leopard4.alcoholrecipe.model.UserRes;
 
+import org.json.JSONObject;
+
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -31,70 +36,137 @@ import retrofit2.Retrofit;
 public class RegisterActivity extends AppCompatActivity {
 
     private ProgressDialog dialog;
-    EditText editEmail, editPassword, editPassword2, editNickName;
+    EditText editEmail, editNickName, editPassword, editPassword2;
+    TextView txtViewCheckEmail, txtViewCheckName, txtViewCheckPassword1, txtViewCheckPassword2;
     Button btnOk;
 
-    // todo: 테스트를위한 로그인 버튼을 만들어놓았습니다.
-    // 나중에 삭제해주세요.
-    Button btnTest;
+    String email;
+    String nickname;
+    String password;
+    String password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // todo: 테스트를위한 로그인 버튼을 만들어놓았습니다.
-        // 나중에 삭제해주세요.
-        btnTest = findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        }); // 여기까지만 지우면됩니다.
-
         editEmail = findViewById(R.id.editEmail);
+        editNickName = findViewById(R.id.editNickName);
         editPassword = findViewById(R.id.editPassword);
         editPassword2 = findViewById(R.id.editPassword2);
-        editNickName = findViewById(R.id.editNickName);
         btnOk = findViewById(R.id.btnOk);
+
+        txtViewCheckEmail = findViewById(R.id.txtViewCheckId);
+        txtViewCheckName = findViewById(R.id.txtViewCheckName);
+        txtViewCheckPassword1 = findViewById(R.id.txtViewCheckPassword1);
+        txtViewCheckPassword2 = findViewById(R.id.txtViewCheckPassword2);
+
+
+        editEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 이메일 가져와서 형식 체크
+                email = editEmail.getText().toString().trim();
+                Pattern pattern = Patterns.EMAIL_ADDRESS;
+                if(!pattern.matcher(email).matches()){
+                    txtViewCheckEmail.setText("이메일 형식으로 입력해 주세요.");
+                    txtViewCheckEmail.setVisibility(View.VISIBLE);
+                    return;
+                }else{
+                    txtViewCheckEmail.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        editNickName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 닉네임 체크
+                nickname = editNickName.getText().toString().trim();
+                if(nickname.length() < 2 || nickname.length() > 12){
+                    txtViewCheckName.setText("2~12자 사이로 입력해 주세요.");
+                    txtViewCheckName.setVisibility(View.VISIBLE);
+                    return;
+                }else{
+                    txtViewCheckName.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        editPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 비밀번호 체크
+                password = editPassword.getText().toString().trim();
+                // 우리 기획에는 비번길이가 4~12 만 허용
+                if(password.length() < 4 || password.length() > 12){
+                    txtViewCheckPassword1.setVisibility(View.VISIBLE);
+                    return;
+                }else{
+                    txtViewCheckPassword1.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        editPassword2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 비밀번호 확인과 같은지 체크
+                password2 = editPassword2.getText().toString().trim();
+                if (!password2.equals(password)) {
+                    txtViewCheckPassword2.setVisibility(View.VISIBLE);
+                    return;
+                }else{
+                    txtViewCheckPassword2.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        });
+
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 이메일 가져와서 형식 체크
-                String email = editEmail.getText().toString().trim();
-
-                Pattern pattern = Patterns.EMAIL_ADDRESS;
-                if(!pattern.matcher(email).matches()){
-                    Toast.makeText(RegisterActivity.this, "이메일 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // 비밀번호 체크
-                String password = editPassword.getText().toString().trim();
-                String password2 = editPassword2.getText().toString().trim();
-                // 우리 기획에는 비번길이가 4~12 만 허용
-                if(password.length() < 4 || password.length() > 12){
-                    Toast.makeText(RegisterActivity.this, "비번 길이를 확인하세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                // 비밀번호 확인과 같은지 체크
-                if (!password.equals(password2)) {
-                    Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                // 닉네임 체크
-                String nickname = editNickName.getText().toString().trim();
-                if(nickname.length() < 2 || nickname.length() > 12){
-                    Toast.makeText(RegisterActivity.this, "닉네임 길이를 확인하세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                //todo : 닉네임 중복 체크
-                // 서버에 요청해서 중복되는 닉네임이 있는지 확인
-                // 중복되는 닉네임이 있으면 Toast로 알려주고
-                // 없으면 회원가입 진행
 
                 // 1. 다이얼로그를 화면에 보여준다.
                 showProgress("회원가입 중입니다...");
@@ -103,7 +175,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Retrofit retrofit =
                         NetworkClient.getRetrofitClient(RegisterActivity.this);
                 UserApi api = retrofit.create(UserApi.class); // 레트로핏으로 서버에 요청할 객체 생성
-
 
                 User user = new User(email, password, nickname); // User 객체 생성
                 Call<UserRes> call = api.register(user); // 서버에 요청
@@ -123,12 +194,12 @@ public class RegisterActivity extends AppCompatActivity {
                             editor.putString(Config.ACCESS_TOKEN, res.getAccess_token());
                             editor.apply(); // 저장
 
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, RegisterInfoActivity.class);
                             startActivity(intent);
                             finish();
 
                         }else{
-                            Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "아이디 또는 닉네임이 이미 사용 중입니다.", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -144,15 +215,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-//        // 로그인 화면으로 이동
-//        txtLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+
 
     }
     // 로직처리가 시작되면 화면에 보여지는 함수
