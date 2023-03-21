@@ -121,6 +121,8 @@ public class RecipeInfoActivity extends AppCompatActivity {
                                 Log.i("하트", "하트가 눌렸습니다.");
                             }
                         }
+
+                        @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             Log.i("하트", "하트가 눌리지 않았습니다.");
                         }
