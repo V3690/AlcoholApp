@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leopard4.alcoholrecipe.R;
-import com.leopard4.alcoholrecipe.model.RecipeFavorite;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeFavorite;
 
 import java.util.ArrayList;
 

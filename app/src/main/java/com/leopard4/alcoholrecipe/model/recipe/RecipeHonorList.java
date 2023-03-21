@@ -1,15 +1,14 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.recipe;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class RecipeMasterList implements Serializable {
-
+public class RecipeHonorList implements Serializable {
     private String result;
     @SerializedName("items")
-    private List<RecipeMaster> items;
+    private List<RecipeHonor> items;
 
     private int count;
 
@@ -21,13 +20,14 @@ public class RecipeMasterList implements Serializable {
         this.result = result;
     }
 
-    public List<RecipeMaster> getItems() {
+    public List<RecipeHonor> getItems() {
         return items;
     }
 
-    public void setItems(List<RecipeMaster> items) {
+    public void setItems(List<RecipeHonor> items) {
         this.items = items;
     }
+
     public int getCount() {
         return count;
     }

@@ -58,7 +58,7 @@
             android:background="#6F837676"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/txtEngTitle"
-            app:layout_constraintEnd_toStartOf="@+id/imageView17"
+            app:layout_constraintEnd_toStartOf="@+id/imgRecipeLike"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_android_black_24dp" />
@@ -101,7 +101,7 @@
             app:layout_constraintStart_toStartOf="@+id/txtPercent" />
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/imgRecipeLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
@@ -111,7 +111,7 @@
             app:layout_constraintStart_toEndOf="@+id/imgUrl"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/baseline_favorite_24" />
+            app:srcCompat="@drawable/baseline_favorite_border_24_gray" />
 
         <TextView
             android:id="@+id/txtLikeCnt"
@@ -124,7 +124,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView36"
-            app:layout_constraintStart_toEndOf="@+id/imageView17"
+            app:layout_constraintStart_toEndOf="@+id/imgRecipeLike"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

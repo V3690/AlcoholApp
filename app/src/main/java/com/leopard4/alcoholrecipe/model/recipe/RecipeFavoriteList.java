@@ -1,4 +1,4 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.recipe;
 
 import java.util.List;
 

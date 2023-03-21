@@ -1,4 +1,4 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.recipe;
 
 import java.io.Serializable;
 
@@ -12,6 +12,15 @@ public class RecipeHonor implements Serializable {
     private int id;
     private String imgUrl;
     private int likeCount;
+    private int isLike;
+
+    public int getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(int isLike) {
+        this.isLike = isLike;
+    }
 
     public int getId() {
         return id;

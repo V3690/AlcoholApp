@@ -1,6 +1,6 @@
 package com.leopard4.alcoholrecipe.api;
 
-import com.leopard4.alcoholrecipe.model.RecipeFavoriteList;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeFavoriteList;
 
 import java.io.Serializable;
 
