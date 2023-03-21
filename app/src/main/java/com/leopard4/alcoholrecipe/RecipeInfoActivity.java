@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,10 +29,12 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
     ImageView imgUrl;
     TextView txtRecipeTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
-    Button btnReturnRecipe;
+    Button btnReturnRecipe, btnEdit;
     ImageView imgBack;
     private String accessToken;
     private int recipeId;
+    private int userId;
+    private int getAdapterUserId;
     private ArrayList<RecipeOne> recipeOneList = new ArrayList<>();
 
     @Override
@@ -52,12 +55,29 @@ public class RecipeInfoActivity extends AppCompatActivity {
         txtIntro = findViewById(R.id.txtIntro);
         txtContent = findViewById(R.id.txtContent);
         txtIngredient = findViewById(R.id.txtIngredient);
+        btnEdit = findViewById(R.id.btnEdit);
 
 
         recipeId = getIntent().getIntExtra("recipeId", 0);
         Log.i("레시피 아이디", Integer.toString(recipeId));
 
         getNetworkData();
+
+
+        // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
+        // myrecipeAdapter 에서 받은 userId
+//        getAdapterUserId = getIntent().getIntExtra("userId", 0);
+//
+//        Log.i("IDCHECK", userId + " " + getAdapterUserId);
+//
+//        if (userId == getAdapterUserId){
+//            btnEdit.setVisibility(View.VISIBLE);
+//
+//            return;
+//
+//        }
+
+
 
         // 뒤로가기 버튼
         imgBack.setOnClickListener(v -> {
@@ -91,10 +111,32 @@ public class RecipeInfoActivity extends AppCompatActivity {
 //                    recipeOneList.addAll(response.body().getRecipeOne());
 
                     recipeOne = response.body().getRecipeOne();
+
+                    userId = recipeOne.getUserId();
+
+                    // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
+                    // myrecipeAdapter 에서 받은 userId
+//        getAdapterUserId = getIntent().getIntExtra("userId", 0);
+//
+//        Log.i("IDCHECK", userId + " " + getAdapterUserId);
+//
+//        if (userId == getAdapterUserId){
+//            btnEdit.setVisibility(View.VISIBLE);
+//
+//            return;
+//
+//        }
+
+
+
+
+
                     // glide로 이미지 뿌려주기
                     Glide.with(RecipeInfoActivity.this)
                             .load(recipeOne.getImgUrl())
                             .into(imgUrl);
+
+
 
                     // recipeOnd에 값이 없는게 있을때 처리
                     if (recipeOne.getImgUrl() == null) {
@@ -155,6 +197,8 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     txtIntro.setText(recipeOne.getIntro()+"");
                     txtContent.setText(recipeOne.getContent()+"");
                     txtIngredient.setText(recipeOne.getIngredient()+ "");
+
+
 
                 }
             }
