@@ -66,16 +66,16 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
         // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
         // myrecipeAdapter 에서 받은 userId
-//        getAdapterUserId = getIntent().getIntExtra("userId", 0);
-//
-//        Log.i("IDCHECK", userId + " " + getAdapterUserId);
-//
-//        if (userId == getAdapterUserId){
-//            btnEdit.setVisibility(View.VISIBLE);
-//
-//            return;
-//
-//        }
+        getAdapterUserId = getIntent().getIntExtra("userId", 0);
+
+        Log.i("IDCHECK", userId + " " + getAdapterUserId);
+
+        if (userId == getAdapterUserId){
+            btnEdit.setVisibility(View.VISIBLE);
+
+            return;
+
+        }
 
 
 
@@ -175,6 +175,8 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     }
 
                     // todo: 나중에 지워야댐 근데 레시피 db에는 주종이라는게 없는데 ??
+                    // 답변 : 주종 제외시키기로 해놓고 기획 수정을 안했네요...
+                    // 오븐에 화면 수정된거 반영했습니다. (3/21)
                     Log.i("레시피 정보", response.body().toString());
                     Log.i("레시피 정보", recipeOne.toString()+"");
                     Log.i("레시피 정보", recipeOne.getImgUrl()+"");
