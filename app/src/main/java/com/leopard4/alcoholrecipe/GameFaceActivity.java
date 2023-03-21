@@ -1,5 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,7 +78,7 @@ public class GameFaceActivity extends AppCompatActivity {
         imgFace = findViewById(R.id.imgFace);
         txtResult = findViewById(R.id.txtResult);
         txtAlchol = findViewById(R.id.txtAlchol);
-
+        imgAlchol = findViewById(R.id.imgAlchol);
 
 
 
@@ -114,10 +116,18 @@ public class GameFaceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<EmotionRes> call, Response<EmotionRes> response) {
 
+
                         if(response.isSuccessful()){
                             txtResult.setText(response.body().getResult().getContent());
                             txtAlchol.setText(response.body().getResult().getName());
-//                    Glide.with(context).load(imgUrl).into(imageView);
+                            String imgurl = response.body().getResult().getImgUrl();
+                            Log.i(TAG,"이미지url은"+imgurl);
+
+
+                            Glide.with(GameFaceActivity.this).load(imgurl).override(500,300).into(imgAlchol);
+
+
+
                         }else{
                             txtResult.setText("실패)");
                         }

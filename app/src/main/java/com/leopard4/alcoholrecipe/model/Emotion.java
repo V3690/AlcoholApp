@@ -15,7 +15,7 @@ public class Emotion {
 
     private  int alcoholId;
     private  String name;
-    private  String imgurl;
+    private  String imgUrl;
     private int emotionId;
     private  String emotion;
     private  String content;
@@ -36,12 +36,12 @@ public class Emotion {
         this.name = name;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public int getEmotionId() {
