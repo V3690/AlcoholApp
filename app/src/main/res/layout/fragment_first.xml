@@ -133,7 +133,7 @@
                         android:fontFamily="sans-serif-black"
                         android:text="재미있고 편리한 자동 건배사 제조기"
                         android:textColor="#FAFAFA"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -300,7 +300,7 @@
                     android:fontFamily="sans-serif-black"
                     android:text="주인장이 직접 추천하는 공식 레시피"
                     android:textColor="#FAFAFA"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
@@ -328,7 +328,7 @@
                     android:fontFamily="sans-serif-black"
                     android:text="우리들이 인정한 손님들의 창작 레시피"
                     android:textColor="#FAFAFA"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
