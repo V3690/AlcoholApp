@@ -11,6 +11,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -29,7 +30,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.leopard4.alcoholrecipe.api.CreatingApi;
+import com.leopard4.alcoholrecipe.api.DogamApi;
+import com.leopard4.alcoholrecipe.api.NetworkClient;
+import com.leopard4.alcoholrecipe.config.Config;
+import com.leopard4.alcoholrecipe.model.Res;
 
 import org.apache.commons.io.IOUtils;
 
@@ -41,6 +50,14 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class OwnerRequestActivity extends AppCompatActivity {
 
 
@@ -49,6 +66,15 @@ public class OwnerRequestActivity extends AppCompatActivity {
     Button btnCancel, btnPhoto, btnEnd;
 
     File photoFile;
+
+    RadioGroup radioGroup;
+    RadioButton radioAdd, radioEdit;
+
+    int requestType;
+
+    String name;
+    String percent;
+    String content;
 
 
     @Override
@@ -67,6 +93,12 @@ public class OwnerRequestActivity extends AppCompatActivity {
         btnPhoto = findViewById(R.id.btnPhoto);
         btnEnd = findViewById(R.id.btnEnd);
 
+        radioGroup = findViewById(R.id.radioGroup);
+
+        radioAdd = findViewById(R.id.radioAdd);
+        radioEdit = findViewById(R.id.radioEdit);
+
+
 
 
         // 이미지 업로드
@@ -80,7 +112,132 @@ public class OwnerRequestActivity extends AppCompatActivity {
             }
         });
 
+
+        btnEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int radioBtnId = radioGroup.getCheckedRadioButtonId();
+
+                if (radioBtnId == R.id.radioAdd){
+                    requestType = 0;
+                } else if (radioBtnId == R.id.radioEdit) {
+                    requestType = 1;
+                } else {
+                    Toast.makeText(OwnerRequestActivity.this, "요청타입을 선택하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                name = editName.getText().toString().trim();
+
+                if (name.isEmpty()){
+                    Toast.makeText(OwnerRequestActivity.this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                percent = editPercent.getText().toString().trim();
+
+                if (percent.isEmpty()){
+                    percent = "";
+                }
+
+                content = editContent.getText().toString().trim();
+
+                if (content.isEmpty()){
+                    content = "";
+                }
+
+                if(photoFile == null) {
+                    Toast.makeText(OwnerRequestActivity.this, "사진을 업로드 해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                Retrofit retrofit = NetworkClient.getRetrofitClient(OwnerRequestActivity.this);
+                DogamApi api = retrofit.create(DogamApi.class);
+
+                // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
+                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
+
+                // photo
+                MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", photoFile.getName(), fileBody);
+
+                // requestType, name, percent, content
+
+                // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터 만든다.
+                RequestBody requestTypeBody = RequestBody.create(requestType+"", MediaType.parse("text/plain"));
+                RequestBody nameBody = RequestBody.create(name, MediaType.parse("text/plain"));
+                RequestBody percentBody = RequestBody.create(percent+"", MediaType.parse("text/plain"));
+                RequestBody contentBody = RequestBody.create(content, MediaType.parse("text/plain"));
+
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+
+                Call<Res> call = api.requestDogam(accessToken,
+                        photo,
+                        requestTypeBody,
+                        nameBody,
+                        percentBody,
+                        contentBody);
+
+
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        if (response.isSuccessful()){
+
+                            Toast.makeText(OwnerRequestActivity.this, "요청 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        } else {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+
+
+                    }
+                });
+
+            }
+        });
+
+
+
+
+        // 취소 버튼
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
+
+
+
+    void getNetworkData(){
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
     // 카메라 관련 코드
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(OwnerRequestActivity.this);

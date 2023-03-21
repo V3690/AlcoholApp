@@ -66,7 +66,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
     // api 호출할 때 정렬 조건에 들어가는 키워드 값 변수
     String OrderKeyword = "percent";
-    String search;
+    String keyword;
 
 
 
@@ -140,25 +140,47 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-//
-//        search = editSearch.getText().toString().trim();
-//
-//        if (search.isEmpty()){
-//            return;
-//        }
 
-
-        // TODO: 2023-03-20 검색 기능 개발 미완료 
         // TODO: 2023-03-20 스피너 기능 미처리
 
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                search = editSearch.getText().toString().trim();
+                keyword = editSearch.getText().toString().trim();
 
-                if (search.isEmpty()){
+                if (keyword.isEmpty()){
                     return;
                 }
+
+                searchKeyword();
+
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+
+                        // 맨 마지막 데이터가 화면에 보이면!!
+                        // 네트워크 통해서 데이터를 추가로 받아와라!!
+                        int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                        int totalCount = recyclerView.getAdapter().getItemCount();
+
+                        // 스크롤을 데이터 맨 끝까지 한 상태
+                        if (lastPosition + 1 == totalCount && !isloading) {
+                            // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                            isloading = true;
+                            addSearchKeyword();
+
+
+                        }
+
+
+                    }
+                });
             }
         });
 
@@ -264,6 +286,102 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
+
+    }
+
+
+    void searchKeyword(){
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
+
+        DogamApi api = retrofit.create(DogamApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        offset = 0;
+        count = 0;
+
+        Call<DogamList> call = api.getKeywordDogamList(accessToken, keyword, offset, limit);
+        call.enqueue(new Callback<DogamList>() {
+            @Override
+            public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+
+                // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
+                // 초기화 코드가 필요.
+                dogamList.clear();
+
+
+                if (response.isSuccessful()) {
+
+                    count = response.body().getCount();
+
+                    offset = offset + count;
+
+                    dogamList.addAll(response.body().getItems());
+
+                    dogamAdapter = new DogamAdapter(DogamActivity.this, dogamList);
+                    recyclerView.setAdapter(dogamAdapter);
+
+
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DogamList> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void addSearchKeyword(){
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
+
+        DogamApi api = retrofit.create(DogamApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+
+        Call<DogamList> call = api.getKeywordDogamList(accessToken, keyword, offset, limit);
+        call.enqueue(new Callback<DogamList>() {
+            @Override
+            public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+
+                // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
+                // 초기화 코드가 필요.
+//                alcoholList.clear();
+
+
+                if (response.isSuccessful()) {
+                    offset = offset + count;
+//                    alcoholList.clear();
+
+//                    count = response.body().getCount();
+//
+//                    offset = offset + count;
+
+                    dogamList.addAll(response.body().getItems());
+
+//                    alcoholAdapter = new AlcoholAdapter(MyRecipeWriteSecondActivity.this, alcoholList);
+//                    alcoholRecyclerView.setAdapter(alcoholAdapter);
+                    dogamAdapter.notifyDataSetChanged();
+                    isloading = false;
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DogamList> call, Throwable t) {
+
+            }
+        });
 
     }
 

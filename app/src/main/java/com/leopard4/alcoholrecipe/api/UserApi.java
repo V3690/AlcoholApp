@@ -1,5 +1,5 @@
-패키지 com.leopard4.alcoholrecipe.api
-.
+package com.leopard4.alcoholrecipe.api;
+
 import com.leopard4.alcoholrecipe.model.Res;
 import com.leopard4.alcoholrecipe.model.User;
 import com.leopard4.alcoholrecipe.model.UserPreference;
