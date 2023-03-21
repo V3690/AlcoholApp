@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/txtHuman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="주인장에게 요청하기" />

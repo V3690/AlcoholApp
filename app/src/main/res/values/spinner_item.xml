@@ -35,5 +35,26 @@
     <item>인기순</item>
 
 </string-array>
+    -<string-array name="spinner_item6">
+
+    <item>본인만</item>
+
+    <item>본인 제외</item>
+
+    <item>전체랜덤</item>
+
+</string-array>
+
+    -<string-array name="spinner_item7">
+
+    <item>벌칙</item>
+
+    <item>벌주</item>
+
+    <item>전체랜덤</item>
+
+
+</string-array>
+
 
 </resources>
