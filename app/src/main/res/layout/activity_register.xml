@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/alcoholApp">
-
-    <ImageView
-        android:id="@+id/imageView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/a_b_1_register2" />
+    android:background="@drawable/a_b_2_register">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="150dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +27,8 @@
             android:fontFamily="@font/puradak_gentle_gothic"
             android:gravity="center"
             android:text="회원 가입"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,12 +46,11 @@
 
             <EditText
                 android:id="@+id/editEmail"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:background="#A6FFFFFF"
+                android:background="#80FFFFFF"
                 android:ems="8"
                 android:fontFamily="@font/kai_gen_gothic_kr_bold"
                 android:inputType="textEmailAddress"
@@ -93,12 +83,11 @@
 
             <EditText
                 android:id="@+id/editNickName"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:background="#A6FFFFFF"
+                android:background="#80FFFFFF"
                 android:ems="8"
                 android:fontFamily="@font/kai_gen_gothic_kr_bold"
                 android:inputType="textPersonName"
@@ -138,8 +127,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:background="#A6FFFFFF"
+                android:background="#80FFFFFF"
                 android:ems="8"
                 android:fontFamily="@font/kai_gen_gothic_kr_bold"
                 android:inputType="textPassword"
@@ -178,8 +166,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:background="#A6FFFFFF"
+                android:background="#80FFFFFF"
                 android:ems="8"
                 android:fontFamily="@font/kai_gen_gothic_kr_bold"
                 android:inputType="textPassword"
@@ -200,15 +187,22 @@
 
         <Button
             android:id="@+id/btnOk"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
-            android:backgroundTint="#D4E73C61"
-            android:fontFamily="sans-serif-black"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="140dp"
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="@font/puradak_gentle_gothic"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="완료"
-            android:textSize="20sp" />
+            android:textColor="#9666F3"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="261dp"
+            tools:layout_editor_absoluteY="493dp" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

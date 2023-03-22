@@ -33,7 +33,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
     ImageView imgUrl,imgRecipeLike;
     TextView txtRecipeTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
     Button btnReturnRecipe, btnEdit;
-    ImageView imgBack;
+    ImageView btnBack;
     private String accessToken;
     private int recipeId;
     private int userId;
@@ -49,22 +49,19 @@ public class RecipeInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_info);
 
-        imgBack = findViewById(R.id.imgBack);
+        btnBack = findViewById(R.id.btnBack);
+        btnEdit = findViewById(R.id.btnEdit);
         btnReturnRecipe = findViewById(R.id.btnReturnRecipe);
         txtRecipeTitle = findViewById(R.id.txtRecipeTitle);
         imgUrl = findViewById(R.id.imgUrl);
+        imgRecipeLike = findViewById(R.id.imgRecipeLike);
         txtLikeCnt = findViewById(R.id.txtLikeCnt);
         txtPercent = findViewById(R.id.txtPercent);
-        txtAlcoholType = findViewById(R.id.txtAlcoholType);
         txtUserId = findViewById(R.id.txtUserId);
         txtEngTitle = findViewById(R.id.txtEngTitle);
         txtIntro = findViewById(R.id.txtIntro);
         txtContent = findViewById(R.id.txtContent);
         txtIngredient = findViewById(R.id.txtIngredient);
-
-        imgRecipeLike = findViewById(R.id.imgRecipeLike);
-
-        btnEdit = findViewById(R.id.btnEdit);
 
 
 
@@ -140,7 +137,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
 
         // 뒤로가기 버튼
-        imgBack.setOnClickListener(v -> {
+        btnBack.setOnClickListener(v -> {
             finish();
         });
 
@@ -174,6 +171,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
     //                    recipeOneList.addAll(response.body().getRecipeOne());
 
                         recipeOne = response.body().getRecipeOne();
+
                         // glide로 이미지 뿌려주기
                         Glide.with(RecipeInfoActivity.this)
                                 .load(recipeOne.getImgUrl())
@@ -198,11 +196,8 @@ public class RecipeInfoActivity extends AppCompatActivity {
                         if (recipeOne.getImgUrl() == null) {
                             recipeOne.setImgUrl("");
                         }
-                        if (recipeOne.getAlcoholType() == null) {
-                            recipeOne.setAlcoholType("");
-                        }
                         if (recipeOne.getEngTitle() == null) {
-                            recipeOne.setEngTitle("");
+                            recipeOne.setEngTitle("No English name");
                         }
                         if (recipeOne.getIntro() == null) {
                             recipeOne.setIntro("");
@@ -228,11 +223,10 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
                         txtRecipeTitle.setText(recipeOne.getTitle()+"");
                         txtLikeCnt.setText(recipeOne.getLikeCnt()+"");
-                        txtAlcoholType.setText(recipeOne.getAlcoholType()+"");
                         txtEngTitle.setText(recipeOne.getEngTitle()+"");
                         txtIntro.setText(recipeOne.getIntro()+"");
-                        txtContent.setText(recipeOne.getContent()+"");
                         txtIngredient.setText(recipeOne.getIngredient()+ "");
+                        txtContent.setText(recipeOne.getContent()+"");
 
                         likeCnt = recipeOne.getLikeCnt();
 
