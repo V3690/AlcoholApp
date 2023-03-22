@@ -1,4 +1,4 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.cheers;
 
 import java.io.Serializable;
 import java.util.ArrayList;

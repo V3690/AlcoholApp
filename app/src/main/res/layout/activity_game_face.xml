@@ -16,12 +16,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginEnd="360dp"
+            android:layout_marginRight="360dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/textView52"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+
         <TextView
             android:id="@+id/textView52"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="100dp"
             android:text="지금 내 얼굴은"
             android:textSize="30sp" />
 
@@ -29,8 +44,7 @@
             android:id="@+id/textView54"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginStart="50dp"
             android:text="얼굴 사진을 촬영해서 올리면 나에게 어울리는 술 매칭!" />
 
         <LinearLayout

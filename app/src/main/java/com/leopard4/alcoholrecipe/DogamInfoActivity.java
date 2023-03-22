@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,15 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.api.DogamApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
-import com.leopard4.alcoholrecipe.api.RecipeApi;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.RecipeOne;
-import com.leopard4.alcoholrecipe.model.RecipeOneResponse;
-import com.leopard4.alcoholrecipe.model.dogam.Dogam;
 import com.leopard4.alcoholrecipe.model.dogam.DogamInfo;
 import com.leopard4.alcoholrecipe.model.dogam.DogamInfoResponse;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

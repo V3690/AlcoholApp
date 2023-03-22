@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.R;
-import com.leopard4.alcoholrecipe.model.RecipeMaster;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeMaster;
 
 import java.util.ArrayList;
 

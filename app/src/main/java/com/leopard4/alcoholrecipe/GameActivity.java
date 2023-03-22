@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 
 public class GameActivity extends AppCompatActivity {
 
-    ImageButton ibtnFace, ibtnToast, ibtnDice;
+    ImageButton ibtnFace, ibtnToast, ibtnDice , imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
         ibtnFace = findViewById(R.id.ibtnFace);
         ibtnToast = findViewById(R.id.ibtnToast);
         ibtnDice = findViewById(R.id.ibtnDice);
+        imgBack = findViewById(R.id.imgBack);
 
         ibtnFace.setOnClickListener(view -> {
             Intent intent = new Intent(GameActivity.this, GameFaceActivity.class);
@@ -33,6 +34,12 @@ public class GameActivity extends AppCompatActivity {
             Intent intent = new Intent(GameActivity.this, GameDiceActivity.class);
             startActivity(intent);
         });
+
+        imgBack.setOnClickListener(v -> {
+            finish();
+        });
+
+
 
     }
 }

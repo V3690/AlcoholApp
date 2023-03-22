@@ -1,7 +1,5 @@
 package com.leopard4.alcoholrecipe;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +22,8 @@ import com.leopard4.alcoholrecipe.adapter.RecipeFavoriteAdapter;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeFavoriteApi;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.RecipeFavorite;
-import com.leopard4.alcoholrecipe.model.RecipeFavoriteList;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeFavorite;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeFavoriteList;
 
 import java.util.ArrayList;
 

@@ -132,6 +132,9 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                 // 영문 이름
                 String engTitle = editEngTitle.getText().toString().trim();
+                if (engTitle.isEmpty()){
+                    engTitle = "";
+                }
 
                 // 도수 선택
                 int radioBtnId = radioGroup.getCheckedRadioButtonId();
@@ -151,6 +154,10 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                 // 소개
                 String intro = editIntro.getText().toString().trim();
+
+                if (intro.isEmpty()){
+                    intro = "";
+                }
 
                 // 레시피
                 String content = editContent.getText().toString().trim();
