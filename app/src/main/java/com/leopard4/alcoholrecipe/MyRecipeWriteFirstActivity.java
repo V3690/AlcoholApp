@@ -1,9 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
-import static com.leopard4.alcoholrecipe.MyRecipeWriteSecondActivity.BACK;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -23,7 +21,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -35,20 +32,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.leopard4.alcoholrecipe.api.CreatingApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.Res;
+
+import com.leopard4.alcoholrecipe.model.CreateRecipeRes.RecipeRes;
+import com.leopard4.alcoholrecipe.model.CreateRecipeRes.Recipe_id;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -66,7 +61,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.Multipart;
 
 public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
@@ -94,6 +88,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     int percent = 0;
     ImageButton imgBack;
     TextView textView96; // 주인장의 연구실로 이동
+    private String thisRecipeId;
 
 
     @Override
@@ -114,24 +109,15 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         btnImg = findViewById(R.id.btnImg);
         btnNext = findViewById(R.id.btnNext);
-        // 두번째 레시피 작성페이지에서 뒤로버튼을 눌렀다면 버튼에 다음단계가 아닌 수정으로 변경
-        if (BACK == 1) {
-            btnNext.setText("수 정");
-            btnNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // 수정 api 호출
-                    Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
-                    CreatingApi creatingApi = retrofit.create(CreatingApi.class);
-//                    Call<Res> call = creatingApi.editRecipe(
-
-
-                    // 레시피 수정완료후 재료선택 페이지로 이동
-                    Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
-                    startActivity(intent);
-                }
-            });
+        // 이화면에서 수정을 재활용하고싶다면
+        // thisRecipeId변수에 recipeId를 할당한다.
+        // 그러면 next버튼이 수정하기로 바뀌고, 수정하기를 누르면
+        // 수정하는 api가 호출된다.
+        if (thisRecipeId != null){
+            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+            btnNext.setText("수정하기");
         }
+
         // 레시피 버튼을 눌렀을때 주인장의 연구실로 이동
         textView96 = findViewById(R.id.textView96);
         textView96.setOnClickListener(new View.OnClickListener() {
@@ -167,145 +153,284 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (thisRecipeId == null) {
+                    // 한글 이름
+                    String title = editTitle.getText().toString().trim();
+                    if (title.isEmpty()){
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "한글 이름은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                // 한글 이름
-                String title = editTitle.getText().toString().trim();
-                if (title.isEmpty()){
-                    Toast.makeText(MyRecipeWriteFirstActivity.this, "한글 이름은 필수입니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    // 영문 이름
+                    String engTitle = editEngTitle.getText().toString().trim();
+                    if (engTitle.isEmpty()){
+                        engTitle = "";
+                    }
 
-                // 영문 이름
-                String engTitle = editEngTitle.getText().toString().trim();
-                if (engTitle.isEmpty()){
-                    engTitle = "";
-                }
+                    // 도수 선택
+                    int radioBtnId = radioGroup.getCheckedRadioButtonId();
 
-                // 도수 선택
-                int radioBtnId = radioGroup.getCheckedRadioButtonId();
+                    if (radioBtnId == R.id.radioOne){
+                        percent = 1;
+                    } else if (radioBtnId == R.id.radioTwo) {
+                        percent = 2;
+                    } else if (radioBtnId == R.id.radioThree) {
+                        percent = 3;
+                    } else if (radioBtnId == R.id.radioFour) {
+                        percent = 4;
+                    } else {
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "도수를 선택하세요.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                if (radioBtnId == R.id.radioOne){
-                    percent = 1;
-                } else if (radioBtnId == R.id.radioTwo) {
-                    percent = 2;
-                } else if (radioBtnId == R.id.radioThree) {
-                    percent = 3;
-                } else if (radioBtnId == R.id.radioFour) {
-                    percent = 4;
-                } else {
-                    Toast.makeText(MyRecipeWriteFirstActivity.this, "도수를 선택하세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    // 소개
+                    String intro = editIntro.getText().toString().trim();
 
-                // 소개
-                String intro = editIntro.getText().toString().trim();
+                    if (intro.isEmpty()){
+                        intro = "";
+                    }
 
-                if (intro.isEmpty()){
-                    intro = "";
-                }
+                    // 레시피
+                    String content = editContent.getText().toString().trim();
+                    if (content.isEmpty()){
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "레시피 작성은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                // 레시피
-                String content = editContent.getText().toString().trim();
-                if (content.isEmpty()){
-                    Toast.makeText(MyRecipeWriteFirstActivity.this, "레시피 작성은 필수입니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    // 사진 첨부
+                    // 사진이 첨부되었는지 - 안돼있으면 토스트메세지
+                    if(photoFile == null) {
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "사진은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                // 사진 첨부
-                // 사진이 첨부되었는지 - 안돼있으면 토스트메세지
-                if(photoFile == null) {
-                    Toast.makeText(MyRecipeWriteFirstActivity.this, "사진은 필수입니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    showProgress("포스팅 업로드 중...");
 
-                showProgress("포스팅 업로드 중...");
-
-                Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
-                CreatingApi api = retrofit.create(CreatingApi.class);
-
-
-                // title, engTitle, intro, percent, content, img
-                // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
-                MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
+                    Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
+                    CreatingApi api = retrofit.create(CreatingApi.class);
 
 
+                    // title, engTitle, intro, percent, content, img
+                    // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
+                    RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
+                    MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
 
-                // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터를 만든다.
-                // title
-                RequestBody titleBody = RequestBody.create(title, MediaType.parse("text/plain"));
-                //engTitle
-                RequestBody engTitleBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
-                //intro
-                RequestBody introBody = RequestBody.create(intro, MediaType.parse("text/plain"));
-                // percent
-                RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
-                // content
-                RequestBody contentBody = RequestBody.create(content, MediaType.parse("text/plain"));
 
-                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
-                // title, engTitle, intro, percent, content, img
+                    // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터를 만든다.
+                    // title
+                    RequestBody titleBody = RequestBody.create(title, MediaType.parse("text/plain"));
+                    //engTitle
+                    RequestBody engTitleBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
+                    //intro
+                    RequestBody introBody = RequestBody.create(intro, MediaType.parse("text/plain"));
+                    // percent
+                    RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
+                    // content
+                    RequestBody contentBody = RequestBody.create(content, MediaType.parse("text/plain"));
 
-                Call<Res> call = api.addRecipe(accessToken,
-                        titleBody,
-                        engTitleBody,
-                        introBody,
-                        percentBody,
-                        contentBody,
-                        img);
+                    SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                    String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        dismissProgress();
-                        if (response.isSuccessful()){
-                            // response.body() : 응답 본문
-                            Log.i("포스팅업로드", response.body().toString());
-                            Log.d("포스팅업로드", "onResponse: " + response.body().toString());
-                            // response.body()를 json으로 변환
-                            JSONObject jsonObject = null;
-                            try {
-                                jsonObject = new JSONObject(response.body().toString());
-                                int id = jsonObject.getInt("id");
-                                Log.i("포스팅업로드", id+"");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                    // title, engTitle, intro, percent, content, img
 
-                            Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
-                            startActivity(intent);
+                    Call<RecipeRes> call = api.addRecipe(accessToken,
+                            titleBody,
+                            engTitleBody,
+                            introBody,
+                            percentBody,
+                            contentBody,
+                            img);
 
-                        } else {
-                            try {
-                                String errorBody = response.errorBody().string(); // 에러바디를 String으로 변환
-                                JSONObject jsonObject = new JSONObject(errorBody); // String을 JSON으로 변환
-                                String errorMessage = jsonObject.getString("error"); // JSON에서 error 키의 값을 가져옴
-                                Log.i("중복에러", errorMessage);
+                    call.enqueue(new Callback<RecipeRes>() {
+                        @SuppressLint("LongLogTag") // 로그가 길어도 무시
+                        @Override
+                        public void onResponse(Call<RecipeRes> call, Response<RecipeRes> response) {
+                            dismissProgress();
+                            if (response.isSuccessful()){
+                                // response의 상세한 내용을 확인하는 과정 (공부용)
+                                RecipeRes res = response.body();
+                                Recipe_id recipe_id = res.getRecipe_id()[0];
+                                Recipe_id[] res2 = response.body().getRecipe_id();
+                                Recipe_id recipeId2 = res2[0];
+                                String recipeId = recipe_id.getId();
+                                String res3 = response.body().getRecipe_id()[0].getId();
 
-                                if(errorMessage.contains("Duplicate")){
-                                    editTitle.setError("이미 존재하는 제목입니다.");
-                                    Toast.makeText(MyRecipeWriteFirstActivity.this, "이미 존재하는 제목입니다.", Toast.LENGTH_SHORT).show();
+                                Log.i("리스폰 res = response.body()", res + "");
+                                Log.i("리스폰 recipe_id = res.getRecipe_id()[0]", res.getResult() + "");
+                                Log.i("리스폰 res2 = response.body().getRecipe_id();", res.getRecipe_id() + "");
+                                Log.i("리스폰 res2 = response.body().getRecipe_id(); ", res2 + "");
+                                Log.i("리스폰 recipe_id = res.getRecipe_id()[0];", recipe_id + "");
+                                Log.i("리스폰 recipeId2 = res2[0];", recipeId2 + "");
+                                Log.i("리스폰 recipeId = recipe_id.getId();", recipeId + "");
+                                Log.i("리스폰 res3 = response.body().getRecipe_id()[0].getId();", res3 + "");
+
+                                thisRecipeId = recipeId;
+                                // 결론적으로 recipeId를 가져올 수 있었고 이를 다음 액티비티로 넘겨준다.
+                                Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
+                                intent.putExtra("recipeId", recipeId);
+                                startActivity(intent);
+
+                            } else {
+                                try {
+                                    String errorBody = response.errorBody().string(); // 에러바디를 String으로 변환
+                                    JSONObject jsonObject = new JSONObject(errorBody); // String을 JSON으로 변환
+                                    String errorMessage = jsonObject.getString("error"); // JSON에서 error 키의 값을 가져옴
+                                    Log.i("중복에러", errorMessage);
+
+                                    if(errorMessage.contains("Duplicate")){
+                                        editTitle.setError("이미 존재하는 제목입니다.");
+                                        Toast.makeText(MyRecipeWriteFirstActivity.this, "이미 존재하는 제목입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace(); // 에러바디를 String으로 변환하는 과정에서 에러가 발생하면
+
                                 }
-
-                            } catch (Exception e) {
-                                e.printStackTrace(); // 에러바디를 String으로 변환하는 과정에서 에러가 발생하면
 
                             }
 
                         }
 
+                        @Override
+                        public void onFailure(Call<RecipeRes> call, Throwable t) {
+                            dismissProgress();
+                            Log.e("통신 실패", t.getMessage());
+
+
+                        }
+                    });
+                    // 수정 하기
+                }else if (thisRecipeId != null){
+                    String title = editTitle.getText().toString().trim();
+                    if (title.isEmpty()){
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "한글 이름은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        dismissProgress();
-                        Log.e("통신 실패", t.getMessage());
-
-
+                    // 영문 이름
+                    String engTitle = editEngTitle.getText().toString().trim();
+                    if (engTitle.isEmpty()){
+                        engTitle = "";
                     }
-                });
+
+                    // 도수 선택
+                    int radioBtnId = radioGroup.getCheckedRadioButtonId();
+
+                    if (radioBtnId == R.id.radioOne){
+                        percent = 1;
+                    } else if (radioBtnId == R.id.radioTwo) {
+                        percent = 2;
+                    } else if (radioBtnId == R.id.radioThree) {
+                        percent = 3;
+                    } else if (radioBtnId == R.id.radioFour) {
+                        percent = 4;
+                    } else {
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "도수를 선택하세요.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // 소개
+                    String intro = editIntro.getText().toString().trim();
+
+                    if (intro.isEmpty()){
+                        intro = "";
+                    }
+
+                    // 레시피
+                    String content = editContent.getText().toString().trim();
+                    if (content.isEmpty()){
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "레시피 작성은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // 사진 첨부
+                    // 사진이 첨부되었는지 - 안돼있으면 토스트메세지
+                    if(photoFile == null) {
+                        Toast.makeText(MyRecipeWriteFirstActivity.this, "사진은 필수입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    showProgress("포스팅 업로드 중...");
+
+                    Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
+                    CreatingApi api = retrofit.create(CreatingApi.class);
+
+
+                    // title, engTitle, intro, percent, content, img
+                    // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
+                    RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
+                    MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
+
+
+
+                    // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터를 만든다.
+                    // title
+                    RequestBody titleBody = RequestBody.create(title, MediaType.parse("text/plain"));
+                    //engTitle
+                    RequestBody engTitleBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
+                    //intro
+                    RequestBody introBody = RequestBody.create(intro, MediaType.parse("text/plain"));
+                    // percent
+                    RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
+                    // content
+                    RequestBody contentBody = RequestBody.create(content, MediaType.parse("text/plain"));
+
+                    SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                    String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+                    // title, engTitle, intro, percent, content, img
+
+                    Call<RecipeRes> call = api.editRecipe(accessToken,
+                            titleBody,
+                            engTitleBody,
+                            introBody,
+                            percentBody,
+                            contentBody,
+                            img,thisRecipeId);
+
+                    call.enqueue(new Callback<RecipeRes>() {
+                        @Override
+                        public void onResponse(Call<RecipeRes> call, Response<RecipeRes> response) {
+                            dismissProgress();
+                            if (response.isSuccessful()){
+                                RecipeRes res = response.body();
+                                Log.i("리스폰2", res + "");
+
+                                Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
+                                startActivity(intent);
+
+                            } else {
+                                try {
+                                    String errorBody = response.errorBody().string(); // 에러바디를 String으로 변환
+                                    JSONObject jsonObject = new JSONObject(errorBody); // String을 JSON으로 변환
+                                    String errorMessage = jsonObject.getString("error"); // JSON에서 error 키의 값을 가져옴
+                                    Log.i("중복에러", errorMessage);
+
+                                    if(errorMessage.contains("Duplicate")){
+                                        editTitle.setError("이미 존재하는 제목입니다.");
+                                        Toast.makeText(MyRecipeWriteFirstActivity.this, "이미 존재하는 제목입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace(); // 에러바디를 String으로 변환하는 과정에서 에러가 발생하면
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<RecipeRes> call, Throwable t) {
+                            dismissProgress();
+                            Log.e("통신 실패", t.getMessage());
+
+
+                        }
+                    });
+                }
+
 
 
             }
@@ -595,6 +720,21 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     void dismissProgress(){
         dialog.dismiss();
     }
+    // onResume
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 이화면에서 수정을 재활용하고싶다면
+        // thisRecipeId변수에 recipeId를 할당한다.
+        // 그러면 수정하는 화면이 된다.
+        if (thisRecipeId != null){
+            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+            btnNext.setText("수정하기");
+        }
+
+
+    }
+
 
 
 }

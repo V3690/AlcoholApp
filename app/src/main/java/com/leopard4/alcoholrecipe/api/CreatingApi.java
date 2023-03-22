@@ -1,6 +1,7 @@
 package com.leopard4.alcoholrecipe.api;
 
-import com.leopard4.alcoholrecipe.model.Res;
+
+import com.leopard4.alcoholrecipe.model.CreateRecipeRes.RecipeRes;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
 
@@ -15,6 +16,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CreatingApi extends Serializable {
@@ -23,13 +25,13 @@ public interface CreatingApi extends Serializable {
     // title, engTitle, intro, percent, content, img
     @Multipart
     @POST("/creating/recipe")
-    Call<Res> addRecipe(@Header("Authorization") String token,
-                         @Part("title") RequestBody title,
-                         @Part("engTitle")RequestBody engTitle,
-                         @Part("intro")RequestBody intro,
-                         @Part("percent")RequestBody percent,
-                         @Part("content")RequestBody content,
-                         @Part MultipartBody.Part img);
+    Call<RecipeRes> addRecipe(@Header("Authorization") String token,
+                              @Part("title") RequestBody title,
+                              @Part("engTitle")RequestBody engTitle,
+                              @Part("intro")RequestBody intro,
+                              @Part("percent")RequestBody percent,
+                              @Part("content")RequestBody content,
+                              @Part MultipartBody.Part img);
 
 
     // 알콜 리스트 가져오는 API
@@ -48,14 +50,15 @@ public interface CreatingApi extends Serializable {
     // 본인 레시피 수정 API
     // title, engTitle, intro, percent, content, img
     @Multipart
-    @POST("/creating/recipe/edit/{recipeId}")
-    Call<Res> editRecipe(@Header("Authorization") String token,
-                         @Part("title") RequestBody title,
-                         @Part("engTitle")RequestBody engTitle,
-                         @Part("intro")RequestBody intro,
-                         @Part("percent")RequestBody percent,
-                         @Part("content")RequestBody content,
-                         @Part MultipartBody.Part img);
+    @PUT("/creating/recipe/edit/{recipeId}")
+    Call<RecipeRes> editRecipe(@Header("Authorization") String token,
+                              @Part("title") RequestBody title,
+                              @Part("engTitle")RequestBody engTitle,
+                              @Part("intro")RequestBody intro,
+                              @Part("percent")RequestBody percent,
+                              @Part("content")RequestBody content,
+                              @Part MultipartBody.Part img,
+                              @Path("recipeId") String recipeId);
 
     // 본인 재료 수정 API
 //    {
@@ -63,7 +66,7 @@ public interface CreatingApi extends Serializable {
 //            "ingredientId": "11,12,13,14,15,16"
 //    }
     @PUT("/creating/ingredient/edit/{ingredientId}")
-    Call<Res> editIngredient(@Header("Authorization") String token,
+    Call<RecipeRes> editIngredient(@Header("Authorization") String token,
                              @Part("alcoholId") RequestBody alcoholId,
                              @Part("ingredientId")RequestBody ingredientId);
 
