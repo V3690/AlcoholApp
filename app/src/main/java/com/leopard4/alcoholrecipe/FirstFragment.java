@@ -1,6 +1,11 @@
 package com.leopard4.alcoholrecipe;
 
 
+//import static com.leopard4.alcoholrecipe.RecipeInfoActivity.state;
+
+import static com.leopard4.alcoholrecipe.RecipeInfoActivity.state;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,17 +26,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.leopard4.alcoholrecipe.adapter.RecipeHonorAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeMasterAdapter;
 import com.leopard4.alcoholrecipe.api.GameApi;
+import com.leopard4.alcoholrecipe.api.LikeApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeApi;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.CheersMent;
-import com.leopard4.alcoholrecipe.model.CheersMentRes;
-import com.leopard4.alcoholrecipe.model.LandomMent;
-import com.leopard4.alcoholrecipe.model.Ment;
-import com.leopard4.alcoholrecipe.model.RecipeHonor;
-import com.leopard4.alcoholrecipe.model.RecipeHonorList;
-import com.leopard4.alcoholrecipe.model.RecipeMaster;
-import com.leopard4.alcoholrecipe.model.RecipeMasterList;
+import com.leopard4.alcoholrecipe.model.ResMessage;
+import com.leopard4.alcoholrecipe.model.cheers.CheersMent;
+import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
+import com.leopard4.alcoholrecipe.model.cheers.Ment;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeHonor;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeHonorList;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeMaster;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeMasterList;
 
 import java.util.ArrayList;
 
@@ -75,7 +82,7 @@ public class FirstFragment extends Fragment {
 
     private boolean isLoading1 = false;
     private boolean isLoading2 = false;
-
+    private RecipeHonor selectedHonor;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -101,10 +108,12 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -333,6 +342,11 @@ public class FirstFragment extends Fragment {
 
                     adapter2.setOnItemClickListener(new RecipeHonorAdapter.onItemClickListener() {
                         @Override
+                        public void likeProcess(int index) {
+                           FirstFragment.this.likeProcess(index);
+                        }
+
+                        @Override
                         public void onItemClick(int index) {
                             Intent intent = new Intent(getActivity(), RecipeInfoActivity.class);
                             intent.putExtra("recipeId", recipeHonorList.get(index).getId());
@@ -381,6 +395,11 @@ public class FirstFragment extends Fragment {
                     offset2 = offset2+count2;
                     adapter2 = new RecipeHonorAdapter(getActivity(),recipeHonorList );
                     adapter2.setOnItemClickListener(new RecipeHonorAdapter.onItemClickListener() {
+
+                        @Override
+                        public void likeProcess(int index) {
+                            FirstFragment.this.likeProcess(index);
+                        }
                         @Override
                         public void onItemClick(int index) {
                             Intent intent = new Intent(getActivity(), RecipeInfoActivity.class);
@@ -435,4 +454,84 @@ public class FirstFragment extends Fragment {
             }
         });
     }
+    // 액티비티에서 현재프래그먼트로 돌아왔을때
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 액티비티에서 현재프래그먼트로 돌아왔을때
+        // 상태변화를 스탯으로 감지해서 1이면 명예 레시피를 다시불러온다. (좋아요표시때문에)
+        int s = state;
+        if (state == 1) {
+            getNetworkData2();
+            state = 0;
+
+        }
+    }
+
+
+    public void likeProcess(int index) {
+
+        selectedHonor = recipeHonorList.get(index); // 선택된 명예레시피
+
+        // 2. 해당행의 좋아요가 이미 좋아요인지 아닌지 파악
+        if (selectedHonor.getIsLike() == 0) {
+            // 3. 해당 좋아요에 맞는 좋아요 API를 호출
+            Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
+            LikeApi api = retrofit.create(LikeApi.class);
+
+            Call<Void> call = api.postLike(accessToken, selectedHonor.getId());
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // 4. 화면에 결과를 표시
+                        selectedHonor.setIsLike(1);
+                        selectedHonor.setLikeCount(selectedHonor.getLikeCount() + 1);
+                        adapter2.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(getActivity(), "좋아요 처리에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getActivity(), "서버와 통신이 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else {
+            // 3. 좋아요 해제 API를 호출
+            // 3. 해당 좋아요에 맞는 좋아요 API를 호출
+            Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
+            LikeApi api = retrofit.create(LikeApi.class);
+
+            Call<Void> call = api.deleteLike(accessToken, selectedHonor.getId());
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // 4. 화면에 결과를 표시
+                        selectedHonor.setIsLike(0);
+                        selectedHonor.setLikeCount(selectedHonor.getLikeCount() - 1);
+                        adapter2.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(getActivity(), "좋아요 해제에 실패했습니다.", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getActivity(), "서버와 통신이 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+
 }

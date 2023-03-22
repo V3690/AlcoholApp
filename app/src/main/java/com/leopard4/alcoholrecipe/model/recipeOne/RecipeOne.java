@@ -1,4 +1,4 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.recipeOne;
 
 import java.io.Serializable;
 
@@ -15,11 +15,19 @@ public class RecipeOne implements Serializable {
     private String ingredient;
     private String createdAt;
     private String updatedAt;
-
     private String nickname;
+    private int isLike;
 
     public String getNickname() {
         return nickname;
+    }
+
+    public int getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(int isLike) {
+        this.isLike = isLike;
     }
 
     public void setNickname(String nickname) {

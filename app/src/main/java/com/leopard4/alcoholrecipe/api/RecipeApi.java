@@ -1,9 +1,10 @@
 package com.leopard4.alcoholrecipe.api;
 
-import com.leopard4.alcoholrecipe.model.RecipeHonorList;
-import com.leopard4.alcoholrecipe.model.RecipeMasterList;
+
+import com.leopard4.alcoholrecipe.model.recipe.RecipeHonorList;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeMasterList;
 import com.leopard4.alcoholrecipe.model.RecipeOne;
-import com.leopard4.alcoholrecipe.model.RecipeOneResponse;
+import com.leopard4.alcoholrecipe.model.recipeOne.RecipeOneResponse;
 import com.leopard4.alcoholrecipe.model.Res;
 import com.leopard4.alcoholrecipe.model.myRecipe.MyRecipeRes;
 

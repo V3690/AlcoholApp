@@ -1,9 +1,6 @@
 package com.leopard4.alcoholrecipe.model.dogam;
 
 import com.google.gson.annotations.SerializedName;
-import com.leopard4.alcoholrecipe.model.RecipeOne;
-
-import java.util.List;
 
 public class DogamInfoResponse {
 

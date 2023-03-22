@@ -1,10 +1,12 @@
 package com.leopard4.alcoholrecipe.api;
 
-import com.leopard4.alcoholrecipe.model.CheersMentRes;
+
+import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
 import com.leopard4.alcoholrecipe.model.DiceRes;
 import com.leopard4.alcoholrecipe.model.EmotionRes;
-import com.leopard4.alcoholrecipe.model.Ment;
+import com.leopard4.alcoholrecipe.model.cheers.Ment;
 import com.leopard4.alcoholrecipe.model.RecipeOneResponse;
+
 
 import java.io.Serializable;
 

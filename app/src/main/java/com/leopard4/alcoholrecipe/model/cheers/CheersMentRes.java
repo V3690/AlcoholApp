@@ -1,7 +1,8 @@
-package com.leopard4.alcoholrecipe.model;
+package com.leopard4.alcoholrecipe.model.cheers;
+
+import com.leopard4.alcoholrecipe.model.cheers.CheersMent;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class CheersMentRes implements Serializable {
 //    {

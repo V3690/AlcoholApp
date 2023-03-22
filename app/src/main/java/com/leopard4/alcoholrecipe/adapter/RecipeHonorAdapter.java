@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.R;
-import com.leopard4.alcoholrecipe.model.RecipeHonor;
+import com.leopard4.alcoholrecipe.model.recipe.RecipeHonor;
 
 import java.util.ArrayList;
 
@@ -24,14 +24,15 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
 
     // 플래그먼트에서 사용가능토록,
     // 어댑터의 특정 행이나 버튼을 누르면 처리할 함수를 만든다.
-    public interface onItemClickListener{
-        void onItemClick(int index);
+    public interface onItemClickListener{ // 특정 행을 눌렀을 때 처리할 함수를 만든다.
+        void likeProcess(int index);
+        void onItemClick(int index); // 특정 행을 눌렀을 때 처리할 함수
     }
 
-    public onItemClickListener listener;
+    public onItemClickListener listener; // 인터페이스를 사용하기 위한 변수
 
-    public void setOnItemClickListener(onItemClickListener listener){
-        this.listener = listener;
+    public void setOnItemClickListener(onItemClickListener listener){ // 인터페이스를 사용하기 위한 함수
+        this.listener = listener;  // 인터페이스를 사용하기 위한 변수에 인터페이스를 받아온다.
     }
 
     public RecipeHonorAdapter(Context context, ArrayList<RecipeHonor> recipeHonorList) {
@@ -55,6 +56,13 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
 
         holder.txtLikeCnt.setText(recipeHonor.getLikeCount()+"");
         Glide.with(context).load(recipeHonor.getImgUrl()).into(holder.imgHonor);
+        if (recipeHonor.getIsLike() == 1){
+            holder.imgLike.setImageResource(R.drawable.baseline_favorite_24_pink);
+
+        }else{
+            holder.imgLike.setImageResource(R.drawable.baseline_favorite_border_24);
+
+        }
 
 
     }
@@ -69,15 +77,16 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
         LinearLayout layoutView;
         CardView cardView2;
         TextView txtLikeCnt;
-        ImageView imgHonor;
+        ImageView imgHonor, imgLike;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView2 = itemView.findViewById(R.id.cardView2);
             txtLikeCnt = itemView.findViewById(R.id.txtLikeCnt);
             imgHonor = itemView.findViewById(R.id.imgHonor);
-
-            cardView2.setOnClickListener(new View.OnClickListener() {
+            imgLike = itemView.findViewById(R.id.imgLike);
+            imgHonor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null){
@@ -86,6 +95,17 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
                             listener.onItemClick(index); // 리스너에게 클릭한 위치를 알려준다.
                         }
                     }
+                }
+            });
+            imgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 1. 어느번째의 데이터의 좋아요를 누른것인지 확인
+                    int index = getAdapterPosition();
+//                    ((MainActivity)context).likeProcess(index);
+//                    ((FirstFragment) ((MainActivity)context).firstFragment).likeProcess(index);
+                    listener.likeProcess(index);
+
                 }
             });
         }
