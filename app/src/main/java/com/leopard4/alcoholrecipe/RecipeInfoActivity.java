@@ -229,12 +229,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
                         likeCnt = recipeOne.getLikeCnt();
 
 
-                    RecipeOne recipeOne = new RecipeOne();
-//                    recipeOneList.addAll(response.body().getRecipeOne());
-
-                    recipeOne = response.body().getRecipeOne();
-
-
                     // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
                     // myrecipeAdapter 에서 받은 userId
                     getAdapterUserId = getIntent().getIntExtra("userId", 0);

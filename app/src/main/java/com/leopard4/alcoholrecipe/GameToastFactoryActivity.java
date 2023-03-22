@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.leopard4.alcoholrecipe.api.GameApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.CheersMentRes;
-import com.leopard4.alcoholrecipe.model.Ment;
+import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
+import com.leopard4.alcoholrecipe.model.cheers.Ment;
 
 import java.util.Locale;
 
