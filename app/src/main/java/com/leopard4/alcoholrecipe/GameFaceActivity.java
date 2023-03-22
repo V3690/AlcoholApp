@@ -62,7 +62,7 @@ public class GameFaceActivity extends AppCompatActivity {
 
     Button btnResult;
     Button btnFace;
-    ImageView imgFace ,imgAlchol ;
+    ImageView imgFace ,imgAlchol , imgBack;
     File photoFile;
     TextView txtResult , txtAlchol;
 
@@ -79,7 +79,7 @@ public class GameFaceActivity extends AppCompatActivity {
         txtResult = findViewById(R.id.txtResult);
         txtAlchol = findViewById(R.id.txtAlchol);
         imgAlchol = findViewById(R.id.imgAlchol);
-
+        imgBack = findViewById(R.id.imgBack);
 
 
         btnFace.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +144,11 @@ public class GameFaceActivity extends AppCompatActivity {
 
 
             }
+        });
+
+
+        imgBack.setOnClickListener(v -> {
+            finish();
         });
 
 
