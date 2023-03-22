@@ -1,6 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,6 +21,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -29,18 +31,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.leopard4.alcoholrecipe.api.CreatingApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
 import com.leopard4.alcoholrecipe.model.Res;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -83,6 +89,8 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     private ProgressDialog dialog;
 
     int percent = 0;
+    ImageButton imgBack;
+    TextView textView96; // 주인장의 연구실로 이동
 
 
     @Override
@@ -100,10 +108,27 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         editContent = findViewById(R.id.editContent);
 
         imageView = findViewById(R.id.imageView);
-
+        imgBack = findViewById(R.id.imgBack);
         btnImg = findViewById(R.id.btnImg);
         btnNext = findViewById(R.id.btnNext);
 
+        textView96 = findViewById(R.id.textView96);
+        // 레시피 버튼을 눌렀을때 주인장의 연구실로 이동
+        textView96.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyRecipeWriteFirstActivity.this, RecipeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 뒤로가기
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // 이미지 업로드
         btnImg.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +206,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                 // title, engTitle, intro, percent, content, img
                 // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
+                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
                 MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
 
 
@@ -196,7 +221,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                 // percent
                 RequestBody percentBody = RequestBody.create(percent + "", MediaType.parse("text/plain"));
                 // content
-                RequestBody contentBody = RequestBody.create(engTitle, MediaType.parse("text/plain"));
+                RequestBody contentBody = RequestBody.create(content, MediaType.parse("text/plain"));
 
                 SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
                 String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
@@ -221,6 +246,21 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                             startActivity(intent);
 
                         } else {
+                            try {
+                                String errorBody = response.errorBody().string(); // 에러바디를 String으로 변환
+                                JSONObject jsonObject = new JSONObject(errorBody); // String을 JSON으로 변환
+                                String errorMessage = jsonObject.getString("error"); // JSON에서 error 키의 값을 가져옴
+                                Log.i("중복에러", errorMessage);
+
+                                if(errorMessage.contains("Duplicate")){
+                                    editTitle.setError("이미 존재하는 제목입니다.");
+                                    Toast.makeText(MyRecipeWriteFirstActivity.this, "이미 존재하는 제목입니다.", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace(); // 에러바디를 String으로 변환하는 과정에서 에러가 발생하면
+
+                            }
 
                         }
 
@@ -229,6 +269,8 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call call, Throwable t) {
                         dismissProgress();
+                        Log.e("통신 실패", t.getMessage());
+
 
                     }
                 });
@@ -328,10 +370,9 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 500);
         }
     }
-
     private boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(MyRecipeWriteFirstActivity.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                Manifest.permission.WRITE_EXTERNAL_STORAGE); // 외부저장소 쓰기 권한
         if(result == PackageManager.PERMISSION_DENIED){
             return false;
         }else{

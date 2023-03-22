@@ -2,303 +2,293 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/a_a_basic"
     tools:context=".MyRecipeWriteSecondActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/a_e_recipe_posting_2"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imgBack"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:backgroundTint="#00FFFFFF"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/baseline_keyboard_backspace_24"
-                app:tint="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="110dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="240dp"
-                android:layout_marginTop="25dp"
-                android:fontFamily="@font/puradak_gentle_gothic"
-                android:gravity="center"
-                android:text="레시피"
-                android:textColor="#D3BA87"
-                android:textColorHint="#D3AA91"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="재료(술)"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtAlcohol"
+                <ImageButton
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/baseline_keyboard_backspace_24"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="240dp"
+                    android:background="@drawable/z_z_back"
+                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:gravity="center"
+                    android:text="레시피"
+                    android:textColor="#D3BA87"
+                    android:textColorHint="#D3AA91"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="TextView"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="선택 개수 :"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtAlcoholCount"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="00"
-                android:textColor="#FFC107"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="재료(술)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/editSearchAlcohol"
-                android:layout_width="215dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#FFFFFF"
-                android:ems="13"
-                android:hint="재료를 검색하세요"
-                android:inputType="textPersonName"
-                android:paddingLeft="5dp"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/txtAlcohol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/boxline_24"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="14sp" />
 
-            <ImageButton
-                android:id="@+id/imgSearchAlcohol"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#00FFFFFF"
-                app:srcCompat="@drawable/baseline_search_24"
-                app:tint="#FFFFFF" />
-        </LinearLayout>
+            </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/alcoholRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="29dp"
-            android:layout_marginBottom="3dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="부재료"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/txtIngreList"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="TextView"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="선택 개수 :"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="선택 개수 :"
+                    android:textColor="#86FFFFFF"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtAlcoholCount"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="#FFC107"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editSearchAlcohol"
+                    android:layout_width="215dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/boxline_24"
+                    android:backgroundTint="#FFFFFF"
+                    android:ems="13"
+                    android:hint="재료를 검색하세요"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/imgSearchAlcohol"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/baseline_search_24"
+                    app:tint="#FFFFFF" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/alcoholRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="165dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="29dp"
+                android:background="#5CBDBDA9" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="부재료"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtIngreList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/boxline_24"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="선택 개수 :"
+                    android:textColor="#86FFFFFF"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtIngreCount"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="#FFC107"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editSearchIngre"
+                    android:layout_width="215dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/boxline_24"
+                    android:backgroundTint="#FFFFFF"
+                    android:ems="13"
+                    android:hint="재료를 검색하세요"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/imgSearchIngre"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/baseline_search_24"
+                    app:tint="#FFFFFF" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingreRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="165dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="29dp"
+                android:layout_marginBottom="3dp"
+                android:background="#5CBDBDA9">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/txtIngreCount"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="00"
-                android:textColor="#FFC107"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editSearchIngre"
-                android:layout_width="215dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#FFFFFF"
-                android:ems="13"
-                android:hint="재료를 검색하세요"
-                android:inputType="textPersonName"
-                android:paddingLeft="5dp"
-                android:textSize="14sp" />
-
-            <ImageButton
-                android:id="@+id/imgSearchIngre"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#00FFFFFF"
-                app:srcCompat="@drawable/baseline_search_24"
-                app:tint="#FFFFFF" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ingreRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="29dp"
-            android:layout_marginBottom="3dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/textView100"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:backgroundTint="#535151"
-            android:text="등록되지 않은 재료가 있으면 아래에 꼭 체크해 주세요."
-            android:textColor="#E91E63"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView97"
-                android:layout_width="160dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="레시피 참고 필요"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/checkBox1"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp" />
-
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="130dp"
+                android:id="@+id/textView100"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="#E8537C"
-                android:backgroundTint="#E8537C"
-                android:fontFamily="sans-serif-black"
-                android:text="작성 완료"
-                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:backgroundTint="#535151"
+                android:text="등록되지 않은 재료가 있으면 아래에 꼭 체크해 주세요."
+                android:textColor="#E91E63"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView97"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="레시피 참고 필요"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSave"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="#E8537C"
+                    android:backgroundTint="#E8537C"
+                    android:fontFamily="sans-serif-black"
+                    android:text="작성 완료"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

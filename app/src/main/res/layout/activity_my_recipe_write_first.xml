@@ -4,24 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/a_a_basic"
     tools:context=".MyRecipeWriteFirstActivity">
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/a_e_recipe_posting_1" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/a_a_basic"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView27">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,10 +35,10 @@
 
             <TextView
                 android:id="@+id/textView96"
-                android:layout_width="110dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="240dp"
-                android:layout_marginTop="25dp"
+                android:background="@drawable/z_z_back"
                 android:fontFamily="@font/kai_gen_gothic_kr_bold"
                 android:gravity="center"
                 android:text="레시피"
@@ -95,10 +91,11 @@
 
             <EditText
                 android:id="@+id/editTitle"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/boxline_24"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:fontFamily="sans-serif-medium"
@@ -129,10 +126,11 @@
 
             <EditText
                 android:id="@+id/editEngTitle"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/boxline_24"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:fontFamily="sans-serif-medium"
@@ -233,9 +231,10 @@
             <EditText
                 android:id="@+id/editIntro"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/boxline_24"
                 android:ems="13"
                 android:fontFamily="sans-serif-medium"
                 android:inputType="textPersonName"
@@ -263,9 +262,10 @@
             <EditText
                 android:id="@+id/editContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/boxline_24"
                 android:ems="13"
                 android:fontFamily="sans-serif-medium"
                 android:inputType="textPersonName"
@@ -314,7 +314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:background="@drawable/boxline_24"
                 app:srcCompat="@drawable/outline_image_24" />
         </LinearLayout>
 
