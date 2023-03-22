@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="percent">
-        <item>전체</item>
+        <item>도수</item>
         <item>약</item>
         <item>중</item>
         <item>강</item>
@@ -11,7 +11,7 @@
 
 
     <string-array name="order">
-        <item>전체</item>
+        <item>정렬</item>
         <item>인기순</item>
         <item>최신순</item>
         <item>한글순</item>

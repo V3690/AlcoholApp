@@ -23,6 +23,7 @@ public interface DogamApi extends Serializable {
     // 도감 리스트 가져오는 API
     @GET("/alcohol")
     Call<DogamList> getDogamlList(@Header("Authorization") String token,
+                                  @Query("percent") int percent,
                                   @Query("order") String order,
                                   @Query("offset") int offset,
                                   @Query("limit") int limit);

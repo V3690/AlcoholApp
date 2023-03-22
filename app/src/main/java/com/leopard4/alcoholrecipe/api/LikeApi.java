@@ -13,11 +13,11 @@ public interface LikeApi {
     // 레시피 좋아요 취소
     @DELETE("/recipe/{recipeId}/like")
     Call<Void> deleteLike(@Header("Authorization") String token, @Path("recipeId") int recipeId);
-    // todo 술 좋아요, 취소는 미구현상태
-//    @POST("/alcohol/{alcoholId}/like")
-//    Call<Void> postAlcoholLike(@Header("Authorization") String token, @Path("alcoholId") int alcoholId);
-//    // 술 좋아요 취소
-//    @DELETE("/alcohol/{alcoholId}/like")
-//    Call<Void> deleteAlcoholLike(@Header("Authorization") String token, @Path("alcoholId") int alcoholId);
+
+    @POST("/alcohol/{alcoholId}/like")
+    Call<Void> postAlcoholLike(@Header("Authorization") String token, @Path("alcoholId") int alcoholId);
+    // 술 좋아요 취소
+    @DELETE("/alcohol/{alcoholId}/like")
+    Call<Void> deleteAlcoholLike(@Header("Authorization") String token, @Path("alcoholId") int alcoholId);
 
 }

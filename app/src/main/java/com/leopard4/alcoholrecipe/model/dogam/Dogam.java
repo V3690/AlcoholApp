@@ -12,6 +12,15 @@ public class Dogam {
     private String imgUrl;
     private String createdAt;
     private String updatedAt;
+    private int isLike;
+
+    public int getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(int isLike) {
+        this.isLike = isLike;
+    }
 
     public int getId() {
         return id;
