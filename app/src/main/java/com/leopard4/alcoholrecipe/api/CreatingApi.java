@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
@@ -44,5 +45,29 @@ public interface CreatingApi extends Serializable {
                                         @Query("keyword") String Keyword,
                                         @Query("offset") int offset,
                                         @Query("limit") int limit);
+    // 본인 레시피 수정 API
+    // title, engTitle, intro, percent, content, img
+    @Multipart
+    @POST("/creating/recipe/edit/{recipeId}")
+    Call<Res> editRecipe(@Header("Authorization") String token,
+                         @Part("title") RequestBody title,
+                         @Part("engTitle")RequestBody engTitle,
+                         @Part("intro")RequestBody intro,
+                         @Part("percent")RequestBody percent,
+                         @Part("content")RequestBody content,
+                         @Part MultipartBody.Part img);
+
+    // 본인 재료 수정 API
+//    {
+//            "alcoholId": "11,12,13,14,15,16",
+//            "ingredientId": "11,12,13,14,15,16"
+//    }
+    @PUT("/creating/ingredient/edit/{ingredientId}")
+    Call<Res> editIngredient(@Header("Authorization") String token,
+                             @Part("alcoholId") RequestBody alcoholId,
+                             @Part("ingredientId")RequestBody ingredientId);
+
+
+
 
 }

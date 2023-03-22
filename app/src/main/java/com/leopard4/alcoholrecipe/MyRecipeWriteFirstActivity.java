@@ -1,5 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
+import static com.leopard4.alcoholrecipe.MyRecipeWriteSecondActivity.BACK;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -46,6 +48,7 @@ import com.leopard4.alcoholrecipe.config.Config;
 import com.leopard4.alcoholrecipe.model.Res;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -111,9 +114,26 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         btnImg = findViewById(R.id.btnImg);
         btnNext = findViewById(R.id.btnNext);
+        // 두번째 레시피 작성페이지에서 뒤로버튼을 눌렀다면 버튼에 다음단계가 아닌 수정으로 변경
+        if (BACK == 1) {
+            btnNext.setText("수 정");
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 수정 api 호출
+                    Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteFirstActivity.this);
+                    CreatingApi creatingApi = retrofit.create(CreatingApi.class);
+//                    Call<Res> call = creatingApi.editRecipe(
 
-        textView96 = findViewById(R.id.textView96);
+
+                    // 레시피 수정완료후 재료선택 페이지로 이동
+                    Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
         // 레시피 버튼을 눌렀을때 주인장의 연구실로 이동
+        textView96 = findViewById(R.id.textView96);
         textView96.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,6 +261,18 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) {
                         dismissProgress();
                         if (response.isSuccessful()){
+                            // response.body() : 응답 본문
+                            Log.i("포스팅업로드", response.body().toString());
+                            Log.d("포스팅업로드", "onResponse: " + response.body().toString());
+                            // response.body()를 json으로 변환
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = new JSONObject(response.body().toString());
+                                int id = jsonObject.getInt("id");
+                                Log.i("포스팅업로드", id+"");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                             Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
                             startActivity(intent);

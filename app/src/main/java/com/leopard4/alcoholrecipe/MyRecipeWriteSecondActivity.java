@@ -82,6 +82,9 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
     private boolean isloading = false;
 
+    // 뒤로가기 버튼을 눌러서 넘어왔는지 확인하기위한 변수
+    public static int BACK = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BACK = 1;
                 finish();
             }
         });
