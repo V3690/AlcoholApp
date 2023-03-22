@@ -16,6 +16,16 @@ public class DogamInfo implements Serializable {
     private String imgUrl;
     private int likeCnt;
 
+    private int isLike;
+
+    public int getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(int isLike) {
+        this.isLike = isLike;
+    }
+
     public int getId() {
         return id;
     }

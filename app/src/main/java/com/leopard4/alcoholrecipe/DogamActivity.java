@@ -39,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class DogamActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class DogamActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     EditText editSearch;
     ImageButton imgSearch;
@@ -50,6 +50,9 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     ArrayList<Dogam> dogamList = new ArrayList<>();
 
 
+    // 쿼리 스트링
+    int percent;
+    String order;
     // 페이징 처리를 위한 변수
     int count = 0;
     int offset = 0;
@@ -57,17 +60,13 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
     private boolean isloading = false;
 
-    Spinner spinner1 = null;
-
-    ArrayAdapter<CharSequence> adapterPercent = null;
+    Spinner spinner1;
 
     Spinner spinner2;
-    ArrayAdapter<CharSequence> adapterOrder = null;
 
-    // api 호출할 때 정렬 조건에 들어가는 키워드 값 변수
-    String OrderKeyword = "percent";
     String keyword;
-
+    int spinner1Id;
+    int spinner2Id;
 
 
     @Override
@@ -88,6 +87,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+
 
         // 스크롤 내렸을 때 데이터 추가로 가져오는 코드
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -119,17 +120,61 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         });
 
         // 스피너 처리 관련 코드
-        adapterPercent = ArrayAdapter.createFromResource(this, R.array.percent, android.R.layout.simple_spinner_dropdown_item);
-        spinner1 = findViewById(R.id.spinner1);
-        spinner1.setAdapter(adapterPercent);
+
+        ArrayAdapter<CharSequence> adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , android.R.layout.simple_spinner_dropdown_item);;
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , android.R.layout.simple_spinner_dropdown_item);;
 
         spinner1.setOnItemSelectedListener(DogamActivity.this);
+        spinner2.setOnItemSelectedListener(DogamActivity.this);
 
-        adapterOrder = ArrayAdapter.createFromResource(this, R.array.order, android.R.layout.simple_spinner_dropdown_item);
-        spinner2 = findViewById(R.id.spinner2);
+        spinner1.setAdapter(adapterPercent);
         spinner2.setAdapter(adapterOrder);
 
-        spinner2.setOnItemSelectedListener(DogamActivity.this);
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                percent = spinner1.getSelectedItemPosition();
+                Log.i("SPINNERTEST", spinner1Id + "");
+
+                getNetworkData();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                percent = spinner2.getSelectedItemPosition();
+                Log.i("SPINNERTEST", spinner2Id + "");
+
+                if (spinner2Id == 0){
+                    order = "cnt";
+                } else if (spinner2Id == 1) {
+                    order = "cnt";
+                } else if (spinner2Id == 2) {
+                    order = "createdAt";
+                } else if (spinner2Id == 3) {
+                    order = "name";
+                }
+                getNetworkData();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+//        Log.i("ORDERTEST", "order" + order + " percent" + percent);
 
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +186,6 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         });
 
 
-        // TODO: 2023-03-20 스피너 기능 미처리
 
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,12 +229,6 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         });
 
 
-
-        // 네트워크 처리하는 함수
-        getNetworkData();
-
-
-
     }
 
     void getNetworkData() {
@@ -205,7 +243,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         offset = 0;
         count = 0;
 
-        Call<DogamList> call = api.getDogamlList(accessToken, OrderKeyword, offset, limit);
+        Call<DogamList> call = api.getDogamlList(accessToken, percent ,order , offset, limit);
         call.enqueue(new Callback<DogamList>() {
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
@@ -251,28 +289,17 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
 
-        Call<DogamList> call = api.getDogamlList(accessToken, "percent", offset, limit);
+        Call<DogamList> call = api.getDogamlList(accessToken, percent ,order , offset, limit);
         call.enqueue(new Callback<DogamList>() {
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
 
-                // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
-                // 초기화 코드가 필요.
-//                alcoholList.clear();
-
-
                 if (response.isSuccessful()) {
                     offset = offset + count;
-//                    alcoholList.clear();
 
-//                    count = response.body().getCount();
-//
-//                    offset = offset + count;
 
                     dogamList.addAll(response.body().getItems());
 
-//                    alcoholAdapter = new AlcoholAdapter(MyRecipeWriteSecondActivity.this, alcoholList);
-//                    alcoholRecyclerView.setAdapter(alcoholAdapter);
                     dogamAdapter.notifyDataSetChanged();
                     isloading = false;
 
@@ -388,7 +415,6 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
     }
 
     @Override
@@ -396,13 +422,16 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+    private int getSpinnerIndex(Spinner spinner, String value) {
+        int index = 0;
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
+
 }
