@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/txtHuman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="주인장에게 요청하기" />
@@ -32,6 +32,7 @@
             android:text="등록되지 않은 술/재료를 요청할 수 있습니다.\n수정해야 할 정보가 있다면\n주인장에게 요청하세요." />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

@@ -1,18 +1,24 @@
 package com.leopard4.alcoholrecipe.api;
 
+
 import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
+import com.leopard4.alcoholrecipe.model.DiceRes;
 import com.leopard4.alcoholrecipe.model.EmotionRes;
 import com.leopard4.alcoholrecipe.model.cheers.Ment;
+import com.leopard4.alcoholrecipe.model.RecipeOneResponse;
+
 
 import java.io.Serializable;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GameApi extends Serializable {
@@ -26,5 +32,7 @@ public interface GameApi extends Serializable {
     Call<EmotionRes> faceRes(@Header("Authorization")String token,
                             @Part MultipartBody.Part photoFile);
 
-
+    @GET("/game/dice/{subjectTypeId}/{penaltyTypeId}")
+    Call<DiceRes> diceRes(@Header("Authorization") String token,
+                          @Path("subjectTypeId") int subjectTypeId , @Path("penaltyTypeId") int penaltyTypeId) ;
 }

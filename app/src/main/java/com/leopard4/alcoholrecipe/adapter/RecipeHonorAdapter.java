@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,6 +74,7 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout layoutView;
         CardView cardView2;
         TextView txtLikeCnt;
         ImageView imgHonor, imgLike;

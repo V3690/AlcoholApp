@@ -32,10 +32,12 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
     ImageView imgUrl,imgRecipeLike;
     TextView txtRecipeTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
-    Button btnReturnRecipe;
+    Button btnReturnRecipe, btnEdit;
     ImageView imgBack;
     private String accessToken;
     private int recipeId;
+    private int userId;
+    private int getAdapterUserId;
     private ArrayList<RecipeOne> recipeOneList = new ArrayList<>();
     // 상태가변화됨을 감지하는 변수
     public static int state = 0;
@@ -59,7 +61,11 @@ public class RecipeInfoActivity extends AppCompatActivity {
         txtIntro = findViewById(R.id.txtIntro);
         txtContent = findViewById(R.id.txtContent);
         txtIngredient = findViewById(R.id.txtIngredient);
+
         imgRecipeLike = findViewById(R.id.imgRecipeLike);
+
+        btnEdit = findViewById(R.id.btnEdit);
+
 
 
         recipeId = getIntent().getIntExtra("recipeId", 0);
@@ -130,6 +136,22 @@ public class RecipeInfoActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
+        // myrecipeAdapter 에서 받은 userId
+//        getAdapterUserId = getIntent().getIntExtra("userId", 0);
+//
+//        Log.i("IDCHECK", userId + " " + getAdapterUserId);
+//
+//        if (userId == getAdapterUserId){
+//            btnEdit.setVisibility(View.VISIBLE);
+//
+//            return;
+//
+//        }
+
+
+
 
         // 뒤로가기 버튼
         imgBack.setOnClickListener(v -> {
@@ -219,11 +241,80 @@ public class RecipeInfoActivity extends AppCompatActivity {
 
                         likeCnt = recipeOne.getLikeCnt();
 
+
+                    RecipeOne recipeOne = new RecipeOne();
+//                    recipeOneList.addAll(response.body().getRecipeOne());
+
+                    recipeOne = response.body().getRecipeOne();
+
+                    userId = recipeOne.getUserId();
+
+                    // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
+                    // myrecipeAdapter 에서 받은 userId
+//        getAdapterUserId = getIntent().getIntExtra("userId", 0);
+//
+//        Log.i("IDCHECK", userId + " " + getAdapterUserId);
+//
+//        if (userId == getAdapterUserId){
+//            btnEdit.setVisibility(View.VISIBLE);
+//
+//            return;
+//
+//        }
+
+
+
+
+
+                    // glide로 이미지 뿌려주기
+                    Glide.with(RecipeInfoActivity.this)
+                            .load(recipeOne.getImgUrl())
+                            .into(imgUrl);
+
+
+
+                    // recipeOnd에 값이 없는게 있을때 처리
+                    if (recipeOne.getImgUrl() == null) {
+                        recipeOne.setImgUrl("");
+                    }
+                    if (recipeOne.getAlcoholType() == null) {
+                        recipeOne.setAlcoholType("");
+                    }
+                    if (recipeOne.getEngTitle() == null) {
+                        recipeOne.setEngTitle("영어이름이 없어요");
+                    }
+                    if (recipeOne.getIntro() == null) {
+                        recipeOne.setIntro("");
+                    }
+                    if (recipeOne.getContent() == null) {
+                        recipeOne.setContent("");
+                    }
+                    if (recipeOne.getIngredient() == null) {
+                        recipeOne.setIngredient("");
+                    }
+                    // 닉네임 뿌려주기
+                    if (recipeOne.getUserId() == 1) {
+                        txtUserId.setText("주인장의시크릿");
+                    } else {
+                        txtUserId.setText(recipeOne.getNickname());
+                    }
+                    // 도수 뿌려주기
+                    if (recipeOne.getPercent() == 1) {
+                        txtPercent.setText("약");
+                    } else if (recipeOne.getPercent() == 2) {
+                        txtPercent.setText("중");
+                    } else if (recipeOne.getPercent() == 3) {
+                        txtPercent.setText("강");
+                    } else {
+                        txtPercent.setText("알수없음");
+
                     }
                     catch (Exception e) {
                         e.printStackTrace();
 
                     }
+
+
 
                 }
             }

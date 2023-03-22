@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView1"
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
@@ -15,7 +15,7 @@
         android:layout_marginBottom="7dp">
 
         <TextView
-            android:id="@+id/txtAlcoholName"
+            android:id="@+id/txtRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#DDFFFFFF"

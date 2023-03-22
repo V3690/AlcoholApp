@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/a_d_1_home"
+    android:background="@drawable/a_a_basic"
     tools:context=".FirstFragment">
 
     <ProgressBar
@@ -29,8 +29,9 @@
 
             <Button
                 android:id="@+id/btnMyRecipe"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#6947A5"
                 android:fontFamily="@font/puradak_gentle_gothic"
@@ -38,16 +39,15 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="레시피"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:iconPadding="0dp" />
 
             <Button
                 android:id="@+id/btnGame"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#6947A5"
                 android:fontFamily="@font/puradak_gentle_gothic"
@@ -55,14 +55,15 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="오락실"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:iconPadding="0dp" />
 
             <Button
                 android:id="@+id/btnDogam"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#6947A5"
                 android:fontFamily="@font/puradak_gentle_gothic"
@@ -70,7 +71,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="술도감"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:iconPadding="0dp" />
 
@@ -109,7 +110,7 @@
                             android:text="건배사 제조기"
                             android:textColor="#FFC107"
                             android:textColorHighlight="#FFC107"
-                            android:textSize="36sp"
+                            android:textSize="32sp"
                             android:textStyle="normal" />
 
                         <ImageView
@@ -132,12 +133,17 @@
                         android:fontFamily="sans-serif-black"
                         android:text="재미있고 편리한 자동 건배사 제조기"
                         android:textColor="#FAFAFA"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:background="@drawable/a_0_view_base">
+                        android:layout_height="170dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:alpha="0.7"
+                            android:background="@drawable/a_0_row_2" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -153,22 +159,21 @@
                                     android:id="@+id/textView7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="25dp"
                                     android:layout_marginRight="40dp"
-                                    android:layout_weight="2"
                                     android:fontFamily="@font/puradak_gentle_gothic"
                                     android:gravity="center"
                                     android:paddingLeft="5dp"
                                     android:paddingRight="5dp"
                                     android:text="▼ 오늘의 건배사 ▼"
                                     android:textColor="#404040"
-                                    android:textSize="20sp" />
+                                    android:textSize="18sp" />
 
                                 <Button
                                     android:id="@+id/btnToast"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_weight="1"
+                                    android:layout_marginLeft="10dp"
                                     android:backgroundTint="#404040"
                                     android:fontFamily="sans-serif-black"
                                     android:text="+ 더보기"
@@ -209,10 +214,13 @@
                                             android:layout_marginBottom="5dp"
                                             android:background="#5C000000"
                                             android:fontFamily="@font/puradak_gentle_gothic"
-                                            android:padding="5dp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingRight="10dp"
+                                            android:paddingBottom="5dp"
                                             android:text="선창"
-                                            android:textColor="#B2FFFFFF"
-                                            android:textSize="16sp"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -223,7 +231,7 @@
                                             android:gravity="center_vertical"
                                             android:text="first"
                                             android:textColor="#404040"
-                                            android:textSize="20sp"
+                                            android:textSize="16sp"
                                             android:textStyle="normal" />
                                     </LinearLayout>
 
@@ -241,10 +249,13 @@
                                             android:layout_marginBottom="5dp"
                                             android:background="#5C000000"
                                             android:fontFamily="@font/puradak_gentle_gothic"
-                                            android:padding="5dp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingRight="10dp"
+                                            android:paddingBottom="5dp"
                                             android:text="후창"
-                                            android:textColor="#B2FFFFFF"
-                                            android:textSize="16sp"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -255,7 +266,7 @@
                                             android:gravity="center_vertical"
                                             android:text="last"
                                             android:textColor="#404040"
-                                            android:textSize="20sp"
+                                            android:textSize="16sp"
                                             android:textStyle="normal" />
 
                                     </LinearLayout>
@@ -277,7 +288,7 @@
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="오늘의 실험"
                     android:textColor="#FFC107"
-                    android:textSize="36sp"
+                    android:textSize="32sp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -289,7 +300,7 @@
                     android:fontFamily="sans-serif-black"
                     android:text="주인장이 직접 추천하는 공식 레시피"
                     android:textColor="#FAFAFA"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
@@ -305,7 +316,7 @@
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="명예 주인장"
                     android:textColor="#FFC107"
-                    android:textSize="36sp"
+                    android:textSize="32sp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -317,7 +328,7 @@
                     android:fontFamily="sans-serif-black"
                     android:text="우리들이 인정한 손님들의 창작 레시피"
                     android:textColor="#FAFAFA"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"

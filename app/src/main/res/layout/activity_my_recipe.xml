@@ -66,7 +66,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName3"
+                    android:id="@+id/editSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#99FFFFFF"
@@ -75,21 +75,17 @@
                     android:inputType="textPersonName" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imgSearch"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
                     app:srcCompat="@drawable/baseline_search_24" />
 
-                <Spinner
-                    android:id="@+id/spinner10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp" />
+
 
                 <Spinner
-                    android:id="@+id/spinner11"
+                    android:id="@+id/spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp" />
