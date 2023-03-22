@@ -138,7 +138,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
         });
 
 
-
         // 뒤로가기 버튼
         imgBack.setOnClickListener(v -> {
             finish();
@@ -172,7 +171,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     try {
                         RecipeOne recipeOne = new RecipeOne();
     //                    recipeOneList.addAll(response.body().getRecipeOne());
-
                         recipeOne = response.body().getRecipeOne();
                         // glide로 이미지 뿌려주기
                         Glide.with(RecipeInfoActivity.this)
@@ -189,11 +187,9 @@ public class RecipeInfoActivity extends AppCompatActivity {
                             btnEdit.setVisibility(View.VISIBLE);
                         }
 
-
                         if (recipeOne.getIsLike() == 1) {
                             imgRecipeLike.setImageResource(R.drawable.baseline_favorite_24);
                         }
-
                         // recipeOnd에 값이 없는게 있을때 처리
                         if (recipeOne.getImgUrl() == null) {
                             recipeOne.setImgUrl("");
@@ -207,7 +203,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
                         if (recipeOne.getIntro() == null) {
                             recipeOne.setIntro("");
                         }
-
                         // 닉네임 뿌려주기
                         if (recipeOne.getUserId() == 1) {
                             txtUserId.setText("주인장의시크릿");
@@ -225,7 +220,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
                             txtPercent.setText("비밀");
                         }
 
-
                         txtRecipeTitle.setText(recipeOne.getTitle()+"");
                         txtLikeCnt.setText(recipeOne.getLikeCnt()+"");
                         txtAlcoholType.setText(recipeOne.getAlcoholType()+"");
@@ -241,12 +235,10 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     catch (Exception e) {
                         e.printStackTrace();
 
-
                     }
 
                 }
             }
-
             @Override
             public void onFailure(Call<RecipeOneResponse> call, Throwable t) {
                 Log.i("레시피 정보", t.getMessage());
