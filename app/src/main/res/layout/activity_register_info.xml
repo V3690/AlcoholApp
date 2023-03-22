@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/puradak_gentle_gothic"
             android:text="Q1. 좋아하는 주종은?"
             android:textColor="#FFFFFF"
@@ -121,13 +122,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView31"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:text="Q2. 선호하는 도수는?"
                 android:textColor="#FFFFFF"
@@ -135,13 +136,13 @@
 
             <TextView
                 android:id="@+id/txtPercent"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="10"
+                android:layout_marginLeft="15dp"
+                android:background="#4DFFFFFF"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:text="00"
-                android:textColor="#000000"
+                android:textColor="#DE5179"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -154,15 +155,17 @@
             android:layout_marginRight="10dp"
             android:max="50"
             android:progress="0"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#DE5179"
             android:thumb="@drawable/baseline_favorite_24"
-            android:thumbTint="#DE5179"
-            app:tickMarkTint="#E91E63" />
+            android:thumbTint="#DE5179" />
 
         <TextView
             android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/puradak_gentle_gothic"
             android:text="Q3. 주로 누구와 함께?"
             android:textColor="#FFFFFF"
@@ -187,7 +190,7 @@
                 android:id="@+id/checkBox3_2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
+                android:fontFamily="@font/puradak_gentle_gothic"
                 android:shadowColor="#FFFFFF"
                 android:text="친구"
                 app:useMaterialThemeColors="true" />
@@ -196,7 +199,7 @@
                 android:id="@+id/checkBox3_3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
+                android:fontFamily="@font/puradak_gentle_gothic"
                 android:text="혼자"
                 android:textColorLink="#FFFFFF"
                 app:useMaterialThemeColors="true" />

@@ -69,7 +69,7 @@ public class RegisterInfoActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                txtPercent.setText(String.format("%d도", seekBar.getProgress()));
+                txtPercent.setText(String.format("%d", seekBar.getProgress())+" %");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
