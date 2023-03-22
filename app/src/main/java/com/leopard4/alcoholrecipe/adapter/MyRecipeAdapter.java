@@ -21,6 +21,8 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
     Context context;
     ArrayList<MyRecipe> myRecipeList;
 
+    int userId;
+
     public MyRecipeAdapter(Context context, ArrayList<MyRecipe> myRecipeList) {
         this.context = context;
         this.myRecipeList = myRecipeList;
@@ -74,7 +76,7 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
 
                     int recipeId = myRecipe.getRecipeId();
 
-                    int userId = myRecipe.getUserId();
+                    userId = myRecipe.getUserId();
 
                     Intent intent = new Intent(context, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", recipeId);
