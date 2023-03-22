@@ -113,6 +113,7 @@ public class MyRecipeActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
+
     }
 
     void getNetworkData() {

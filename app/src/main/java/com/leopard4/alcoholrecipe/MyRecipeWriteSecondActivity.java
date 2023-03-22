@@ -66,7 +66,8 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
     // 저장 버튼
     Button btnSave;
-
+    ImageButton imgBack;
+    TextView textView;
 
 
     // 페이징 처리를 위한 변수
@@ -98,7 +99,23 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
 
 
-
+        imgBack = findViewById(R.id.imgBack);
+        // 뒤로가기
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        // 주인장의 연구실로 이동
+        textView = findViewById(R.id.textView);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         alcoholRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
