@@ -209,23 +209,6 @@ public class RecipeInfoActivity extends AppCompatActivity {
                             txtPercent.setText("알수없음");
                         }
 
-                        // todo: 나중에 지워야댐 근데 레시피 db에는 주종이라는게 없는데 ??
-                        Log.i("레시피 정보", response.body().toString());
-                        Log.i("레시피 정보", recipeOne.toString()+"");
-                        Log.i("레시피 정보", recipeOne.getImgUrl()+"");
-                        Log.i("레시피 정보", recipeOne.getTitle()+"");
-                        Log.i("레시피 정보", recipeOne.getLikeCnt()+"");
-                        Log.i("레시피 정보", recipeOne.getPercent()+"");
-                        Log.i("레시피 정보", recipeOne.getAlcoholType()+"");
-                        Log.i("레시피 정보", recipeOne.getUserId()+"");
-                        Log.i("레시피 정보", recipeOne.getEngTitle()+"");
-                        Log.i("레시피 정보", recipeOne.getIntro()+"");
-                        Log.i("레시피 정보", recipeOne.getContent()+"");
-                        Log.i("레시피 정보", recipeOne.getIngredient()+ "");
-                        Log.i("레시피 정보", recipeOne.getNickname()+ "");
-                        Log.i("레시피 정보", recipeOne.getIsLike()+ "");
-
-    //                    imgUrl.setImageResource(Integer.parseInt(recipeOne.getImgUrl()));
                         txtRecipeTitle.setText(recipeOne.getTitle()+"");
                         txtLikeCnt.setText(recipeOne.getLikeCnt()+"");
                         txtAlcoholType.setText(recipeOne.getAlcoholType()+"");

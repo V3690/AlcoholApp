@@ -23,7 +23,7 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
 
     // 플래그먼트에서 사용가능토록,
     // 어댑터의 특정 행이나 버튼을 누르면 처리할 함수를 만든다.
-    public interface onItemClickListener{ // 인터페이스를 사용하기 위한 함수
+    public interface onItemClickListener{ // 특정 행을 눌렀을 때 처리할 함수를 만든다.
         void likeProcess(int index);
         void onItemClick(int index); // 특정 행을 눌렀을 때 처리할 함수
     }
@@ -57,8 +57,10 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
         Glide.with(context).load(recipeHonor.getImgUrl()).into(holder.imgHonor);
         if (recipeHonor.getIsLike() == 1){
             holder.imgLike.setImageResource(R.drawable.baseline_favorite_24_pink);
+
         }else{
             holder.imgLike.setImageResource(R.drawable.baseline_favorite_border_24);
+
         }
 
 
@@ -93,17 +95,17 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
                     }
                 }
             });
-//            imgLike.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    // 1. 어느번째의 데이터의 좋아요를 누른것인지 확인
-//                    int index = getAdapterPosition();
-////                    ((MainActivity)context).likeProcess(index);
-////                    ((FirstFragment) ((MainActivity)context).firstFragment).likeProcess(index);
-//                    listener.likeProcess(index);
-//
-//                }
-//            });
+            imgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 1. 어느번째의 데이터의 좋아요를 누른것인지 확인
+                    int index = getAdapterPosition();
+//                    ((MainActivity)context).likeProcess(index);
+//                    ((FirstFragment) ((MainActivity)context).firstFragment).likeProcess(index);
+                    listener.likeProcess(index);
+
+                }
+            });
         }
     }
 }
