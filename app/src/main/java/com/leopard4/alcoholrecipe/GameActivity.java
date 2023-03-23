@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class GameActivity extends AppCompatActivity {
 
-    ImageButton ibtnFace, ibtnToast, ibtnDice , imgBack;
+    ImageButton ibtnFace, ibtnToast, ibtnDice;
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,7 @@ public class GameActivity extends AppCompatActivity {
         ibtnFace = findViewById(R.id.ibtnFace);
         ibtnToast = findViewById(R.id.ibtnToast);
         ibtnDice = findViewById(R.id.ibtnDice);
-        imgBack = findViewById(R.id.imgBack);
+        btnBack = findViewById(R.id.btnBack);
 
         ibtnFace.setOnClickListener(view -> {
             Intent intent = new Intent(GameActivity.this, GameFaceActivity.class);
@@ -35,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        imgBack.setOnClickListener(v -> {
+        btnBack.setOnClickListener(v -> {
             finish();
         });
 

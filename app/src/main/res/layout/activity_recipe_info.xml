@@ -19,22 +19,24 @@
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
-            app:srcCompat="@drawable/baseline_arrow_back_24" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_0_back"
+            android:tintMode="src_in"
+            android:visibility="visible"
+            app:tint="#4DFFFFFF" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnReturnRecipe"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="200dp"
-            android:background="@drawable/b_0_bubble"
-            android:fontFamily="@font/puradak_gentle_gothic"
-            android:paddingTop="18dp"
-            android:text="레시피"
-            android:textColor="#D1B885"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_height="80dp"
+            android:scaleType="fitEnd"
+            android:tintMode="src_in"
+            app:srcCompat="@drawable/icon_menu1"
+            app:tint="#FFD324" />
 
     </LinearLayout>
 
@@ -46,7 +48,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -60,10 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/puradak_gentle_gothic"
-                    android:text="✨ 한글이름"
+                    android:text="⭐ 한글이름"
                     android:textColor="#FBFBFB"
                     android:textSize="27sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                     app:layout_constraintTop_toBottomOf="@+id/imgBack" />

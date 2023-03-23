@@ -29,10 +29,9 @@ import retrofit2.Retrofit;
 
 public class GameToastActivity extends AppCompatActivity {
 
-    Button btnMyToast;
+    Button btnStart;
     TextView txtFirst,txtLast;
-    ImageButton imgBack;
-    ImageView imgSpeaker;
+    ImageView imgBack, imgSpeaker;
     private TextToSpeech tts;
 
 
@@ -45,14 +44,14 @@ public class GameToastActivity extends AppCompatActivity {
 
         imgSpeaker = findViewById(R.id.imgSpeaker);
         imgBack=findViewById(R.id.imgBack);
-        btnMyToast = findViewById(R.id.btnPassEdit);
+        btnStart = findViewById(R.id.btnStart);
         txtFirst=findViewById(R.id.txtFirst);
         txtLast=findViewById(R.id.txtLast);
 
         getCheersMentResNetworkData();
 
 
-        btnMyToast.setOnClickListener(new View.OnClickListener() {
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GameToastActivity.this, GameToastFactoryActivity.class);

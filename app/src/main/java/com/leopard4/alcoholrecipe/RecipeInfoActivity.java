@@ -30,9 +30,9 @@ import retrofit2.Retrofit;
 
 public class RecipeInfoActivity extends AppCompatActivity {
 
-    ImageView imgUrl,imgRecipeLike;
+    ImageView imgUrl,imgRecipeLike, btnReturnRecipe;
     TextView txtRecipeTitle, txtLikeCnt, txtPercent, txtAlcoholType, txtUserId, txtEngTitle, txtIntro, txtContent, txtIngredient;
-    Button btnReturnRecipe, btnEdit;
+    Button btnEdit;
     ImageView btnBack;
     private String accessToken;
     private int recipeId;
@@ -215,7 +215,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
                             txtPercent.setText("비밀");
                         }
 
-                        txtRecipeTitle.setText(recipeOne.getTitle()+"");
+                        txtRecipeTitle.setText("⭐ "+recipeOne.getTitle()+""+" ⭐");
                         txtLikeCnt.setText(recipeOne.getLikeCnt()+"");
                         txtEngTitle.setText(recipeOne.getEngTitle()+"");
                         txtIntro.setText(recipeOne.getIntro()+"");
