@@ -10,6 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.util.Range;
 import android.view.View;
 import android.widget.Button;
@@ -247,9 +252,33 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                                 if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName())) {
                                     Snackbar.make(findViewById(R.id.alcoholRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
                                 } else {
-                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
-                                    selectedAlcoholList.add(alcoholList.get(index));
-                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
+                                        String s = alcoholList.get(index).getName() + ", ";
+                                        SpannableStringBuilder spannable = new SpannableStringBuilder(txtAlcohol.getText()); // Use existing text as a base for the SpannableStringBuilder
+                                        int start = spannable.length(); // Get the start position for the new spannable text
+                                        spannable.append(s); // Append the new text to the existing text
+                                        ClickableSpan clickableSpan = new ClickableSpan() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                int wordStart = spannable.toString().indexOf(s); // Use start position to find the clicked word
+                                                spannable.delete(wordStart, wordStart + s.length()); // Remove clicked word from SpannableStringBuilder
+                                                Log.i("스팬", spannable.toString());
+                                                Log.i("에스", s);
+                                                Log.i("인덱스", index + "");
+                                                Log.i("스타트", start + "");
+                                                Log.i("알콜리스트겟인덱스",alcoholList.get(index).getName() + "");
+                                                txtAlcohol.setText(spannable); // Update TextView with modified SpannableStringBuilder
+                                                selectedAlcoholList.remove(selectedAlcoholList.getClass().getName()==s);
+                                                updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+                                            }
+                                        };
+                                        spannable.setSpan(clickableSpan, start, start + s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); // Add the new ClickableSpan to the SpannableStringBuilder
+                                        txtAlcohol.setText(spannable); // Update TextView with the modified SpannableStringBuilder
+                                        txtAlcohol.setMovementMethod(LinkMovementMethod.getInstance()); // Make the text clickable
+                                        selectedAlcoholList.add(alcoholList.get(index));
+                                        updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+//                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
+//                                    selectedAlcoholList.add(alcoholList.get(index));
+//                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
                                 }
                             }
                         }
@@ -270,6 +299,10 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateTxtAlcoholCount() {
+        txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
     }
 
     private void addIngreNetworkData() {
@@ -354,9 +387,47 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                                 if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName())) {
                                     Snackbar.make(findViewById(R.id.alcoholRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
                                 } else {
-                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
+                                    String s = alcoholList.get(index).getName() + ", ";
+                                    SpannableStringBuilder spannable = new SpannableStringBuilder(txtAlcohol.getText()); // Use existing text as a base for the SpannableStringBuilder
+                                    int start = spannable.length(); // Get the start position for the new spannable text
+                                    spannable.append(s); // Append the new text to the existing text
+                                    ClickableSpan clickableSpan = new ClickableSpan() {
+                                        @Override
+                                        public void onClick(View view) {
+//                                            int wordStart = spannable.toString().indexOf(s, start); // Use start position to find the clicked word
+                                            int wordStart = spannable.toString().indexOf(s);
+                                            spannable.delete(wordStart, wordStart + s.length()); // Remove clicked word from SpannableStringBuilder
+                                            Log.i("스팬", spannable.toString());
+                                            Log.i("에스", s);
+                                            Log.i("인덱스", index + "");
+                                            Log.i("스타트", start + "");
+                                            Log.i("알콜리스트겟인덱스",alcoholList.get(index).getName() + "");
+
+//                                            I/스팬: 신선주 약주16, 한청, 33JU 25도, 매화수,
+//                                            I/에스: 업타운 피나콜라다 750ml,
+//                                            I/인덱스: 8
+//                                            I/스타트: 29
+//                                            I/알콜리스트겟인덱스: 업타운 피나콜라다 750ml
+//                                            I/스팬:
+//                                            I/에스: 신선주 약주16,
+//                                            I/인덱스: 4
+//                                            I/스타트: 0
+//                                            I/알콜리스트겟인덱스: 신선주 약주16
+                                            // 검색햇을경우 인덱스가 동일하기 때문에 인덱스로 지우는것은 안됨.
+
+                                            selectedAlcoholList.remove(selectedAlcoholList.getClass().getName()==s);
+                                            txtAlcohol.setText(spannable); // Update TextView with modified SpannableStringBuilder
+                                            updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+                                        }
+                                    };
+                                    spannable.setSpan(clickableSpan, start, start + s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); // Add the new ClickableSpan to the SpannableStringBuilder
+                                    txtAlcohol.setText(spannable); // Update TextView with the modified SpannableStringBuilder
+                                    txtAlcohol.setMovementMethod(LinkMovementMethod.getInstance()); // Make the text clickable
                                     selectedAlcoholList.add(alcoholList.get(index));
-                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
+                                    updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+//                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
+//                                    selectedAlcoholList.add(alcoholList.get(index));
+//                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
                                 }
                             }
 
