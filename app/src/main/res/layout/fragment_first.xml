@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/a_a_basic"
+    android:outlineProvider="bounds"
     tools:context=".FirstFragment">
 
     <ProgressBar
@@ -18,71 +19,90 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="7dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_margin="7dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="#33000000"
+            android:orientation="horizontal"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:paddingBottom="10dp">
 
             <Button
                 android:id="@+id/btnMyRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="#6947A5"
+                android:backgroundTint="#FFFFFF"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_horizontal"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:text="레시피"
-                android:textSize="18sp"
+                android:outlineProvider="none"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="🍺 레시피  "
+                android:textColor="#404040"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:iconPadding="0dp" />
+                app:iconPadding="0dp"
+                app:strokeColor="#FED224"
+                app:strokeWidth="2dp" />
 
             <Button
                 android:id="@+id/btnGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="#6947A5"
+                android:backgroundTint="#FFFFFF"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_horizontal"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:text="오락실"
-                android:textSize="18sp"
+                android:outlineProvider="none"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="🎲 오락실  "
+                android:textColor="#404040"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:iconPadding="0dp" />
+                app:iconPadding="0dp"
+                app:strokeColor="#FED224"
+                app:strokeWidth="2dp" />
 
             <Button
                 android:id="@+id/btnDogam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="#6947A5"
+                android:backgroundTint="#FFFFFF"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_horizontal"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:text="술도감"
-                android:textSize="18sp"
+                android:outlineProvider="none"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="📚 술도감  "
+                android:textColor="#404040"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:iconPadding="0dp" />
+                app:iconPadding="0dp"
+                app:strokeColor="#FED224"
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="#33000000"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,10 +125,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginTop="3dp"
                             android:fontFamily="@font/puradak_gentle_gothic"
                             android:text="건배사 제조기"
-                            android:textColor="#FFC107"
+                            android:textColor="#FFD324"
                             android:textColorHighlight="#FFC107"
                             android:textSize="32sp"
                             android:textStyle="normal" />
@@ -284,10 +303,10 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="50dp"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="오늘의 실험"
-                    android:textColor="#FFC107"
+                    android:textColor="#FFD324"
                     android:textSize="32sp"
                     android:textStyle="normal" />
 
@@ -305,17 +324,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="50dp"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="명예 주인장"
-                    android:textColor="#FFC107"
+                    android:textColor="#FFD324"
                     android:textSize="32sp"
                     android:textStyle="normal" />
 
@@ -333,10 +352,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="3dp"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="50dp" />
 
             </LinearLayout>
         </ScrollView>

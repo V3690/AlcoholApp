@@ -4,29 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/alcoholApp">
-
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/a_a_login2" />
+    android:background="@drawable/a_a_login">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -35,25 +26,30 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:background="#4DFFFFFF"
                 app:srcCompat="@drawable/baseline_key_24"
                 app:tint="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editEmail"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#FFFFFF"
+                android:background="#4DFFFFFF"
                 android:ems="7"
+                android:fontFamily="@font/puradak_gentle_gothic"
                 android:hint="email ID"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
+                android:textColorHint="#FFFFFF"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -62,63 +58,77 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:background="#4DFFFFFF"
                 app:srcCompat="@drawable/baseline_person_24"
                 app:tint="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editPassword"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#FFFFFF"
+                android:background="#4DFFFFFF"
                 android:ems="7"
+                android:fontFamily="@font/puradak_gentle_gothic"
                 android:hint="password"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
+                android:textColorHint="#FFFFFF"
                 android:textSize="16sp" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btnOk"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#404040"
-            android:fontFamily="@font/kai_gen_gothic_kr_bold"
+            android:layout_marginRight="140dp"
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="@font/puradak_gentle_gothic"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="로그인"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textColor="#9666F3"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="261dp"
             tools:layout_editor_absoluteY="493dp" />
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="80dp"
             android:backgroundTint="#E2507B"
-            android:fontFamily="@font/kai_gen_gothic_kr_bold"
+            android:fontFamily="@font/puradak_gentle_gothic"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="@string/txt_register_btn"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="96dp"
             tools:layout_editor_absoluteY="566dp" />
 
         <Button
             android:id="@+id/btnRegister2"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:backgroundTint="#F9E000"
-            android:fontFamily="@font/kai_gen_gothic_kr_bold"
+            android:fontFamily="@font/puradak_gentle_gothic"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="@string/txt_register_btn2"
             android:textColor="#615019"
-            android:textSize="16sp"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="96dp"
             tools:layout_editor_absoluteY="632dp" />
     </LinearLayout>
