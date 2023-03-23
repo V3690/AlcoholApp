@@ -48,9 +48,9 @@ public class SecondFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Spinner spinner;
-    private Spinner spinner4;
-    private Spinner spinner5;
+    private Spinner spinner1;
+    private Spinner spinner2;
+    private Spinner spinner3;
 
     String accessToken;
     ProgressBar progressBar2;
@@ -116,9 +116,9 @@ public class SecondFragment extends Fragment {
         // 이 조각의 레이아웃 확장
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_second, container, false); // attachToRoot = false 란 뷰를 붙이지 않는다는 의미 // 뷰를 붙인다는것은 // 뷰를 레이아웃에 붙이는것이다.
 
-        spinner = (Spinner) rootView.findViewById(R.id.spinner);
-        spinner4 = (Spinner) rootView.findViewById(R.id.spinner4);
-        spinner5 = (Spinner) rootView.findViewById(R.id.spinner5);
+        spinner1 = (Spinner) rootView.findViewById(R.id.spinner1);
+        spinner2 = (Spinner) rootView.findViewById(R.id.spinner2);
+        spinner3 = (Spinner) rootView.findViewById(R.id.spinner3);
 
         String accessToken;
         progressBar2 = rootView.findViewById(R.id.progressBar2);
@@ -161,15 +161,15 @@ public class SecondFragment extends Fragment {
         });
 
         //문자열 배열과 기본 스피너 레이아웃을 사용하여 ArrayAdapter 만들기
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item4, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter5 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item5, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item1, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item2, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item3, android.R.layout.simple_spinner_item);
         //선택 목록이 나타날 때 사용할 레이아웃을 지정
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //스피너에 어댑터 적용
-        spinner.setAdapter(adapter);
-        spinner4.setAdapter(adapter4);
-        spinner5.setAdapter(adapter5);
+        spinner1.setAdapter(adapter1);
+        spinner2.setAdapter(adapter2);
+        spinner3.setAdapter(adapter3);
         // 스피너(콤보박스)에 특정 값으로 초기값으로 고정하고 싶다면 setSelection메소드를 사용하면 된다.
 //        spinner.setSelection(0); //position 값을 지정한다.
 //        spinner3.setSelection(0);
@@ -178,7 +178,7 @@ public class SecondFragment extends Fragment {
         // 스피너 선택값 가져오는 방법
         // spinner.getSelectedItem().toString();
         // 스피너 선택값 가져오는 방법
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행하지 않고 두번째부터
@@ -197,7 +197,7 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (first2 == 0) {
@@ -213,7 +213,7 @@ public class SecondFragment extends Fragment {
                 Toast.makeText(getContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (first3 == 0) {
