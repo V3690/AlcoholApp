@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     RecyclerView recyclerView;
     DogamAdapter dogamAdapter;
     ArrayList<Dogam> dogamList = new ArrayList<>();
+    private ProgressDialog dialog;
+
 
 
     // 쿼리 스트링
@@ -233,6 +236,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
     void getNetworkData() {
 
+
+
         Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
 
         DogamApi api = retrofit.create(DogamApi.class);
@@ -245,6 +250,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
         Call<DogamList> call = api.getDogamlList(accessToken, percent ,order , offset, limit);
         call.enqueue(new Callback<DogamList>() {
+
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
 
@@ -266,6 +272,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
                 } else {
+
 
                 }
 
@@ -280,6 +287,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void addNetworkData() {
+        showProgress("술도감 불러오는 중...");
+
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
 
@@ -293,8 +302,10 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         call.enqueue(new Callback<DogamList>() {
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                dismissProgress();
 
                 if (response.isSuccessful()) {
+
                     offset = offset + count;
 
 
@@ -309,6 +320,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onFailure(Call<DogamList> call, Throwable t) {
+                dismissProgress();
+
 
             }
         });
@@ -318,6 +331,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     void searchKeyword(){
+
+        showProgress("술도감 불러오는 중...");
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
 
@@ -333,6 +348,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         call.enqueue(new Callback<DogamList>() {
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                dismissProgress();
 
                 // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
                 // 초기화 코드가 필요.
@@ -340,6 +356,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
                 if (response.isSuccessful()) {
+
 
                     count = response.body().getCount();
 
@@ -359,6 +376,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onFailure(Call<DogamList> call, Throwable t) {
+                dismissProgress();
+
 
             }
         });
@@ -366,6 +385,9 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void addSearchKeyword(){
+
+        showProgress("술도감 불러오는 중...");
+
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(DogamActivity.this);
 
@@ -379,6 +401,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         call.enqueue(new Callback<DogamList>() {
             @Override
             public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                dismissProgress();
 
                 // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
                 // 초기화 코드가 필요.
@@ -386,6 +409,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
                 if (response.isSuccessful()) {
+                    dismissProgress();
                     offset = offset + count;
 //                    alcoholList.clear();
 
@@ -406,6 +430,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onFailure(Call<DogamList> call, Throwable t) {
+                dismissProgress();
+
 
             }
         });
@@ -431,6 +457,18 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         }
         return index;
+    }
+    // 네트워크 로직 처리시에 화면에 보여주는 함수
+    void showProgress(String message){
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+    }
+
+    // 로직처리가 끝나면 화면에서 사라지는 함수
+    void dismissProgress(){
+        dialog.dismiss();
     }
 
 
