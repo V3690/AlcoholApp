@@ -67,7 +67,7 @@ public class RecipeFavoriteAdapter extends RecyclerView.Adapter<RecipeFavoriteAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.cardView1);
+            cardView = itemView.findViewById(R.id.cardView);
             txtTitle = itemView.findViewById(R.id.txtTitle);
 
             cardView.setOnClickListener(new View.OnClickListener() {
