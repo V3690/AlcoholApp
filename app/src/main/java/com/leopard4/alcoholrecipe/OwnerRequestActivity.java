@@ -129,26 +129,24 @@ public class OwnerRequestActivity extends AppCompatActivity {
                 }
 
                 name = editName.getText().toString().trim();
-
                 if (name.isEmpty()){
                     Toast.makeText(OwnerRequestActivity.this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 percent = editPercent.getText().toString().trim();
-
                 if (percent.isEmpty()){
                     percent = "";
                 }
 
                 content = editContent.getText().toString().trim();
-
                 if (content.isEmpty()){
                     content = "";
                 }
 
+
+                // TODO: 사진데이터는 필수 값이 아니기 때문에 null 값으로 보내야함. 하지만, null 값으로 요청하면 에러가 난다. 이 부분은 나중에 수정해야함
                 if(photoFile == null) {
-                    Toast.makeText(OwnerRequestActivity.this, "사진을 업로드 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -157,10 +155,11 @@ public class OwnerRequestActivity extends AppCompatActivity {
                 DogamApi api = retrofit.create(DogamApi.class);
 
                 // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
+                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png"));
 
                 // photo
                 MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", photoFile.getName(), fileBody);
+
 
                 // requestType, name, percent, content
 
@@ -219,20 +218,6 @@ public class OwnerRequestActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-    void getNetworkData(){
-
-
-
-
-
-
-
-    }
-
-
 
 
 
