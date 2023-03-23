@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="10dp"
         android:hapticFeedbackEnabled="false"
         android:orientation="vertical">
 
@@ -27,21 +27,20 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"
             android:fontFamily="@font/puradak_gentle_gothic"
-            android:text="⭐ 즐겨찾기 ⭐"
+            android:text="즐겨찾기"
             android:textColor="#FFD324"
-            android:textSize="32sp"
-            android:textStyle="normal" />
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:text="내가 관심을 표시한 레시피"
+            android:layout_marginLeft="12dp"
+            android:text="내가 관심(💗)을 표시한 레시피"
             android:textColor="#F8F6F6"
             android:textStyle="bold" />
 

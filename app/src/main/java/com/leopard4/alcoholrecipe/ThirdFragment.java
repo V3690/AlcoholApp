@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,8 @@ public class ThirdFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button btnPassEdit, btnMyRecipe, btnLogout, btnLisence, btnSecession, btnEdit, btnBack;
+    Button btnPassEdit, btnMyRecipe, btnLisence, btnSecession, btnEdit;
+    ImageView btnBack, btnLogout;
     TextView txtAppVersion;
     EditText editName;
     private String accessToken;
@@ -94,7 +96,7 @@ public class ThirdFragment extends Fragment {
         btnPassEdit = view.findViewById(R.id.btnPassEdit);
         btnMyRecipe = view.findViewById(R.id.btnMyRecipe);
         btnLogout = view.findViewById(R.id.btnLogout);
-        btnLisence = view.findViewById(R.id.btnLisence);
+        btnLisence = view.findViewById(R.id.btnLicense);
         btnSecession = view.findViewById(R.id.btnSecession);
         btnEdit = view.findViewById(R.id.btnEdit);
         editName = view.findViewById(R.id.editName);
