@@ -241,7 +241,7 @@
                                             android:textStyle="bold" />
 
                                         <TextView
-                                            android:id="@+id/txtFirst"
+                                            android:id="@+id/txtOutputFirst"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/puradak_gentle_gothic"
@@ -276,7 +276,7 @@
                                             android:textStyle="bold" />
 
                                         <TextView
-                                            android:id="@+id/txtLast"
+                                            android:id="@+id/txtOutputLast"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/puradak_gentle_gothic"

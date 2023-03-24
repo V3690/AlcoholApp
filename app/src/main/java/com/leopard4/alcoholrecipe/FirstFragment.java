@@ -5,7 +5,6 @@ package com.leopard4.alcoholrecipe;
 
 import static com.leopard4.alcoholrecipe.RecipeInfoActivity.state;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.leopard4.alcoholrecipe.api.LikeApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeApi;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.ResMessage;
 import com.leopard4.alcoholrecipe.model.cheers.CheersMent;
 import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
 import com.leopard4.alcoholrecipe.model.cheers.Ment;
@@ -126,8 +124,8 @@ public class FirstFragment extends Fragment {
         btnGame = rootView.findViewById(R.id.btnGame);
         btnDogam = rootView.findViewById(R.id.btnDogam);
         btnToast = rootView.findViewById(R.id.btnToast);
-        txtFirst = rootView.findViewById(R.id.txtFirst);
-        txtLast = rootView.findViewById(R.id.txtLast);
+        txtFirst = rootView.findViewById(R.id.txtOutputFirst);
+        txtLast = rootView.findViewById(R.id.txtOutputLast);
 
         recyclerView1 = rootView.findViewById(R.id.recyclerView1);
         recyclerView1.setHasFixedSize(true);

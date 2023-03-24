@@ -31,10 +31,10 @@ import retrofit2.http.Tag;
 public class GameToastFactoryActivity extends AppCompatActivity {
 
     TextView txtOutputFirst,txtOutputLast,txtOutput;
-    ImageButton  imgButtonTwo,imgButtonOne;
+
     EditText editUserInput1,editUserInput2;
 
-    ImageView imgSpeaker , imgSpeaker2 , imgBack ;
+    ImageView imgSpeaker, imgSpeaker2, imgBack, btnStart1,btnStart2; ;
     private TextToSpeech tts;
 
 
@@ -46,15 +46,15 @@ public class GameToastFactoryActivity extends AppCompatActivity {
         txtOutputFirst=findViewById(R.id.txtOutputFirst);
         txtOutputLast=findViewById(R.id.txtOutputLast);
         txtOutput=findViewById(R.id.txtOutput);
-        imgButtonTwo=findViewById(R.id.imgButtonTwo);
-        imgButtonOne=findViewById(R.id.imgButtonOne);
+        btnStart1=findViewById(R.id.btnStart1);
+        btnStart2=findViewById(R.id.btnStart2);
         editUserInput1=findViewById(R.id.editUserInput1);
         editUserInput2=findViewById(R.id.editUserInput2);
         imgBack=findViewById(R.id.imgBack);
         imgSpeaker=findViewById(R.id.imgSpeaker);
         imgSpeaker2=findViewById(R.id.imgSpeaker2);
 
-        imgButtonTwo.setOnClickListener(new View.OnClickListener() {
+        btnStart1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -94,7 +94,7 @@ public class GameToastFactoryActivity extends AppCompatActivity {
             }
         });
 
-        imgButtonOne.setOnClickListener(new View.OnClickListener() {
+        btnStart2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String editMent = editUserInput2.getText().toString().trim();

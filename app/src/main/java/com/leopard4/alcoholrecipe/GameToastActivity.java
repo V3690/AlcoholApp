@@ -9,7 +9,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,8 +44,8 @@ public class GameToastActivity extends AppCompatActivity {
         imgSpeaker = findViewById(R.id.imgSpeaker);
         imgBack=findViewById(R.id.imgBack);
         btnStart = findViewById(R.id.btnStart);
-        txtFirst=findViewById(R.id.txtFirst);
-        txtLast=findViewById(R.id.txtLast);
+        txtFirst=findViewById(R.id.txtOutputFirst);
+        txtLast=findViewById(R.id.txtOutputLast);
 
         getCheersMentResNetworkData();
 
