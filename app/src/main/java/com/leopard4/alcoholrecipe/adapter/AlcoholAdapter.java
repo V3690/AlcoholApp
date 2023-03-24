@@ -29,7 +29,7 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
     Context context;
     ArrayList<Alcohol> alcoholList;
 
-    ArrayList<String> selectedAlcohol = new ArrayList<>();
+//    ArrayList<String> selectedAlcohol = new ArrayList<>();
     public interface onItemClickListener{ // 특정 행을 눌렀을 때 처리할 인터페이스로 일정한 폼을만듬
         void onItemClick(int index);
     }

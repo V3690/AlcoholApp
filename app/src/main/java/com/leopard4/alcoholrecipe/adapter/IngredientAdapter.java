@@ -27,7 +27,14 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     Context context;
     ArrayList<Ingredient> ingredientList;
-    Ingredient selectedIngredient;
+
+    public interface onItemClickListener{ // 특정 행을 눌렀을 때 처리할 인터페이스로 일정한 폼을만듬
+        void onItemClick(int index);
+    }
+    public IngredientAdapter.onItemClickListener listener; // 인터페이스를 사용하기 위한 변수
+    public void setOnItemClickListener(IngredientAdapter.onItemClickListener listener){ // 인터페이스를 사용하기 위한 함수
+        this.listener = listener;
+    }
 
     public IngredientAdapter(Context context, ArrayList<Ingredient> ingredientList) {
         this.context = context;
@@ -73,6 +80,18 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
             super(itemView);
 
             txtIngredientName = itemView.findViewById(R.id.txtIngredientName);
+
+            txtIngredientName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int index = getAdapterPosition();
+                        if(index != RecyclerView.NO_POSITION){
+                            listener.onItemClick(index);
+                        }
+                    }
+                }
+            });
 
         }
     }

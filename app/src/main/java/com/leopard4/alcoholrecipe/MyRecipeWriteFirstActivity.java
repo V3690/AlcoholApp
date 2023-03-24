@@ -268,7 +268,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                                 thisRecipeId = recipeId;
                                 // 결론적으로 recipeId를 가져올 수 있었고 이를 다음 액티비티로 넘겨준다.
                                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
-                                intent.putExtra("recipeId", recipeId);
+                                intent.putExtra("recipeId", thisRecipeId);
                                 startActivity(intent);
 
                             } else {

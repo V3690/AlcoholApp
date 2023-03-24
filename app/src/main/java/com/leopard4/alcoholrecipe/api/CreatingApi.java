@@ -4,12 +4,15 @@ package com.leopard4.alcoholrecipe.api;
 import com.leopard4.alcoholrecipe.model.CreateRecipeRes.RecipeRes;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
+import com.leopard4.alcoholrecipe.model.recipeIngreAlcol.RecipeIngreAlcol;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -70,6 +73,10 @@ public interface CreatingApi extends Serializable {
                              @Part("alcoholId") RequestBody alcoholId,
                              @Part("ingredientId")RequestBody ingredientId);
 
+    // 레시피 술,재료 등록 api
+    @POST("creating/ingredient")
+    Call<Void> addAlcoholIngre(@Header("Authorization") String token,
+                               @Body RecipeIngreAlcol  recipeIngreAlcol);
 
 
 

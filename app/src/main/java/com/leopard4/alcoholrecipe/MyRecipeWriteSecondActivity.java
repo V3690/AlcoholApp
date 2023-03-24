@@ -5,17 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spannable;
+import android.os.Handler;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
-import android.util.Range;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,9 +34,10 @@ import com.leopard4.alcoholrecipe.model.alcohol.Alcohol;
 import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.Ingredient;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
+import com.leopard4.alcoholrecipe.model.recipeIngreAlcol.RecipeIngreAlcol;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,7 +63,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
 
     // 부재료 부분 //
-    TextView txtIngreList;
+    TextView txtIngre;
     TextView txtIngreCount;
     EditText editSearchIngre;
     ImageButton imgSearchIngre;
@@ -85,14 +87,23 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     int limit = 5;
 
     // 선택된 알콜과 부재료를 저장하기 위한 변수
-    private ArrayList<Alcohol> selectedAlcoholList = new ArrayList<>();
-    private ArrayList<Ingredient> selectedIngredientList = new ArrayList<>();
+    private ArrayList<String> selectedAlcoholList = new ArrayList<String>();
+    private ArrayList<String> selectedIngreList = new ArrayList<String>();
 
     String alcoholKeyword = "%%"; // 기본적으로 재료리스트를 화면에 보여주기위해 %%로 설정
     String ingreKeyword = "%%";
+    private Handler handler = new Handler();
 
     // 비동기적 네트워크를 동기적으로 바꾸기위한 플래그변수
     private boolean isloading = false;
+    // 선택한 재료는 한번에 하나씩만 삭제가 가능하다.
+    public int isisloading = 0;
+    private ProgressDialog dialog;
+
+    // save버튼을 눌렀을때 api로 보낼 데이터
+    String recipeId;
+    ArrayList<Integer> selectedAlcoholid = new ArrayList<>();
+    ArrayList<Integer> selectedIngreid = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +119,14 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView = findViewById(R.id.alcoholRecyclerView);
         alcoholRecyclerView.setHasFixedSize(true);
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
+
+        // recipeId 받아오기
+        Intent intent = getIntent();
+        recipeId = intent.getStringExtra("recipeId");
+        // recipeId 다시받아오기
+        Log.d("recipeId", recipeId);
+
+
 
         // 뒤로가기
         imgBack = findViewById(R.id.imgBack);
@@ -155,7 +174,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         });
 
         // 재료부분
-        txtIngreList = findViewById(R.id.txtIngreList);
+        txtIngre = findViewById(R.id.txtIngre);
         txtIngreCount = findViewById(R.id.txtIngreCount);
         editSearchIngre = findViewById(R.id.editSearchIngre);
         imgSearchIngre = findViewById(R.id.imgSearchIngre);
@@ -188,8 +207,6 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                 }
         });
 
-        // todo 에딧텍스트에 검색을 실시간으로 하기위해 리스너를 달아야함
-
         // 체크박스
         checkBox = findViewById(R.id.checkBox1);
         // todo: 체크박스 구현
@@ -199,9 +216,8 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo: 저장누르면 api호출 구현
-                Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
-                startActivity(intent);
+
+                PostRecipeIngreAlcolNetworkData();
 
             }
         });
@@ -212,6 +228,59 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
                 alcoholKeyword = editSearchAlcohol.getText().toString().trim();
                 getAlcoholNetworkData();
+
+            }
+        });
+        // 실시간으로 검색결과를 가져온다
+        editSearchAlcohol.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // 업데이트된 텍스트를 가져와 alcoholKeyword에 할당합니다.
+                alcoholKeyword = charSequence.toString().trim();
+                // 여러 요청을 방지하기 위해 처리기 대기열의 기존 메시지를 취소합니다.
+                handler.removeCallbacksAndMessages(null);
+                // 1000밀리초 후에 getAlcoholNetworkData()를 호출하도록 지연된 메시지 예약
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getAlcoholNetworkData();
+                    }
+                }, 800);
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        editSearchIngre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // 업데이트된 텍스트를 가져와 alcoholKeyword에 할당합니다.
+                ingreKeyword = charSequence.toString().trim();
+                // 여러 요청을 방지하기 위해 처리기 대기열의 기존 메시지를 취소합니다.
+                handler.removeCallbacksAndMessages(null);
+                // 1000밀리초 후에 getAlcoholNetworkData()를 호출하도록 지연된 메시지 예약
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getIngreNetworkData();
+                    }
+                }, 800);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -245,40 +314,32 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                     alcoholAdapter.setOnItemClickListener(new AlcoholAdapter.onItemClickListener() {
                         @Override
                         public void onItemClick(int index) {
-
                             if (selectedAlcoholList.size() == 10) {
                                 Snackbar.make(findViewById(R.id.alcoholRecyclerView), "재료는 10개까지만 추가할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
                             }else {
-                                if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName())) {
+                                if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName()+",")) {
                                     Snackbar.make(findViewById(R.id.alcoholRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
                                 } else {
-                                        String s = alcoholList.get(index).getName() + ", ";
-                                        SpannableStringBuilder spannable = new SpannableStringBuilder(txtAlcohol.getText()); // Use existing text as a base for the SpannableStringBuilder
-                                        int start = spannable.length(); // Get the start position for the new spannable text
-                                        spannable.append(s); // Append the new text to the existing text
-                                        ClickableSpan clickableSpan = new ClickableSpan() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                int wordStart = spannable.toString().indexOf(s); // Use start position to find the clicked word
-                                                spannable.delete(wordStart, wordStart + s.length()); // Remove clicked word from SpannableStringBuilder
-                                                Log.i("스팬", spannable.toString());
-                                                Log.i("에스", s);
-                                                Log.i("인덱스", index + "");
-                                                Log.i("스타트", start + "");
-                                                Log.i("알콜리스트겟인덱스",alcoholList.get(index).getName() + "");
-                                                txtAlcohol.setText(spannable); // Update TextView with modified SpannableStringBuilder
-                                                selectedAlcoholList.remove(selectedAlcoholList.getClass().getName()==s);
-                                                updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+                                    selectedAlcoholList.add(alcoholList.get(index).getName());
+                                    selectedAlcoholid.add(alcoholList.get(index).getId());
+                                    txtAlcohol.setText(txtAlcohol.getText().toString() + alcoholList.get(index).getName() + ", ");
+
+                                    SpannableStringBuilder builder = new SpannableStringBuilder(txtAlcohol.getText());
+                                    for (String word : selectedAlcoholList) {
+                                        int startIndex = 0;
+                                        while ((startIndex = builder.toString().indexOf(word, startIndex)) != -1) {
+                                            // Check if the found word is an exact match
+                                            if (builder.toString().substring(startIndex, startIndex + word.length()).equals(word)) {
+                                                int endIndex = startIndex + word.length();
+                                                builder.setSpan(new WordClickableSpan(word, txtAlcohol), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                             }
-                                        };
-                                        spannable.setSpan(clickableSpan, start, start + s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); // Add the new ClickableSpan to the SpannableStringBuilder
-                                        txtAlcohol.setText(spannable); // Update TextView with the modified SpannableStringBuilder
-                                        txtAlcohol.setMovementMethod(LinkMovementMethod.getInstance()); // Make the text clickable
-                                        selectedAlcoholList.add(alcoholList.get(index));
-                                        updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
-//                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
-//                                    selectedAlcoholList.add(alcoholList.get(index));
-//                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
+                                            startIndex += word.length();
+                                        }
+                                    }
+
+                                    txtAlcohol.setText(builder);
+                                    txtAlcohol.setMovementMethod(LinkMovementMethod.getInstance());
+                                    updateTxtAlcoholCount();
                                 }
                             }
                         }
@@ -287,7 +348,6 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                     });
                     alcoholAdapter.notifyDataSetChanged();
                     isloading = false;
-
 
                 }
             }
@@ -304,11 +364,14 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     private void updateTxtAlcoholCount() {
         txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
     }
+    private void updateTxtIngreCount() {
+        txtIngreCount.setText(selectedIngreList.size() + "개");
+    }
+
 
     private void addIngreNetworkData() {
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
-
         CreatingApi api = retrofit.create(CreatingApi.class);
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
@@ -321,11 +384,42 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     offset = offset + count;
-
                     ingredientList.addAll(response.body().getResult());
-                    ingredientAdapter.notifyDataSetChanged();
-                    isloading = false;
+                    ingredientAdapter.setOnItemClickListener(new IngredientAdapter.onItemClickListener() {
+                        @Override
+                        public void onItemClick(int index) {
+                            if (selectedIngreList.size() == 10) {
+                                Snackbar.make(findViewById(R.id.ingreRecyclerView), "재료는 10개까지만 추가할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
+                            } else {
+                                if (txtIngre.getText().toString().contains(ingredientList.get(index).getName()+",")) {
+                                    Snackbar.make(findViewById(R.id.ingreRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    selectedIngreList.add(ingredientList.get(index).getName());
+                                    selectedIngreid.add(ingredientList.get(index).getId());
+                                    txtIngre.setText(txtIngre.getText().toString() + ingredientList.get(index).getName() + ", ");
 
+                                    SpannableStringBuilder builder = new SpannableStringBuilder(txtIngre.getText());
+                                    for (String word : selectedIngreList) {
+                                        int startIndex = 0;
+                                        while ((startIndex = builder.toString().indexOf(word, startIndex)) != -1) {
+                                            // 찾은 단어가 정확히 일치하는지 확인
+                                            if (builder.toString().substring(startIndex, startIndex + word.length()).equals(word)) {
+                                                int endIndex = startIndex + word.length();
+                                                builder.setSpan(new WordClickableSpan(word, txtIngre), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            }
+                                            startIndex += word.length();
+                                        }
+                                    }
+                                    txtIngre.setText(builder);
+                                    txtIngre.setMovementMethod(LinkMovementMethod.getInstance());
+                                    updateTxtIngreCount();
+                                }
+                            }
+                        }
+
+                    });
+                    ingredientAdapter.notifyDataSetChanged();
+                    isloading =false;
                 }
             }
 
@@ -337,8 +431,6 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
 
     }
-
-
 
     @Override
     protected void onResume() {
@@ -356,9 +448,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     void getAlcoholNetworkData() {
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
-
         CreatingApi api = retrofit.create(CreatingApi.class);
-
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
         String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
@@ -373,7 +463,6 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                 alcoholList.clear();
 
                 if (response.isSuccessful()) {
-
                     count = response.body().getCount();
                     offset = offset + count;
                     alcoholList.addAll(response.body().getResult());
@@ -384,56 +473,37 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                             if (selectedAlcoholList.size() == 10) {
                                 Snackbar.make(findViewById(R.id.alcoholRecyclerView), "재료는 10개까지만 추가할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
                             }else {
-                                if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName())) {
+                                if (txtAlcohol.getText().toString().contains(alcoholList.get(index).getName()+",")) {
                                     Snackbar.make(findViewById(R.id.alcoholRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
                                 } else {
-                                    String s = alcoholList.get(index).getName() + ", ";
-                                    SpannableStringBuilder spannable = new SpannableStringBuilder(txtAlcohol.getText()); // Use existing text as a base for the SpannableStringBuilder
-                                    int start = spannable.length(); // Get the start position for the new spannable text
-                                    spannable.append(s); // Append the new text to the existing text
-                                    ClickableSpan clickableSpan = new ClickableSpan() {
-                                        @Override
-                                        public void onClick(View view) {
-//                                            int wordStart = spannable.toString().indexOf(s, start); // Use start position to find the clicked word
-                                            int wordStart = spannable.toString().indexOf(s);
-                                            spannable.delete(wordStart, wordStart + s.length()); // Remove clicked word from SpannableStringBuilder
-                                            Log.i("스팬", spannable.toString());
-                                            Log.i("에스", s);
-                                            Log.i("인덱스", index + "");
-                                            Log.i("스타트", start + "");
-                                            Log.i("알콜리스트겟인덱스",alcoholList.get(index).getName() + "");
-
-//                                            I/스팬: 신선주 약주16, 한청, 33JU 25도, 매화수,
-//                                            I/에스: 업타운 피나콜라다 750ml,
-//                                            I/인덱스: 8
-//                                            I/스타트: 29
-//                                            I/알콜리스트겟인덱스: 업타운 피나콜라다 750ml
-//                                            I/스팬:
-//                                            I/에스: 신선주 약주16,
-//                                            I/인덱스: 4
-//                                            I/스타트: 0
-//                                            I/알콜리스트겟인덱스: 신선주 약주16
-                                            // 검색햇을경우 인덱스가 동일하기 때문에 인덱스로 지우는것은 안됨.
-
-                                            selectedAlcoholList.remove(selectedAlcoholList.getClass().getName()==s);
-                                            txtAlcohol.setText(spannable); // Update TextView with modified SpannableStringBuilder
-                                            updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
+                                    selectedAlcoholList.add(alcoholList.get(index).getName());
+                                    selectedAlcoholid.add(alcoholList.get(index).getId());
+                                    txtAlcohol.setText(txtAlcohol.getText().toString() + alcoholList.get(index).getName() + ", ");
+                                    SpannableStringBuilder builder = new SpannableStringBuilder(txtAlcohol.getText());
+                                    for (String word : selectedAlcoholList) {
+                                        int startIndex = 0;
+                                        while ((startIndex = builder.toString().indexOf(word, startIndex)) != -1) {
+                                            // 찾은 단어가 정확히 일치하는지 확인
+                                            if (builder.toString().substring(startIndex, startIndex + word.length()).equals(word)) {
+                                                int endIndex = startIndex + word.length();
+                                                builder.setSpan(new WordClickableSpan(word, txtAlcohol), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            }
+                                            startIndex += word.length();
                                         }
-                                    };
-                                    spannable.setSpan(clickableSpan, start, start + s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); // Add the new ClickableSpan to the SpannableStringBuilder
-                                    txtAlcohol.setText(spannable); // Update TextView with the modified SpannableStringBuilder
+                                    }
+//                                    for (String word : selectedAlcoholList) {
+//                                        int startIndex = builder.toString().indexOf(word);
+//                                        if (startIndex != 1){
+//                                            int endIndex = startIndex + word.length();
+//                                            builder.setSpan(new WordClickableSpan(word, txtAlcohol), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                                        }
+//                                    }
+                                    txtAlcohol.setText(builder);
                                     txtAlcohol.setMovementMethod(LinkMovementMethod.getInstance()); // Make the text clickable
-                                    selectedAlcoholList.add(alcoholList.get(index));
-                                    updateTxtAlcoholCount(); // Update txtAlcoholCount with the new count
-//                                    txtAlcohol.setText((txtAlcohol.getText().toString()) + (alcoholList.get(index).getName() + ", "));
-//                                    selectedAlcoholList.add(alcoholList.get(index));
-//                                    txtAlcoholCount.setText(selectedAlcoholList.size() + "개");
+                                    updateTxtAlcoholCount();
                                 }
                             }
-
-
                         }
-
 
                     });
                     alcoholRecyclerView.setAdapter(alcoholAdapter);
@@ -441,19 +511,73 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<AlcoholList> call, Throwable t) {
-
-
             }
         });
 
     }
+    private class WordClickableSpan extends ClickableSpan {
+        private String word;
+        private TextView textView;
+
+        public WordClickableSpan(String word, TextView textView) {
+            this.word = word;
+            this.textView = textView;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            // 버튼을 비활성화하여 다중 클릭 방지
+            widget.setEnabled(false);
+            showProgress("삭제중입니다.");
+            // TextView의 현재 텍스트 가져오기
+            SpannableStringBuilder builder = new SpannableStringBuilder(textView.getText());
+
+            // 클릭한 단어의 시작 및 끝 인덱스 찾기
+            int startIndex = builder.toString().indexOf(word);
+            int endIndex = startIndex + word.length();
+
+            // 클릭한 단어를 텍스트에서 제거
+            builder.delete(startIndex, endIndex + 2);
+            // 클릭한 단어를 리스트에서 제거
+            if (this.textView == txtAlcohol) {
+
+                // 정확히 일치하는 단어로 id값을 찾아서 삭제
+                for (int i = 0; i < selectedAlcoholList.size(); i++) {
+                    if (selectedAlcoholList.get(i).equals(word.replace(", ", ""))) {
+                        selectedAlcoholid.remove(i);
+                    }
+                }
+                selectedAlcoholList.removeIf(selectedAlcoholList -> selectedAlcoholList.equals(word.replace(", ", "")));
+                updateTxtAlcoholCount();
+            } else {
+
+                // 정확히 일치하는 단어로 id값을 찾아서 삭제
+                for (int i = 0; i < selectedIngreList.size(); i++) {
+                    if (selectedIngreList.get(i).equals(word.replace(", ", ""))) {
+                        selectedIngreid.remove(i);
+                    }
+                }
+                selectedIngreList.removeIf(selectedIngreList -> selectedIngreList.equals(word.replace(", ", "")));
+                updateTxtIngreCount();
+            }
+            Log.i("selectedAlcoholid", selectedAlcoholid.toString());
+            Log.i("selectedAlcoholList", selectedAlcoholList.toString());
+            Log.i("selectedIngreid", selectedIngreid.toString());
+            Log.i("selectedIngreList", selectedIngreList.toString());
+            // 수정된 텍스트로 TextView 업데이트
+            textView.setText(builder);
+            dismissProgress();
+            // 버튼을 다시 활성화
+            widget.setEnabled(true);
+
+        }
+    }
+
 
     void getIngreNetworkData() {
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
-
         CreatingApi api = retrofit.create(CreatingApi.class);
-
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
         String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
@@ -465,21 +589,46 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<IngredientList> call, Response<IngredientList> response) {
 
-                // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
-                // 초기화 코드가 필요.
                 ingredientList.clear();
 
                 if (response.isSuccessful()){
-
-//                    alcoholList.clear();
-
                     count = response.body().getCount();
                     offset = offset + count;
                     ingredientList.addAll(response.body().getResult());
                     ingredientAdapter = new IngredientAdapter(MyRecipeWriteSecondActivity.this, ingredientList);
-                    ingreRecyclerView.setAdapter(ingredientAdapter);
-                }else {
+                    ingredientAdapter.setOnItemClickListener(new IngredientAdapter.onItemClickListener() {
+                        @Override
+                        public void onItemClick(int index) {
+                            if (selectedIngreList.size() == 10) {
+                                Snackbar.make(findViewById(R.id.ingreRecyclerView), "재료는 10개까지만 추가할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
+                            }else {
+                                if (txtIngre.getText().toString().contains(ingredientList.get(index).getName())) {
+                                    Snackbar.make(findViewById(R.id.ingreRecyclerView), "이미 추가된 재료입니다.", Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    selectedIngreList.add(ingredientList.get(index).getName());
+                                    selectedIngreid.add(ingredientList.get(index).getId());
+                                    txtIngre.setText(txtIngre.getText().toString() + ingredientList.get(index).getName() + ", ");
 
+                                    SpannableStringBuilder builder = new SpannableStringBuilder(txtIngre.getText());
+                                    for (String word : selectedIngreList) {
+                                        int startIndex = 0;
+                                        while ((startIndex = builder.toString().indexOf(word, startIndex)) != -1) {
+                                            // 찾은 단어가 정확히 일치하는지 확인
+                                            if (builder.toString().substring(startIndex, startIndex + word.length()).equals(word)) {
+                                                int endIndex = startIndex + word.length();
+                                                builder.setSpan(new WordClickableSpan(word, txtIngre), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            }
+                                            startIndex += word.length();
+                                        }
+                                    }
+                                    txtIngre.setText(builder);
+                                    txtIngre.setMovementMethod(LinkMovementMethod.getInstance());
+                                    updateTxtIngreCount();
+                                }
+                            }
+                        }
+                    });
+                    ingreRecyclerView.setAdapter(ingredientAdapter);
                 }
             }
             @Override
@@ -487,8 +636,49 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
             }
 
-
         });
 
+    }
+    // save버튼을눌렀을때 호출되는 함수
+    void PostRecipeIngreAlcolNetworkData() {
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
+        CreatingApi api = retrofit.create(CreatingApi.class);
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        String alcoholIdString = Arrays.toString(new ArrayList[]{selectedAlcoholid}).replace("[", "").replace("]", "").replace(" ", "");
+        String ingredientIdString = Arrays.toString(new ArrayList[]{selectedIngreid}).replace("[", "").replace("]", "").replace(" ", "");
+
+        RecipeIngreAlcol recipeIngreAlcol = new RecipeIngreAlcol(Integer.parseInt(recipeId), alcoholIdString, ingredientIdString);
+        Call<Void> call = api.addAlcoholIngre(accessToken, recipeIngreAlcol);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.i("성공", "성공");
+                    Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
+                    intent.putExtra("recipeId", Integer.parseInt(recipeId));
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("실패", "실패");
+            }
+        });
+    }
+
+    void showProgress(String message){
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+    }
+
+    // 로직처리가 끝나면 화면에서 사라지는 함수
+    void dismissProgress(){
+        dialog.dismiss();
     }
 }
