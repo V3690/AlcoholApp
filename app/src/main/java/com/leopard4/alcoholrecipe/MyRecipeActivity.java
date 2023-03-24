@@ -483,4 +483,11 @@ public class MyRecipeActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+    // onResume
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
 }

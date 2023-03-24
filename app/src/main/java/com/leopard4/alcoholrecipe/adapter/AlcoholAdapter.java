@@ -29,8 +29,14 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
     Context context;
     ArrayList<Alcohol> alcoholList;
 
-    ArrayList<String> selectedAlcohol = new ArrayList<>();
-
+//    ArrayList<String> selectedAlcohol = new ArrayList<>();
+    public interface onItemClickListener{ // 특정 행을 눌렀을 때 처리할 인터페이스로 일정한 폼을만듬
+        void onItemClick(int index);
+    }
+    public AlcoholAdapter.onItemClickListener listener; // 인터페이스를 사용하기 위한 변수
+    public void setOnItemClickListener(AlcoholAdapter.onItemClickListener listener){ // 인터페이스를 사용하기 위한 함수
+        this.listener = listener;
+    }
     public AlcoholAdapter(Context context, ArrayList<Alcohol> alcoholList) {
         this.context = context;
         this.alcoholList = alcoholList;
@@ -82,24 +88,12 @@ public class AlcoholAdapter extends RecyclerView.Adapter<AlcoholAdapter.ViewHold
             txtAlcoholName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int index = getAdapterPosition();
-
-//                    Alcohol alcohol = alcoholList.get(index);
-                    alcoholList.get(index);
-                    
-//                    selectedAlcohol.add(String.valueOf(alcohol));
-
-//                    Intent intent;//인텐트 선언
-//                    intent = new Intent(context, MyRecipeWriteSecondActivity.class); //look_memo.class부분에 원하는 화면 연결
-//                    intent.putExtra("selectedAlcohol", (Serializable) alcohol);
-
-//                    Log.i("SELETED_INDEX", alcohol.getId() + " " +alcohol.getName());
-
-//                    Intent intent = new Intent(context, SeletedAlcoholAdapter.ViewHolder);
-
-
-
-
+                    if(listener != null){
+                        int index = getAdapterPosition();
+                        if(index != RecyclerView.NO_POSITION){
+                            listener.onItemClick(index);
+                        }
+                    }
                 }
             });
 
