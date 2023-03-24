@@ -69,9 +69,10 @@ public interface CreatingApi extends Serializable {
 //            "ingredientId": "11,12,13,14,15,16"
 //    }
     @PUT("/creating/ingredient/edit/{ingredientId}")
-    Call<RecipeRes> editIngredient(@Header("Authorization") String token,
-                             @Part("alcoholId") RequestBody alcoholId,
-                             @Part("ingredientId")RequestBody ingredientId);
+    Call<Void> editAlcoholIngre(@Header("Authorization") String token,
+                             @Path("ingredientId") int id,
+                             @Body Map<String, String> map);
+
 
     // 레시피 술,재료 등록 api
     @POST("creating/ingredient")

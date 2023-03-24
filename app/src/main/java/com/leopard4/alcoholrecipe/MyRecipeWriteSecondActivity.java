@@ -38,6 +38,8 @@ import com.leopard4.alcoholrecipe.model.recipeIngreAlcol.RecipeIngreAlcol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -659,7 +661,39 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                     Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", Integer.parseInt(recipeId));
                     startActivity(intent);
-                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("실패", "실패");
+            }
+        });
+    }
+    // 재료수정api
+    void EditRecipeIngreAlcolNetworkData() {
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
+        CreatingApi api = retrofit.create(CreatingApi.class);
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        String alcoholIdString = Arrays.toString(new ArrayList[]{selectedAlcoholid}).replace("[", "").replace("]", "").replace(" ", "");
+        String ingredientIdString = Arrays.toString(new ArrayList[]{selectedIngreid}).replace("[", "").replace("]", "").replace(" ", "");
+        Map map = new HashMap();
+        map.put("alcoholId", alcoholIdString);
+        map.put("ingredientId", ingredientIdString);
+
+        Call<Void> call = api.editAlcoholIngre(accessToken, Integer.parseInt(recipeId), map);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.i("성공", "성공");
+                    Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
+                    intent.putExtra("recipeId", Integer.parseInt(recipeId));
+                    startActivity(intent);
+
                 }
             }
 
