@@ -47,7 +47,7 @@ public class RecipeLabAdapter extends RecyclerView.Adapter<RecipeLabAdapter.View
 
         RecipeLab recipeLab = RecipeLabList.get(position);
 
-        holder.txtLikeCnt.setText(recipeLab.getTitle());
+        holder.txtTitle.setText(recipeLab.getTitle());
 
     }
 
@@ -58,17 +58,17 @@ public class RecipeLabAdapter extends RecyclerView.Adapter<RecipeLabAdapter.View
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
 
-        CardView cardView1;
-        TextView txtLikeCnt;
+        CardView cardView;
+        TextView txtTitle;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cardView1 = itemView.findViewById(R.id.cardView1);
-            txtLikeCnt=itemView.findViewById(R.id.txtLikeCnt);
+            cardView = itemView.findViewById(R.id.cardView);
+            txtTitle=itemView.findViewById(R.id.txtTitle);
 
-            cardView1.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
