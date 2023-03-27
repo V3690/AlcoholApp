@@ -107,6 +107,9 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     ArrayList<Integer> selectedAlcoholid = new ArrayList<>();
     ArrayList<Integer> selectedIngreid = new ArrayList<>();
 
+    // 완료 버튼을 수정버튼으로 바꾸기 위한 변수
+    private String thisRecipeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +125,12 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView.setHasFixedSize(true);
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
 
+        // 완료 버튼을 수정하기로 변경
+        btnSave = findViewById(R.id.btnSave);
+        if(thisRecipeId != null) {
+            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+            btnSave.setText("수정하기");
+        }
         // recipeId 받아오기
         Intent intent = getIntent();
         recipeId = intent.getStringExtra("recipeId");
@@ -214,12 +223,14 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         // todo: 체크박스 구현
 
         // 저장
-        btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                PostRecipeIngreAlcolNetworkData();
+                if (thisRecipeId == null) { // 저장하기
+                    PostRecipeIngreAlcolNetworkData();
+                }else if (thisRecipeId != null) { // 수정하기
+                    EditRecipeIngreAlcolNetworkData();
+                }
 
             }
         });
@@ -437,6 +448,10 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(thisRecipeId != null) {
+            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+            btnSave.setText("수정하기");
+        }
         getAlcoholNetworkData();
         getIngreNetworkData();
     }
@@ -643,6 +658,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     }
     // save버튼을눌렀을때 호출되는 함수
     void PostRecipeIngreAlcolNetworkData() {
+        showProgress("저장중입니다.");
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
         CreatingApi api = retrofit.create(CreatingApi.class);
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
@@ -656,23 +672,28 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissProgress();
                 if (response.isSuccessful()) {
                     Log.i("성공", "성공");
+                    thisRecipeId = recipeId;
                     Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", Integer.parseInt(recipeId));
                     startActivity(intent);
+                    finish();
 
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                dismissProgress();
                 Log.i("실패", "실패");
             }
         });
     }
     // 재료수정api
     void EditRecipeIngreAlcolNetworkData() {
+        showProgress("수정중입니다.");
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
         CreatingApi api = retrofit.create(CreatingApi.class);
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
@@ -688,17 +709,20 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissProgress();
                 if (response.isSuccessful()) {
                     Log.i("성공", "성공");
                     Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", Integer.parseInt(recipeId));
                     startActivity(intent);
+                    finish();
 
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                dismissProgress();
                 Log.i("실패", "실패");
             }
         });
@@ -715,4 +739,5 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     void dismissProgress(){
         dialog.dismiss();
     }
+
 }
