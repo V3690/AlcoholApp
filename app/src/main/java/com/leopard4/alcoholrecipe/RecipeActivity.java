@@ -1,14 +1,18 @@
 package com.leopard4.alcoholrecipe;
 
+import static android.view.View.VISIBLE;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -100,6 +104,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         // 들어가자마자 레시피보여주기
         if(isToggleButton1Checked){
             recyclerView.setVisibility(View.VISIBLE);
+            toggleButton.setTextColor(Color.parseColor("#FFC107"));
+            toggleButton2.setTextColor(Color.WHITE);
             percent=0;
             order="cnt";
             getNetworkData();
@@ -108,23 +114,27 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
             toggle1spinner();
         }
 
+
         //이후 주인장레시피 눌렀을때
        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 isToggleButton1Checked = isChecked;
                 if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false){
+                    toggleButton.setTextColor(Color.parseColor("#FFC107"));
+                    toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
                     getNetworkData();
                     Log.i(TAG,"1번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
 
-                 toggle1spinner();
+                    toggle1spinner();
 
 
                 }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true){
-                    recyclerView.setVisibility(View.GONE);
+                    toggleButton.setTextColor(Color.parseColor("#FFC107"));
+                    toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
@@ -132,13 +142,17 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
                     Log.i(TAG,"3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
 
-                        toggle3spinner();
+                    toggle3spinner();
 
                 }
                 else{
+                    toggleButton.setTextColor(Color.WHITE);
+                    toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
                     txtWarning.setVisibility(View.VISIBLE);
                     if(isToggleButton2Checked){
+                        toggleButton.setTextColor(Color.WHITE);
+                        toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                         recyclerView.setVisibility(View.VISIBLE);
                         percent=0;
                         order="cnt";
@@ -157,6 +171,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                 isToggleButton2Checked = isChecked;
 
                 if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true ){
+                    toggleButton.setTextColor(Color.WHITE);
+                    toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
@@ -168,7 +184,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
 
                 }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true ){
-                    recyclerView.setVisibility(View.GONE);
+                    toggleButton.setTextColor(Color.parseColor("#FFC107"));
+                    toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
@@ -180,9 +197,13 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
                 }
                 else{
+                    toggleButton.setTextColor(Color.WHITE);
+                    toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
                     txtWarning.setVisibility(View.VISIBLE);
                     if(isToggleButton1Checked){
+                        toggleButton.setTextColor(Color.parseColor("#FFC107"));
+                        toggleButton2.setTextColor(Color.WHITE);
                         recyclerView.setVisibility(View.VISIBLE);
                         percent=0;
                         order="cnt";
@@ -586,6 +607,20 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
             }
         });
+    }
+
+
+    public void switchColor() {
+        if (toggleButton.isChecked()) {
+            toggleButton.setTextColor(Color.YELLOW);
+        }else {
+            toggleButton.setTextColor(VISIBLE);
+        }
+        if (toggleButton2.isChecked()) {
+            toggleButton2.setTextColor(Color.YELLOW);
+        }else {
+            toggleButton2.setTextColor(VISIBLE);
+        }
     }
 
 
