@@ -14,18 +14,22 @@ public class User implements Serializable {
 
     private String nickname;
 
+    private  int accountType;
+
     public User() {
     }
 
-    public User(String email, String password) {
+    public User(String email, String password, int accountType) {
         this.email = email;
         this.password = password;
+        this.accountType = accountType;
     }
 
-    public User( String email, String password, String nickname) {
+    public User( String email, String password, String nickname,int accountType) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.accountType = accountType;
 
     }
 

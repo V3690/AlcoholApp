@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     String nickname;
     String password;
     String password2;
+    private int accountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +169,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                accountType=0;
+
                 // 1. 다이얼로그를 화면에 보여준다.
                 showProgress("회원가입 중입니다...");
 
@@ -176,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
                         NetworkClient.getRetrofitClient(RegisterActivity.this);
                 UserApi api = retrofit.create(UserApi.class); // 레트로핏으로 서버에 요청할 객체 생성
 
-                User user = new User(email, password, nickname); // User 객체 생성
+                User user = new User(email, password, nickname,accountType); // User 객체 생성
                 Call<UserRes> call = api.register(user); // 서버에 요청
 
                 call.enqueue(new Callback<UserRes>() { // 비동기로 서버에 요청
