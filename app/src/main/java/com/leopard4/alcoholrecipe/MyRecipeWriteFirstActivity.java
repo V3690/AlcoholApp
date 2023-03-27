@@ -270,6 +270,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
                                 intent.putExtra("recipeId", thisRecipeId);
                                 startActivity(intent);
+                                finish();
 
                             } else {
                                 try {
@@ -399,6 +400,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
                                 startActivity(intent);
+                                finish();
 
                             } else {
                                 try {
