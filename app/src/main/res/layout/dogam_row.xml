@@ -12,7 +12,10 @@
         android:layout_marginLeft="7dp"
         android:layout_marginTop="7dp"
         android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
+        android:layout_marginBottom="7dp"
+        android:outlineProvider="none"
+        app:cardBackgroundColor="#80FFFFFF"
+        app:cardCornerRadius="30dp">
 
         <ImageView
             android:id="@+id/imgAlcohol"

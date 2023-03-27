@@ -29,11 +29,9 @@ import retrofit2.Retrofit;
 
 public class DogamInfoActivity extends AppCompatActivity {
 
-    ImageButton imgBack;
+    ImageView imgBack, imgAlcohol, imgLike;
     TextView txtName;
     Button btnEdit;
-    ImageView imgAlcohol;
-    ImageButton imgLike;
     TextView txtLike, txtPercent, txtType, txtCategory, txtProduce, txtSupply;
     private String accessToken;
     int alcoholId;
