@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,21 +18,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.leopard4.alcoholrecipe.adapter.AlcoholAdapter;
 import com.leopard4.alcoholrecipe.adapter.DogamAdapter;
-import com.leopard4.alcoholrecipe.api.CreatingApi;
 import com.leopard4.alcoholrecipe.api.DogamApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
-import com.leopard4.alcoholrecipe.model.alcohol.Alcohol;
-import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.dogam.Dogam;
 import com.leopard4.alcoholrecipe.model.dogam.DogamList;
 
 import java.util.ArrayList;
-import java.util.function.ToDoubleBiFunction;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -124,8 +117,8 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
 
         // 스피너 처리 관련 코드
 
-        ArrayAdapter<CharSequence> adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , android.R.layout.simple_spinner_dropdown_item);;
-        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , android.R.layout.simple_spinner_dropdown_item);;
+        ArrayAdapter<CharSequence> adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , R.layout.layout_spinner);;
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , R.layout.layout_spinner);;
 
         spinner1.setOnItemSelectedListener(DogamActivity.this);
         spinner2.setOnItemSelectedListener(DogamActivity.this);

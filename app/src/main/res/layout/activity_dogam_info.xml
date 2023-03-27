@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DogamInfoActivity">
+    tools:context=".DogamInfoActivity"
+    android:background="@drawable/a_a_basic">
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="697dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_0_back"
+            android:tintMode="src_in"
+            android:visibility="visible"
+            app:tint="#4DFFFFFF" />
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/btnReturnRecipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="80dp"
+            android:scaleType="fitEnd"
+            android:tintMode="src_in"
+            app:srcCompat="@drawable/icon_menu3"
+            app:tint="#FFD324" />
 
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="이름" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수정" />
-        </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,15 +54,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imgAlcohol"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    app:srcCompat="@drawable/outline_image_24" />
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:text="⭐ 술 이름"
+                    android:textColor="#FBFBFB"
+                    android:textSize="27sp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/imgBack" />
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="210dp"
+                    android:backgroundTint="#F29B12"
+                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:text="수정"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                    app:layout_constraintEnd_toStartOf="@+id/btnReturnRecipe"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/txtRecipeTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/btnReturnRecipe"
+                    app:layout_constraintVertical_bias="0.222" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="#66FFFFFF"
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -69,97 +104,222 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageButton
-                            android:id="@+id/imgLike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/baseline_favorite_border_24" />
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="180dp"
+                            android:layout_height="180dp"
+                            app:cardCornerRadius="30dp">
 
-                        <TextView
-                            android:id="@+id/txtLike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00" />
+                            <ImageView
+                                android:id="@+id/imgAlcohol"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                app:srcCompat="@drawable/a_0_row_1" />
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imgLike"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/baseline_favorite_border_24_gray" />
+
+                                <TextView
+                                    android:id="@+id/txtLike"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:paddingLeft="5dp"
+                                    android:paddingTop="2dp"
+                                    android:text="999"
+                                    android:textColor="#DE5179"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView37"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="도수 : "
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtPercent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="00"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView36"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="구분 : "
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtType"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="일반 소주"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView38"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="구분 : "
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtCategory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/puradak_gentle_gothic"
+                                    android:text="희석식"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView34"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="도수 : " />
-
-                        <TextView
-                            android:id="@+id/txtPercent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView341"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="구분 : " />
-
-                        <TextView
-                            android:id="@+id/txtType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView45"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="세부 : " />
-
-
-
-                    <TextView
-                        android:id="@+id/txtCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="카테고리" />
 
                 </LinearLayout>
-
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView64"
+                android:id="@+id/textView43"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
-                android:text="생산" />
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/puradak_gentle_gothic"
+                android:text="생산"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtIngredient"
+                app:layout_constraintStart_toStartOf="@+id/txtIngredient"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="#66FFFFFF"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtProduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#66E0E0E0"
+                    android:backgroundTintMode="screen"
+                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:padding="10dp"
+                    android:shadowRadius="30"
+                    android:text="TextView"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toTopOf="@+id/textView44"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/puradak_gentle_gothic"
+                android:text="공급"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtContent"
+                app:layout_constraintStart_toStartOf="@+id/txtContent"
+                app:layout_constraintTop_toBottomOf="@+id/txtIngredient" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="#66FFFFFF"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtSupply"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="#66E0E0E0"
+                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:padding="10dp"
+                    android:text="TextView"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView44" />
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/txtProduce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView66"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="공급" />
-
-        <TextView
-            android:id="@+id/txtSupply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
