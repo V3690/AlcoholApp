@@ -55,7 +55,7 @@ public class RecipeHonorAdapter extends RecyclerView.Adapter<RecipeHonorAdapter.
         RecipeHonor recipeHonor = recipeHonorList.get(position);
 
         holder.txtLikeCnt.setText(recipeHonor.getLikeCount()+"");
-        Glide.with(context).load(recipeHonor.getImgUrl()).into(holder.imgHonor);
+        Glide.with(context).load(recipeHonor.getImgUrl().replace("http://", "https://")).into(holder.imgHonor);
         if (recipeHonor.getIsLike() == 1){
             holder.imgLike.setImageResource(R.drawable.baseline_favorite_24_pink);
 

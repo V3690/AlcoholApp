@@ -35,9 +35,12 @@ import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.Ingredient;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
 import com.leopard4.alcoholrecipe.model.recipeIngreAlcol.RecipeIngreAlcol;
+import com.leopard4.alcoholrecipe.model.recipeOne.RecipeOne;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,6 +108,9 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     ArrayList<Integer> selectedAlcoholid = new ArrayList<>();
     ArrayList<Integer> selectedIngreid = new ArrayList<>();
 
+    // 완료 버튼을 수정버튼으로 바꾸기 위한 변수
+    private RecipeOne recipeOne = new RecipeOne();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,11 +126,19 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView.setHasFixedSize(true);
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
 
+
+        btnSave = findViewById(R.id.btnSave);
+
         // recipeId 받아오기
         Intent intent = getIntent();
         recipeId = intent.getStringExtra("recipeId");
-        // recipeId 다시받아오기
+        // recipeOne 받아오기
+        recipeOne = (RecipeOne) intent.getSerializableExtra("recipeOne");
         Log.d("recipeId", recipeId);
+        // 완료 버튼을 수정하기로 변경
+        if(recipeOne != null) {
+            btnSave.setText("수정하기");
+        }
 
 
 
@@ -212,12 +226,14 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         // todo: 체크박스 구현
 
         // 저장
-        btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                PostRecipeIngreAlcolNetworkData();
+                if (recipeOne == null) { // 저장하기
+                    PostRecipeIngreAlcolNetworkData();
+                }else if (recipeOne != null) { // 수정하기
+                    EditRecipeIngreAlcolNetworkData();
+                }
 
             }
         });
@@ -435,6 +451,9 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(recipeOne != null) {
+            btnSave.setText("수정하기");
+        }
         getAlcoholNetworkData();
         getIngreNetworkData();
     }
@@ -641,6 +660,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     }
     // save버튼을눌렀을때 호출되는 함수
     void PostRecipeIngreAlcolNetworkData() {
+        showProgress("저장중입니다.");
         Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
         CreatingApi api = retrofit.create(CreatingApi.class);
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
@@ -654,17 +674,56 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissProgress();
                 if (response.isSuccessful()) {
                     Log.i("성공", "성공");
                     Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", Integer.parseInt(recipeId));
                     startActivity(intent);
                     finish();
+
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                dismissProgress();
+                Log.i("실패", "실패");
+            }
+        });
+    }
+    // 재료수정api
+    void EditRecipeIngreAlcolNetworkData() {
+        showProgress("수정중입니다.");
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyRecipeWriteSecondActivity.this);
+        CreatingApi api = retrofit.create(CreatingApi.class);
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        String alcoholIdString = Arrays.toString(new ArrayList[]{selectedAlcoholid}).replace("[", "").replace("]", "").replace(" ", "");
+        String ingredientIdString = Arrays.toString(new ArrayList[]{selectedIngreid}).replace("[", "").replace("]", "").replace(" ", "");
+        Map map = new HashMap();
+        map.put("alcoholId", alcoholIdString);
+        map.put("ingredientId", ingredientIdString);
+
+        Call<Void> call = api.editAlcoholIngre(accessToken, Integer.parseInt(recipeId), map);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissProgress();
+                if (response.isSuccessful()) {
+                    Log.i("성공", "성공");
+                    Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
+                    intent.putExtra("recipeId", Integer.parseInt(recipeId));
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dismissProgress();
                 Log.i("실패", "실패");
             }
         });
@@ -681,4 +740,5 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     void dismissProgress(){
         dialog.dismiss();
     }
+
 }
