@@ -15,19 +15,12 @@
         app:cardBackgroundColor="#B3FFFFFF"
         app:cardCornerRadius="30dp">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/imgHonor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/imgHonor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@drawable/baseline_favorite_border_24" />
-
-        </FrameLayout>
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/baseline_favorite_border_24" />
 
     </androidx.cardview.widget.CardView>
 

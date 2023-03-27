@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="alcoholApp">#9767f0</color>
     <color name="toggleColor">#FFC107</color>
+    <color name="pointColor">#DE5179</color>
+    <color name="barColor">#80FFFFFF</color>
+
 </resources>

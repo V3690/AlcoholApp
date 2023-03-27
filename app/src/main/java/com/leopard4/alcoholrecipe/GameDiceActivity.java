@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
 
     TextView txtHuman , txtRule;
 
-    ImageButton imgBack ;
+    ImageView imgBack ;
     Button btnSelect1,btnSelect2, btnSound ;
     private TextToSpeech tts;
 
@@ -53,8 +54,8 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
         txtRule = findViewById(R.id.txtRule);
         btnSound=findViewById(R.id.btnSound);
 
-        ArrayAdapter<CharSequence> adapterHuman = ArrayAdapter.createFromResource(this,R.array.spinner_item6 , android.R.layout.simple_spinner_dropdown_item);;
-        ArrayAdapter<CharSequence> adapterRule = ArrayAdapter.createFromResource(this,R.array.spinner_item7 , android.R.layout.simple_spinner_dropdown_item);;
+        ArrayAdapter<CharSequence> adapterHuman = ArrayAdapter.createFromResource(this,R.array.spinner_item6 , R.layout.layout_spinner);;
+        ArrayAdapter<CharSequence> adapterRule = ArrayAdapter.createFromResource(this,R.array.spinner_item7 , R.layout.layout_spinner);;
 
         spinner10.setOnItemSelectedListener(GameDiceActivity.this);
         spinner11.setOnItemSelectedListener(GameDiceActivity.this);
