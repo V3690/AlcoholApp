@@ -53,7 +53,7 @@ public class RecipeMasterAdapter extends RecyclerView.Adapter<RecipeMasterAdapte
         RecipeMaster recipeMaster = recipeMasterList.get(position);
 
         holder.txtTitle.setText(recipeMaster.getTitle());
-        Glide.with(context).load(recipeMaster.getImgUrl()).into(holder.imgMaster);
+        Glide.with(context).load(recipeMaster.getImgUrl().replace("http://", "https://")).into(holder.imgMaster);
 
 
     }

@@ -42,6 +42,7 @@ public class RecipeInfoActivity extends AppCompatActivity {
     // 상태가변화됨을 감지하는 변수
     public static int state = 0;
     int likeCnt;
+    RecipeOne recipeOne = new RecipeOne();
 
 
     @Override
@@ -70,6 +71,18 @@ public class RecipeInfoActivity extends AppCompatActivity {
         Log.i("액티비티스탯",state+"");
 
         getNetworkData();
+        // 수정버튼을 누르면 수정페이지로 이동
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecipeInfoActivity.this, MyRecipeWriteFirstActivity.class);
+                intent.putExtra("recipeId", recipeId);
+                // RecipeOne 객체 전송
+                intent.putExtra("recipeOne", recipeOne);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         //  하트의 상태를 변화시킨다.
@@ -166,23 +179,24 @@ public class RecipeInfoActivity extends AppCompatActivity {
                     // 사용자가 너무빨리 뒤로가기를 눌렀을때 에러가 발생한다.
                     // 이를 방지하기 위해 try catch문을 사용한다.
                     try {
-                        RecipeOne recipeOne = new RecipeOne();
+
     //                    recipeOneList.addAll(response.body().getRecipeOne());
                         recipeOne = response.body().getRecipeOne();
 
                         // glide로 이미지 뿌려주기
                         Glide.with(RecipeInfoActivity.this)
-                                .load(recipeOne.getImgUrl())
+                                .load(recipeOne.getImgUrl().replace("http://", "https://"))
                                 .into(imgUrl);
 
                         // 레시피를 작성한 사람이라면 수정버튼을 보여주기 위해서
                         // myrecipeAdapter 에서 받은 userId
                         getAdapterUserId = getIntent().getIntExtra("userId", 0);
-//                    Log.i("접속한유저ID", getAdapterUserId+"");
+//                        Log.i("접속한유저ID", getAdapterUserId+"");
                         userId = recipeOne.getUserId();
-//                    Log.i("유저ID테스트", userId+"");
+//                        Log.i("유저ID테스트", userId+"");
                         if (userId == getAdapterUserId){
                             btnEdit.setVisibility(View.VISIBLE);
+                            Log.i("유저ID테스트", "수정버튼이 보입니다.");
                         }
 
                         if (recipeOne.getIsLike() == 1) {

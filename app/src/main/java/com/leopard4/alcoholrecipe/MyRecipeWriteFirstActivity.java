@@ -36,12 +36,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.api.CreatingApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
 
 import com.leopard4.alcoholrecipe.model.CreateRecipeRes.RecipeRes;
 import com.leopard4.alcoholrecipe.model.CreateRecipeRes.Recipe_id;
+import com.leopard4.alcoholrecipe.model.recipeOne.RecipeOne;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -88,8 +90,9 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     int percent = 0;
     ImageButton imgBack;
     TextView textView96; // 주인장의 연구실로 이동
-    private String thisRecipeId;
-
+    private String recipeId;
+    private RecipeOne recipeOne = new RecipeOne();
+    MultipartBody.Part img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +112,41 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         btnImg = findViewById(R.id.btnImg);
         btnNext = findViewById(R.id.btnNext);
-        // 이화면에서 수정을 재활용하고싶다면
-        // thisRecipeId변수에 recipeId를 할당한다.
-        // 그러면 next버튼이 수정하기로 바뀌고, 수정하기를 누르면
-        // 수정하는 api가 호출된다.
-        if (thisRecipeId != null){
-            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+        // 넘어온 Serializable recipeOne 객체를 받는다.
+        Intent intent = getIntent();
+        recipeOne = (RecipeOne) intent.getSerializableExtra("recipeOne");
+        // int로 받은 recipeId를 String으로 변환
+        recipeId = String.valueOf(intent.getIntExtra("recipeId", 0));
+        // 넘어온 recipeOne객체가 null이 아니라면
+        // 이 화면은 수정하기 화면이다.
+        if (recipeOne != null){
             btnNext.setText("수정하기");
+            // 넘어온 recipeOne객체의 데이터를 화면에 뿌려준다.
+            editTitle.setText(recipeOne.getTitle());
+            if (recipeOne.getEngTitle() != null){
+                editEngTitle.setText(recipeOne.getEngTitle());
+            }
+            // 라디오 버튼을 체크한다.
+            if (recipeOne.getPercent() == 1){
+                radioGroup.check(R.id.radioOne);
+            } else if (recipeOne.getPercent() == 2){
+                radioGroup.check(R.id.radioTwo);
+            } else if (recipeOne.getPercent() == 3){
+                radioGroup.check(R.id.radioThree);
+            } else if (recipeOne.getPercent() == 4){
+                radioGroup.check(R.id.radioFour);
+            }
+            // 소개란이 null이 아니라면
+            if (recipeOne.getIntro() != null){
+                editIntro.setText(recipeOne.getIntro());
+            }
+
+            editContent.setText(recipeOne.getContent());
+            // 이미지를 뿌려준다.
+            Glide.with(MyRecipeWriteFirstActivity.this)
+                    .load(recipeOne.getImgUrl().replace("http://", "https://"))
+                    .into(imageView);
+
         }
 
         // 레시피 버튼을 눌렀을때 주인장의 연구실로 이동
@@ -153,7 +184,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (thisRecipeId == null) {
+                if (recipeOne == null) {
                     // 한글 이름
                     String title = editTitle.getText().toString().trim();
                     if (title.isEmpty()){
@@ -253,7 +284,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                                 Recipe_id recipe_id = res.getRecipe_id()[0];
                                 Recipe_id[] res2 = response.body().getRecipe_id();
                                 Recipe_id recipeId2 = res2[0];
-                                String recipeId = recipe_id.getId();
+                                recipeId = recipe_id.getId();
                                 String res3 = response.body().getRecipe_id()[0].getId();
 
                                 Log.i("리스폰 res = response.body()", res + "");
@@ -265,10 +296,10 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                                 Log.i("리스폰 recipeId = recipe_id.getId();", recipeId + "");
                                 Log.i("리스폰 res3 = response.body().getRecipe_id()[0].getId();", res3 + "");
 
-                                thisRecipeId = recipeId;
                                 // 결론적으로 recipeId를 가져올 수 있었고 이를 다음 액티비티로 넘겨준다.
                                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
-                                intent.putExtra("recipeId", thisRecipeId);
+                                intent.putExtra("recipeOne", recipeOne);
+                                intent.putExtra("recipeId", recipeId);
                                 startActivity(intent);
                                 finish();
 
@@ -302,7 +333,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                         }
                     });
                     // 수정 하기
-                }else if (thisRecipeId != null){
+                }else if (recipeOne != null){
                     String title = editTitle.getText().toString().trim();
                     if (title.isEmpty()){
                         Toast.makeText(MyRecipeWriteFirstActivity.this, "한글 이름은 필수입니다.", Toast.LENGTH_SHORT).show();
@@ -347,10 +378,6 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                     // 사진 첨부
                     // 사진이 첨부되었는지 - 안돼있으면 토스트메세지
-                    if(photoFile == null) {
-                        Toast.makeText(MyRecipeWriteFirstActivity.this, "사진은 필수입니다.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
 
                     showProgress("포스팅 업로드 중...");
 
@@ -360,9 +387,13 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
                     // title, engTitle, intro, percent, content, img
                     // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-                    RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
-                    MultipartBody.Part img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
-
+                    if (photoFile != null) { // 사진이 첨부되었을경우
+                        RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/png")); // 파일타입을 png로 지정
+                        img = MultipartBody.Part.createFormData("img", photoFile.getName(), fileBody);
+                    } else { // 사진이 첨부되지 않았을경우 빈값을 보내준다.
+                        RequestBody fileBody = RequestBody.create("", MediaType.parse("image/png")); // 파일타입을 png로 지정
+                        img  = MultipartBody.Part.createFormData("img", "", fileBody);
+                    }
 
 
                     // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터를 만든다.
@@ -388,7 +419,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                             introBody,
                             percentBody,
                             contentBody,
-                            img,thisRecipeId);
+                            img,recipeId);
 
                     call.enqueue(new Callback<RecipeRes>() {
                         @Override
@@ -399,6 +430,8 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
                                 Log.i("리스폰2", res + "");
 
                                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, MyRecipeWriteSecondActivity.class);
+                                intent.putExtra("recipeId", recipeId);
+                                intent.putExtra("recipeOne", recipeOne);
                                 startActivity(intent);
                                 finish();
 
@@ -726,11 +759,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // 이화면에서 수정을 재활용하고싶다면
-        // thisRecipeId변수에 recipeId를 할당한다.
-        // 그러면 수정하는 화면이 된다.
-        if (thisRecipeId != null){
-            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+        if (recipeOne != null){
             btnNext.setText("수정하기");
         }
 

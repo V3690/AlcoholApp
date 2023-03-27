@@ -124,7 +124,7 @@ public class GameFaceActivity extends AppCompatActivity {
                             Log.i(TAG,"이미지url은"+imgurl);
 
 
-                            Glide.with(GameFaceActivity.this).load(imgurl).override(500,300).into(imgAlchol);
+                            Glide.with(GameFaceActivity.this).load(imgurl.replace("http://", "https://")).override(500,300).into(imgAlchol);
 
 
 

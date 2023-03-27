@@ -173,7 +173,7 @@ public class DogamInfoActivity extends AppCompatActivity {
 
                         // glide로 이미지 뿌려주기
                         Glide.with(DogamInfoActivity.this)
-                                .load(dogamInfo.getImgUrl())
+                                .load(dogamInfo.getImgUrl().replace("http://", "https://"))
                                 .into(imgAlcohol);
 
                         if (dogamInfo.getIsLike() == 1) {
@@ -193,7 +193,7 @@ public class DogamInfoActivity extends AppCompatActivity {
 
                         // glide로 이미지 뿌려주기
                         Glide.with(DogamInfoActivity.this)
-                                .load(dogamInfo.getImgUrl())
+                                .load(dogamInfo.getImgUrl().replace("http://", "https://"))
                                 .into(imgAlcohol);
 
 

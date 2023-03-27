@@ -35,6 +35,7 @@ import com.leopard4.alcoholrecipe.model.alcohol.AlcoholList;
 import com.leopard4.alcoholrecipe.model.ingredient.Ingredient;
 import com.leopard4.alcoholrecipe.model.ingredient.IngredientList;
 import com.leopard4.alcoholrecipe.model.recipeIngreAlcol.RecipeIngreAlcol;
+import com.leopard4.alcoholrecipe.model.recipeOne.RecipeOne;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,7 +109,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     ArrayList<Integer> selectedIngreid = new ArrayList<>();
 
     // 완료 버튼을 수정버튼으로 바꾸기 위한 변수
-    private String thisRecipeId;
+    private RecipeOne recipeOne = new RecipeOne();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,17 +126,19 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         alcoholRecyclerView.setHasFixedSize(true);
         alcoholRecyclerView.setLayoutManager(new LinearLayoutManager(MyRecipeWriteSecondActivity.this));
 
-        // 완료 버튼을 수정하기로 변경
+
         btnSave = findViewById(R.id.btnSave);
-        if(thisRecipeId != null) {
-            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
-            btnSave.setText("수정하기");
-        }
+
         // recipeId 받아오기
         Intent intent = getIntent();
         recipeId = intent.getStringExtra("recipeId");
-        // recipeId 다시받아오기
+        // recipeOne 받아오기
+        recipeOne = (RecipeOne) intent.getSerializableExtra("recipeOne");
         Log.d("recipeId", recipeId);
+        // 완료 버튼을 수정하기로 변경
+        if(recipeOne != null) {
+            btnSave.setText("수정하기");
+        }
 
 
 
@@ -226,9 +229,9 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (thisRecipeId == null) { // 저장하기
+                if (recipeOne == null) { // 저장하기
                     PostRecipeIngreAlcolNetworkData();
-                }else if (thisRecipeId != null) { // 수정하기
+                }else if (recipeOne != null) { // 수정하기
                     EditRecipeIngreAlcolNetworkData();
                 }
 
@@ -448,8 +451,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(thisRecipeId != null) {
-            Log.i("이액티비티로 돌아왔을때 레시피id", thisRecipeId);
+        if(recipeOne != null) {
             btnSave.setText("수정하기");
         }
         getAlcoholNetworkData();
@@ -675,7 +677,6 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
                 dismissProgress();
                 if (response.isSuccessful()) {
                     Log.i("성공", "성공");
-                    thisRecipeId = recipeId;
                     Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeInfoActivity.class);
                     intent.putExtra("recipeId", Integer.parseInt(recipeId));
                     startActivity(intent);

@@ -43,7 +43,7 @@ public class DogamAdapter extends RecyclerView.Adapter<DogamAdapter.ViewHolder>{
 
         Dogam dogam = dogamList.get(position);
 
-        Glide.with(context).load(dogam.getImgUrl())
+        Glide.with(context).load(dogam.getImgUrl().replace("http://", "https://"))
                 .placeholder(R.drawable.outline_image_24)
                 .into(holder.imgAlcohol);
 
