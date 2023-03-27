@@ -98,8 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             UserRes res = response.body();
 
-                            SharedPreferences sp =
-                                    getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                            SharedPreferences sp = getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putString(Config.NICKNAME, res.getNickname() );
                             editor.putString(Config.ACCESS_TOKEN, res.getAccess_token() );
@@ -166,14 +165,17 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
 
 
+
+
+                SharedPreferences prefs = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(Config.NICKNAME, kakanickname);
+                editor.putString(Config.ACCESS_TOKEN, oAuthToken.getAccessToken());
+                editor.apply();
+
                 kakotoken = oAuthToken.getAccessToken();
                 getUserInfo();
 
-//                SharedPreferences prefs = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-//                SharedPreferences.Editor editor = prefs.edit();
-//                editor.putString(Config.NICKNAME, kakanickname);
-//                editor.putString(Config.ACCESS_TOKEN, oAuthToken.getAccessToken());
-//                editor.apply();
 //
 //
 //                // MainActivity로 화면 전환
@@ -222,27 +224,24 @@ public class LoginActivity extends AppCompatActivity {
     //카카오 로그인 처음인지 확인
     private void kakaoregistercheck() {
 
-        password = null;
         accountType=1;
         Retrofit retrofit = NetworkClient.getRetrofitClient(LoginActivity.this);
         UserApi api = retrofit.create(UserApi.class);
 
 
         Log.i(TAG,"이메일잘왔나?"+kakaoEmail);
-        User user = new User(kakaoEmail, password,accountType);
+        User user = new User(kakaoEmail, null,accountType);
         Call<UserRes> call = api.login(user);
         call.enqueue(new Callback<UserRes>() {
             @Override
             public void onResponse(Call<UserRes> call, Response<UserRes> response) {
                 if(response.isSuccessful()){
-
+//
                     UserRes res = response.body();
-
-                    SharedPreferences sp =
-                            getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                    SharedPreferences sp = getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString(Config.NICKNAME, res.getNickname() );
-                    editor.putString(Config.ACCESS_TOKEN, res.getAccess_token() );
+                    editor.putString(Config.ACCESS_TOKEN,res.getAccess_token()  );
                     editor.apply();
 
                     //만약 이전에 로그인한적 있으면 바로 메인으로 이동
