@@ -101,7 +101,13 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         spinnerRecipe2.setAdapter(adapterOrder);
 
 
-        // 들어가자마자 레시피보여주기
+        //0번째 바로 주인장레시피
+        //1번째 주인장레시피
+        //2번째 유저레시피
+        //3번째 모두레시피
+        // n~번 업는경우: 스피너 no조작 n-1번: 스피너 도수조작 n-2 : 스피너 목록 조작
+
+        // 들어가자마자 레시피보여주는 조건
         if(isToggleButton1Checked){
             recyclerView.setVisibility(View.VISIBLE);
             toggleButton.setTextColor(Color.parseColor("#FFC107"));
@@ -119,33 +125,41 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                // 주인장이 눌린 상황에서
                 isToggleButton1Checked = isChecked;
+                //주인장 하고 유저가 같은상태가 아니며 유저는 꺼진경우(주인장만 켜진경우)
                 if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false){
+
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
+
+                    //주인장 레시피 api
                     getNetworkData();
                     Log.i(TAG,"1번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
-
+                    //주인장만 눌렸을때 스피너조작
                     toggle1spinner();
 
-
+                //주인장하고 유저가 같은 상태이며 유저는 켜져있는경우(둘다켜진경우)
                 }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true){
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
+                    //모든 레시피 불러오는 api
                     getNetworkData3();
 
                     Log.i(TAG,"3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
 
+                    //모든 레시피 상태에서 스피너조작
                     toggle3spinner();
 
                 }
-                else{
+                //유저만 켜진상황
+                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true){
                     toggleButton.setTextColor(Color.WHITE);
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
@@ -156,8 +170,12 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                         recyclerView.setVisibility(View.VISIBLE);
                         percent=0;
                         order="cnt";
+                        //유저 목록만 가저오는 api
                         getNetworkData2();
-                        Log.i(TAG,"1-4번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
+                        Log.i(TAG,"1-3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
+                        // 유저 목록 켜진 상황에서 가저오는 스피너
+                        toggle2spinner();
+
                     }
                 }
 
@@ -168,35 +186,39 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         toggleButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                isToggleButton2Checked = isChecked;
 
+                //유저 버튼이 켜짐
+                isToggleButton2Checked = isChecked;
+                //주인장과 유저버튼이 같은상태가 아니며 유저버튼이 켜진경우(유저만)
                 if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true ){
                     toggleButton.setTextColor(Color.WHITE);
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
+                    //유저레시피 가저오는api
                     getNetworkData2();
                     Log.i(TAG,"2번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
 
-
+                    //유저상황에서 스피너
                     toggle2spinner();
 
-
+                    //주인장과 유저버튼이 같은상황이며 유저는 켜진경우(둘다켜짐)
                 }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true ){
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
                     percent=0;
                     order="cnt";
+                    //둘다켜진 api
                     getNetworkData3();
 
                     Log.i(TAG,"3번째 조건입니다"+isToggleButton2Checked+isToggleButton1Checked);
-
+                    //둘다켜졌을때 스피너
                     toggle3spinner();
 
-                }
-                else{
+                }//주인장과 유저가 같지않으며 유저는 켜저있지않음(주인장만)
+                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false){
                     toggleButton.setTextColor(Color.WHITE);
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
@@ -207,8 +229,12 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                         recyclerView.setVisibility(View.VISIBLE);
                         percent=0;
                         order="cnt";
+                        //
+                        //주인장api
                         getNetworkData();
                         Log.i(TAG,"2-3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
+                        //주인장 스피너
+                        toggle1spinner();
                     }
                 }
 
@@ -388,7 +414,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    //키워드 검색
+    //키워드 검색api
     private void searchKeyword() {
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
@@ -437,6 +463,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+
+    // 레시피 목록 검색api
     private void addSearchKeyword() {Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
 
         RecipeApi api = retrofit.create(RecipeApi.class);
@@ -480,6 +508,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 
+    //주인장 레시피 가저오는 api
     void getNetworkData(){
 
                 Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
@@ -523,6 +552,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         });
     }
 
+    //유저 레시피 가저오는 api
     void getNetworkData2(){
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
@@ -566,6 +596,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         });
     }
 
+    //주인장 + 유저 모두가저오는 api
     void getNetworkData3(){
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
