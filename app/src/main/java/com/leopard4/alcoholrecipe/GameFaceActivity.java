@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -67,6 +68,8 @@ public class GameFaceActivity extends AppCompatActivity {
     TextView txtResult , txtAlchol;
 
 
+    private long mLastClickTime =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +99,12 @@ public class GameFaceActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                //중복클릭 방지
+                if(SystemClock.elapsedRealtime() - mLastClickTime < 100000 ){
+
+                            return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
 
 
                 if(photoFile == null) {
