@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/a_a_basic"
+    android:background="@drawable/basic"
     tools:context=".RegisterInfoActivity">
 
     <ImageView
@@ -65,14 +65,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4DFFFFFF"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/checkBox1_1"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="맥주" />
 
@@ -80,7 +80,7 @@
                     android:id="@+id/checkBox1_2"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="소주" />
 
@@ -88,7 +88,7 @@
                     android:id="@+id/checkBox1_3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="막걸리" />
             </LinearLayout>
@@ -96,14 +96,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4DFFFFFF"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/checkBox1_4"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="와인" />
 
@@ -111,7 +111,7 @@
                     android:id="@+id/checkBox1_5"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="양주" />
 
@@ -119,7 +119,7 @@
                     android:id="@+id/checkBox1_6"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="기타" />
             </LinearLayout>
@@ -145,10 +145,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:background="#4DFFFFFF"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="00"
-                    android:textColor="#DE5179"
+                    android:textColor="#D6A89B"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -180,14 +179,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4DFFFFFF"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/checkBox3_1"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="가족" />
 
@@ -195,7 +194,7 @@
                     android:id="@+id/checkBox3_2"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="친구" />
 
@@ -203,7 +202,7 @@
                     android:id="@+id/checkBox3_3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="혼자" />
 
@@ -212,13 +211,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4DFFFFFF">
+                android:background="#FFFFFF">
 
                 <CheckBox
                     android:id="@+id/checkBox3_4"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="직장" />
 
@@ -226,7 +225,7 @@
                     android:id="@+id/checkBox3_5"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="지인" />
 
@@ -234,7 +233,7 @@
                     android:id="@+id/checkBox3_6"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#DE5179"
+                    android:buttonTint="#6D5C71"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:text="기타" />
 
@@ -282,8 +281,9 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:backgroundTint="#7F7F7F"
-            android:fontFamily="@font/puradak_gentle_gothic"
+            android:fontFamily="sans-serif-black"
             android:text="건너뛰기"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <Button
@@ -294,9 +294,10 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:backgroundTint="#D4E73C61"
-            android:fontFamily="@font/puradak_gentle_gothic"
+            android:backgroundTint="#0B2347"
+            android:fontFamily="sans-serif-black"
             android:text="완료"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/basic"
-    tools:context=".SecondFragment">
+    tools:context=".MyDogamActivity"
+    android:background="@drawable/basic">
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -34,7 +34,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/puradak_gentle_gothic"
-            android:text="즐겨찾기"
+            android:text="손님의 서재"
             android:textColor="#FFD324"
             android:textSize="32sp" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="5dp"
-            android:text="내가 관심(💗)을 표시한 레시피"
+            android:text="내가 관심(💗)을 표시한 도감"
             android:textColor="#F8F6F6"
             android:textStyle="bold" />
 
@@ -93,29 +93,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:outlineProvider="none"
-                app:cardBackgroundColor="#B3FFFFFF"
-                app:cardCornerRadius="5dp">
-
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#0E0E0E"
-                    android:backgroundTintMode="src_in"
-                    android:spinnerMode="dropdown" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_margin="5dp"
                 android:layout_weight="0.9"
                 android:outlineProvider="none"
                 app:cardBackgroundColor="#B3FFFFFF"
@@ -159,6 +136,29 @@
 
                 <Spinner
                     android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#0E0E0E"
+                    android:backgroundTintMode="src_in"
+                    android:spinnerMode="dropdown" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="#B3FFFFFF"
+                app:cardCornerRadius="5dp">
+
+                <Spinner
+                    android:id="@+id/spinner3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
