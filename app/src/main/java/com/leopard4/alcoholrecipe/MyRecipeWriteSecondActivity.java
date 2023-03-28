@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -81,8 +82,8 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
 
     // 저장 버튼
     Button btnSave;
-    ImageButton imgBack;
-    TextView textView;
+    ImageView imgBack;
+    ImageView imgbtnReturnRecipe;
 
     // 페이징 처리를 위한 변수
     int count = 0;
@@ -151,12 +152,13 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
             }
         });
         // 주인장의 연구실로 이동
-        textView = findViewById(R.id.textView);
-        textView.setOnClickListener(new View.OnClickListener() {
+        imgbtnReturnRecipe = findViewById(R.id.btnReturnRecipe2);
+        imgbtnReturnRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyRecipeWriteSecondActivity.this, RecipeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
