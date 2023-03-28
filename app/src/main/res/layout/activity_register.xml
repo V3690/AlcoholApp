@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/a_a_basic">
+    android:background="@drawable/basic">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -201,18 +201,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="120dp"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="120dp"
             android:layout_marginRight="120dp"
-            android:backgroundTint="#FFFFFF"
-            android:fontFamily="@font/puradak_gentle_gothic"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:text="완료"
-            android:textColor="#9666F3"
+            android:backgroundTint="#0B2347"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/white"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="261dp"
-            tools:layout_editor_absoluteY="493dp" />
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp" />
 
     </LinearLayout>
 

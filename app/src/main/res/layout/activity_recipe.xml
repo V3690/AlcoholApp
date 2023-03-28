@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/a_a_basic"
+    android:background="@drawable/basic"
     android:orientation="vertical"
     tools:context=".RecipeActivity">
 
@@ -194,7 +194,7 @@
                 android:scaleType="fitXY"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/baseline_search_24"
-                app:tint="#9372DD" />
+                app:tint="#8C404040" />
         </androidx.cardview.widget.CardView>
 
         <!--이미지 버튼 배경 투명하게 만들기 : color/transparent  -->
