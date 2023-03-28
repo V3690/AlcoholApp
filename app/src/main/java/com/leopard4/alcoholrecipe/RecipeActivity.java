@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import retrofit2.Retrofit;
 public class RecipeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ImageButton imgSearch;
+    ImageView imgBack;
     EditText editSearch;
     TextView txtWarning;
     ToggleButton toggleButton , toggleButton2;
@@ -76,6 +78,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+
+        imgBack=findViewById(R.id.imgBack);
         imgSearch=findViewById(R.id.imgSearch);
         editSearch=findViewById(R.id.editSearch);
         txtWarning=findViewById(R.id.txtWarning);
@@ -91,14 +95,26 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
 
 
-        adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , android.R.layout.simple_spinner_dropdown_item);;
-        adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , android.R.layout.simple_spinner_dropdown_item);;
+        adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , R.layout.layout_spinner);;
+        adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , R.layout.layout_spinner);;
 
         spinnerRecipe.setOnItemSelectedListener(RecipeActivity.this);
         spinnerRecipe2.setOnItemSelectedListener(RecipeActivity.this);
 
         spinnerRecipe.setAdapter(adapterPercent);
         spinnerRecipe2.setAdapter(adapterOrder);
+
+
+        // 뒤로가기 버튼
+        imgBack.setOnClickListener(v -> {
+            finish();
+        });
+
+
+        // 시간 남으면 하자....
+        // todo : 토글 버튼 색깔 작업
+        //  버튼 OFF : #806A6A6A
+        //  버튼 ON : #8C404040
 
 
         //0번째 바로 주인장레시피
@@ -219,13 +235,12 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
                 }//주인장과 유저가 같지않으며 유저는 켜저있지않음(주인장만)
                 else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false){
-                    toggleButton.setTextColor(Color.WHITE);
+                    toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
                     txtWarning.setVisibility(View.VISIBLE);
                     if(isToggleButton1Checked){
                         toggleButton.setTextColor(Color.parseColor("#FFC107"));
-                        toggleButton2.setTextColor(Color.WHITE);
                         recyclerView.setVisibility(View.VISIBLE);
                         percent=0;
                         order="cnt";
@@ -641,20 +656,6 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    public void switchColor() {
-        if (toggleButton.isChecked()) {
-            toggleButton.setTextColor(Color.YELLOW);
-        }else {
-            toggleButton.setTextColor(VISIBLE);
-        }
-        if (toggleButton2.isChecked()) {
-            toggleButton2.setTextColor(Color.YELLOW);
-        }else {
-            toggleButton2.setTextColor(VISIBLE);
-        }
-    }
-
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -664,4 +665,5 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 }

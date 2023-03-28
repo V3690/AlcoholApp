@@ -161,9 +161,9 @@ public class SecondFragment extends Fragment {
         });
 
         //문자열 배열과 기본 스피너 레이아웃을 사용하여 ArrayAdapter 만들기
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item1, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item2, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item3, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item1, R.layout.layout_spinner);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item2, R.layout.layout_spinner);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item3, R.layout.layout_spinner);
         //선택 목록이 나타날 때 사용할 레이아웃을 지정
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //스피너에 어댑터 적용

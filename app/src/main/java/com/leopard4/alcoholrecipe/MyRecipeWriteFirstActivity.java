@@ -89,7 +89,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
 
     int percent = 0;
     ImageButton imgBack;
-    TextView textView96; // 주인장의 연구실로 이동
+    ImageView btnReturnRecipe; // 주인장의 연구실로 이동
     private String recipeId;
     private RecipeOne recipeOne = new RecipeOne();
     MultipartBody.Part img;
@@ -150,8 +150,8 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
         }
 
         // 레시피 버튼을 눌렀을때 주인장의 연구실로 이동
-        textView96 = findViewById(R.id.textView96);
-        textView96.setOnClickListener(new View.OnClickListener() {
+        btnReturnRecipe = findViewById(R.id.btnReturnRecipe);
+        btnReturnRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, RecipeActivity.class);

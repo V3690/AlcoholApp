@@ -41,18 +41,14 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
-                android:fontFamily="@font/puradak_gentle_gothic"
+                android:fontFamily="sans-serif-black"
                 android:gravity="center_horizontal"
-                android:outlineProvider="none"
+                android:outlineProvider="paddedBounds"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="🍺 레시피  "
+                android:text="레시피"
                 android:textColor="#D7554C4C"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:iconPadding="0dp"
-                app:strokeColor="#FED224"
-                app:strokeWidth="2dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnGame"
@@ -62,18 +58,14 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
-                android:fontFamily="@font/puradak_gentle_gothic"
+                android:fontFamily="sans-serif-black"
                 android:gravity="center_horizontal"
-                android:outlineProvider="none"
+                android:outlineProvider="paddedBounds"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="🎲 오락실  "
+                android:text="오락실"
                 android:textColor="#D7554C4C"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:iconPadding="0dp"
-                app:strokeColor="#FED224"
-                app:strokeWidth="2dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnDogam"
@@ -82,18 +74,14 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
-                android:fontFamily="@font/puradak_gentle_gothic"
+                android:fontFamily="sans-serif-black"
                 android:gravity="center_horizontal"
-                android:outlineProvider="none"
+                android:outlineProvider="paddedBounds"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="📚 술도감  "
+                android:text="술도감"
                 android:textColor="#D7554C4C"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:iconPadding="0dp"
-                app:strokeColor="#FED224"
-                app:strokeWidth="2dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -113,7 +101,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:orientation="vertical">
 
                     <LinearLayout

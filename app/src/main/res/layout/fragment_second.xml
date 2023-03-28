@@ -53,10 +53,10 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:outlineProvider="none"
                 app:cardBackgroundColor="#B3FFFFFF"
                 app:cardCornerRadius="5dp">
@@ -64,7 +64,7 @@
                 <Spinner
                     android:id="@+id/spinner1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginRight="2dp"
@@ -89,8 +89,8 @@
             <!-- android:hapticFeedbackEnabled="false"이기 때문에 터치시 진동이 발생하지 않음 -->
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:outlineProvider="none"
@@ -100,7 +100,7 @@
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginRight="2dp"
@@ -112,8 +112,8 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:outlineProvider="none"
@@ -123,7 +123,7 @@
                 <Spinner
                     android:id="@+id/spinner3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginRight="2dp"

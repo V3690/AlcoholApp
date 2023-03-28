@@ -4,16 +4,16 @@
     <item
         android:id="@+id/firstFragment"
         android:enabled="true"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/d_bar_home"
         android:title="홈" />
     <item
         android:id="@+id/secondFragment"
         android:enabled="true"
-        android:icon="@drawable/baseline_favorite_24"
+        android:icon="@drawable/d_bar_like"
         android:title="즐겨찾기" />
     <item
         android:id="@+id/thirdFragment"
         android:enabled="true"
-        android:icon="@drawable/baseline_person_3_24"
+        android:icon="@drawable/d_bar_user"
         android:title="내정보" />
 </menu>

@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
@@ -63,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:fontFamily="@font/puradak_gentle_gothic"
-                android:text="지금 내 얼굴은"
+                android:text="술과 얼굴"
                 android:textColor="#FFD324"
                 android:textSize="32sp" />
 
@@ -73,7 +72,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:text="얼굴 사진을 촬영해서 올리면 나에게 어울리는 술 매칭!"
+                android:text="얼굴 사진을 촬영해서 올리면"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="지금 내 얼굴에 어울리는 술을 알 수 있다 !"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -114,8 +124,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:tintMode="src_in"
-                        app:tint="#FFFFFF"
                         tools:srcCompat="@drawable/icon_2_face" />
                 </androidx.cardview.widget.CardView>
 
@@ -163,8 +171,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:tintMode="src_in"
-                        app:tint="#FFFFFF"
                         tools:srcCompat="@drawable/icon_2_alcohol" />
                 </androidx.cardview.widget.CardView>
 

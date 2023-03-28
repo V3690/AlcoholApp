@@ -22,31 +22,33 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/topLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/imgBack"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:backgroundTint="#00FFFFFF"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/baseline_keyboard_backspace_24"
-                    app:tint="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="240dp"
-                    android:background="@drawable/z_z_back"
-                    android:fontFamily="@font/puradak_gentle_gothic"
-                    android:gravity="center"
-                    android:text="레시피"
-                    android:textColor="#D3BA87"
-                    android:textColorHint="#D3AA91"
-                    android:textSize="18sp" />
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_0_back"
+                    android:tintMode="src_in"
+                    android:visibility="visible"
+                    app:tint="#4DFFFFFF" />
+
+                <ImageView
+                    android:id="@+id/btnReturnRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="fitEnd"
+                    android:tintMode="src_in"
+                    app:srcCompat="@drawable/icon_menu1"
+                    app:tint="#FFD324" />
             </LinearLayout>
 
             <LinearLayout
