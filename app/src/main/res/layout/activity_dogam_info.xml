@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DogamInfoActivity"
-    android:background="@drawable/a_a_basic">
+    android:background="@drawable/basic">
 
     <LinearLayout
         android:id="@+id/topLayout"
