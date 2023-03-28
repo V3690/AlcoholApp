@@ -280,7 +280,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:backgroundTint="#7F7F7F"
+            android:backgroundTint="#404040"
             android:fontFamily="sans-serif-black"
             android:text="건너뛰기"
             android:textColor="@color/white"
@@ -298,7 +298,9 @@
             android:fontFamily="sans-serif-black"
             android:text="완료"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp" />
     </LinearLayout>
 
 </RelativeLayout>

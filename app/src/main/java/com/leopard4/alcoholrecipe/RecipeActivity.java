@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.leopard4.alcoholrecipe.adapter.RecipeLabAdapter;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeApi;
@@ -41,6 +43,8 @@ import retrofit2.Retrofit;
 
 public class RecipeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+
+    FloatingActionButton fab;
     ImageButton imgSearch;
     ImageView imgBack;
     EditText editSearch;
@@ -76,6 +80,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        fab = findViewById(R.id.fab);
+
         imgBack=findViewById(R.id.imgBack);
         imgSearch=findViewById(R.id.imgSearch);
         editSearch=findViewById(R.id.editSearch);
@@ -105,6 +111,15 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         // 뒤로가기 버튼
         imgBack.setOnClickListener(v -> {
             finish();
+        });
+
+        // 레시피 게시글 작성 페이지로 이동
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecipeActivity.this, MyRecipeWriteFirstActivity.class);
+                startActivity(intent);
+            }
         });
 
 

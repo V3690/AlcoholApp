@@ -11,5 +11,6 @@
     <color name="toggleColor">#FFC107</color>
     <color name="pointColor">#082245</color>
     <color name="barColor">#80FFFFFF</color>
+    <color name="pointColor2">#FFC78360</color>
 
 </resources>

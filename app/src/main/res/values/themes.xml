@@ -3,9 +3,9 @@
     <style name="Theme.AlcoholRecipe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/pointColor</item>
-        <item name="colorPrimaryVariant">@color/pointColor</item>
-        <item name="colorOnPrimary">@color/barColor</item>
+        <item name="colorPrimary">@color/pointColor2</item>
+        <item name="colorPrimaryVariant">@color/pointColor2</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
