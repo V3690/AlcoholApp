@@ -88,7 +88,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
     private ProgressDialog dialog;
 
     int percent = 0;
-    ImageButton imgBack;
+    ImageView imgBack;
     ImageView btnReturnRecipe; // 주인장의 연구실로 이동
     private String recipeId;
     private RecipeOne recipeOne = new RecipeOne();
@@ -156,6 +156,7 @@ public class MyRecipeWriteFirstActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MyRecipeWriteFirstActivity.this, RecipeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

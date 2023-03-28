@@ -42,7 +42,7 @@
                     app:tint="#4DFFFFFF" />
 
                 <ImageView
-                    android:id="@+id/btnReturnRecipe"
+                    android:id="@+id/btnReturnRecipe2"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:scaleType="fitEnd"
