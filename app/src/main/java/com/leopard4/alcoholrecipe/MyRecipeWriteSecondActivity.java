@@ -152,7 +152,7 @@ public class MyRecipeWriteSecondActivity extends AppCompatActivity {
             }
         });
         // 주인장의 연구실로 이동
-        imgbtnReturnRecipe = findViewById(R.id.btnReturnRecipe2);
+        imgbtnReturnRecipe = findViewById(R.id.btnReturnRecipe);
         imgbtnReturnRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

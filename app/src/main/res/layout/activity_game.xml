@@ -91,8 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="30dp"
-                    app:cardMaxElevation="20dp">
+                    app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnToast"
@@ -139,8 +138,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="30dp"
-                    app:cardMaxElevation="20dp">
+                    app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnDice"
@@ -188,8 +186,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="30dp"
-                    app:cardMaxElevation="20dp">
+                    app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnFace"

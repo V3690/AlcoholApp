@@ -81,7 +81,7 @@ public class MyRecipeActivity extends AppCompatActivity implements AdapterView.O
         spinner = findViewById(R.id.spinner);
 
         // 스피너 처리 관련 코드
-        adapterSpinner = ArrayAdapter.createFromResource(this, R.array.myRecipe, android.R.layout.simple_spinner_dropdown_item);
+        adapterSpinner = ArrayAdapter.createFromResource(this, R.array.myRecipe, R.layout.layout_spinner);
         spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapterSpinner);
 

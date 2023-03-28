@@ -147,7 +147,7 @@
                                     android:paddingLeft="5dp"
                                     android:paddingTop="2dp"
                                     android:text="999"
-                                    android:textColor="#DE5179"
+                                    android:textColor="#062045"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -175,7 +175,7 @@
                                     android:layout_marginLeft="5dp"
                                     android:fontFamily="@font/puradak_gentle_gothic"
                                     android:text="약중강"
-                                    android:textColor="#DE5179"
+                                    android:textColor="#062045"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -205,7 +205,7 @@
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/puradak_gentle_gothic"
                                 android:text="레시피주인은누구"
-                                android:textColor="#717171"
+                                android:textColor="#504F6F"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -232,6 +232,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:text="TextView"
+                        android:textColor="#062045"
                         android:textStyle="normal" />
 
                 </LinearLayout>
@@ -248,6 +249,7 @@
                 android:text="재료"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toTopOf="@+id/txtIngredient"
                 app:layout_constraintStart_toStartOf="@+id/txtIngredient"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -271,6 +273,7 @@
                     android:padding="10dp"
                     android:shadowRadius="30"
                     android:text="TextView"
+                    android:textColor="#062045"
                     android:textStyle="normal"
                     app:layout_constraintBottom_toTopOf="@+id/textView44"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -289,6 +292,7 @@
                 android:text="레시피"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toTopOf="@+id/txtContent"
                 app:layout_constraintStart_toStartOf="@+id/txtContent"
                 app:layout_constraintTop_toBottomOf="@+id/txtIngredient" />
@@ -310,6 +314,7 @@
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:padding="10dp"
                     android:text="TextView"
+                    android:textColor="#062045"
                     android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

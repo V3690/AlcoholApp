@@ -1,9 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
-import static android.view.View.VISIBLE;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -85,7 +82,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         txtWarning=findViewById(R.id.txtWarning);
         toggleButton=findViewById(R.id.toggleButton);
         toggleButton2=findViewById(R.id.toggleButton2);
-        spinnerRecipe=findViewById(R.id.spinnerRecipe);
+        spinnerRecipe=findViewById(R.id.spinner);
         spinnerRecipe2=findViewById(R.id.spinnerRecipe2);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

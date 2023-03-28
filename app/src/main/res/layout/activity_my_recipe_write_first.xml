@@ -44,8 +44,7 @@
         android:layout_below="@id/topLayout"
         android:layout_marginLeft="15dp"
         android:fontFamily="sans-serif-medium"
-        android:text="없는 레시피가 있다면 직접 등록하세요.
-        \n중복 레시피의 경우 삭제될 수 있습니다."
+        android:text="새로운 레시피가 있다면 직접 등록하세요.  \n중복 레시피의 경우 삭제될 수 있습니다."
         android:textColor="#FFC107"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -84,20 +83,26 @@
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editTitle"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/boxline_24"
-                    android:backgroundTint="#FFFFFF"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-medium"
-                    android:hint="레시피의 이름을 입력하세요."
-                    android:includeFontPadding="false"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="5dp">
+
+                    <EditText
+                        android:id="@+id/editTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/boxline_24"
+                        android:backgroundTint="#FFFFFF"
+                        android:ems="10"
+                        android:fontFamily="sans-serif-medium"
+                        android:hint="레시피의 이름을 입력하세요."
+                        android:includeFontPadding="false"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
             <LinearLayout
@@ -117,19 +122,25 @@
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editEngTitle"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/boxline_24"
-                    android:backgroundTint="#FFFFFF"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-medium"
-                    android:hint="(선택) 레시피 이름을 입력하세요."
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="5dp">
+
+                    <EditText
+                        android:id="@+id/editEngTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/boxline_24"
+                        android:backgroundTint="#FFFFFF"
+                        android:ems="10"
+                        android:fontFamily="sans-serif-medium"
+                        android:hint="(선택) 레시피 이름을 입력하세요."
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
             <LinearLayout
@@ -153,52 +164,53 @@
                     android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="5dp"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/radioOne"
-                        android:layout_width="50dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
                         android:text="약"
                         android:textColor="#FFFFFF"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/radioTwo"
-                        android:layout_width="50dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
                         android:text="중"
                         android:textColor="#FFFFFF"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/radioThree"
-                        android:layout_width="50dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
                         android:text="강"
                         android:textColor="#FFFFFF"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/radioFour"
-                        android:layout_width="50dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
                         android:gravity="center_vertical"
                         android:text="?"
                         android:textColor="#FFFFFF"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -206,7 +218,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="13dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -220,16 +232,23 @@
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editIntro"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/boxline_24"
-                    android:ems="13"
-                    android:fontFamily="sans-serif-medium"
-                    android:inputType="textPersonName"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="5dp">
+
+                    <EditText
+                        android:id="@+id/editIntro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="13"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="textPersonName"
+                        android:outlineProvider="none"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
             <LinearLayout
@@ -250,17 +269,24 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editContent"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/boxline_24"
-                    android:ems="13"
-                    android:fontFamily="sans-serif-medium"
-                    android:inputType="textPersonName"
-                    android:textColorHint="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="5dp">
+
+                    <EditText
+                        android:id="@+id/editContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="13"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="textPersonName"
+                        android:outlineProvider="none"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
             <LinearLayout
@@ -301,30 +327,34 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/boxline_24"
-                    app:srcCompat="@drawable/outline_image_24" />
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/outline_image_24" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#0B2347"
+                android:fontFamily="sans-serif-black"
+                android:text="다음 단계"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="right"
-        android:layout_marginRight="12dp"
-        android:backgroundTint="#0B2347"
-        android:fontFamily="sans-serif-black"
-        android:text="다음 단계"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
 
 </RelativeLayout>
