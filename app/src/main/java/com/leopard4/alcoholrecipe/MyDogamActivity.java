@@ -1,14 +1,314 @@
 package com.leopard4.alcoholrecipe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class MyDogamActivity extends AppCompatActivity {
+import com.leopard4.alcoholrecipe.adapter.DogamAdapter;
+import com.leopard4.alcoholrecipe.adapter.DogamFavoriteAdapter;
+import com.leopard4.alcoholrecipe.api.DogamApi;
+import com.leopard4.alcoholrecipe.api.NetworkClient;
+import com.leopard4.alcoholrecipe.config.Config;
+import com.leopard4.alcoholrecipe.model.dogam.Dogam;
+import com.leopard4.alcoholrecipe.model.dogam.DogamList;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class MyDogamActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
+    EditText editSearch;
+    ImageView imgSearch;
+    Spinner spinner1,spinner2;
+
+    RecyclerView recyclerView;
+
+    DogamFavoriteAdapter adapter;
+    ArrayList<Dogam> dogamList = new ArrayList<>();
+
+    int percent;
+    String order;
+    // 페이징 처리를 위한 변수
+    int count = 0;
+    int offset = 0;
+    int limit = 30;
+
+    private boolean isloading = false;
+    String keyword;
+
+    int spinner1Id;
+    int spinner2Id;
+    private ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_dogam);
+
+        editSearch = findViewById(R.id.editSearch);
+        imgSearch = findViewById(R.id.imgSearch);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyDogamActivity.this));
+
+        spinner1 = findViewById(R.id.spinner1);
+        spinner2 = findViewById(R.id.spinner2);
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                if (lastPosition + 1 == totalCount && !isloading) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                    isloading = true;
+//
+
+                }
+            }
+        });
+
+
+        ArrayAdapter<CharSequence> adapterPercent = ArrayAdapter.createFromResource(this,R.array.percent , R.layout.layout_spinner);;
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(this,R.array.order , R.layout.layout_spinner);;
+
+        spinner1.setOnItemSelectedListener(MyDogamActivity.this);
+        spinner2.setOnItemSelectedListener(MyDogamActivity.this);
+        spinner1.setAdapter(adapterPercent);
+        spinner2.setAdapter(adapterOrder);
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                percent = spinner1.getSelectedItemPosition();
+                Log.i("SPINNERTEST", spinner1Id + "");
+
+                getNetworkData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                spinner2Id = spinner2.getSelectedItemPosition();
+                Log.i("SPINNERTEST", spinner2Id + "");
+
+                if (spinner2Id == 0){
+                    order = "cnt";
+                } else if (spinner2Id == 1) {
+                    order = "cnt";
+                } else if (spinner2Id == 2) {
+                    order = "createdAt";
+                } else if (spinner2Id == 3) {
+                    order = "name";
+                }
+                getNetworkData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                keyword = editSearch.getText().toString().trim();
+
+                if(keyword.isEmpty()){
+                    Toast.makeText(MyDogamActivity.this, "검색어를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                searchKeyword();
+
+
+
+
+            }
+        });
+
+
+
+
+    }
+
+    private void searchKeyword() {
+
+        showProgress("술도감 불러오는 중...");
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyDogamActivity.this);
+
+        DogamApi api = retrofit.create(DogamApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        offset = 0;
+        count = 0;
+        Call<DogamList> call = api.getFavoriteDogamSearch(accessToken, keyword, offset, limit);
+        call.enqueue(new Callback<DogamList>() {
+            @Override
+            public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                dismissProgress();
+                dogamList.clear();
+                if(response.isSuccessful()){
+                    count=response.body().getCount();
+                    count = response.body().getCount();
+
+                    offset = offset + count;
+
+                    dogamList.addAll(response.body().getItems());
+
+                    adapter = new DogamFavoriteAdapter(MyDogamActivity.this, dogamList);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DogamList> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void addNetworkData() {
+
+        showProgress("술도감 불러오는 중...");
+
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyDogamActivity.this);
+
+        DogamApi api = retrofit.create(DogamApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        Call<DogamList> call = api.getFavoriteDogam(accessToken, percent ,order , offset, limit);
+        call.enqueue(new Callback<DogamList>() {
+            @Override
+            public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                dismissProgress();
+                dogamList.clear();
+
+                if (response.isSuccessful()) {
+
+                    offset = offset + count;
+
+
+                    dogamList.addAll(response.body().getItems());
+
+                    adapter.notifyDataSetChanged();
+                    isloading = false;
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DogamList> call, Throwable t) {
+                dismissProgress();
+            }
+        });
+    }
+
+    private void dismissProgress() {
+        dialog.dismiss();
+    }
+
+    private void showProgress(String message) {
+
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+
+    }
+
+
+    private void getNetworkData() {
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MyDogamActivity.this);
+
+        DogamApi api = retrofit.create(DogamApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+        offset = 0;
+        count = 0;
+        Call<DogamList> call = api.getFavoriteDogam(accessToken, percent ,order , offset, limit);
+        call.enqueue(new Callback<DogamList>() {
+            @Override
+            public void onResponse(Call<DogamList> call, Response<DogamList> response) {
+                    dogamList.clear();
+
+
+                if(response.isSuccessful()){
+                    count = response.body().getCount();
+
+                    offset = offset + count;
+
+                    dogamList.addAll(response.body().getItems());
+
+                    adapter = new DogamFavoriteAdapter(MyDogamActivity.this, dogamList);
+                    recyclerView.setAdapter(adapter);
+                    isloading = false;
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<DogamList> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

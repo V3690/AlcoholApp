@@ -63,6 +63,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
     String keyword;
     int spinner1Id;
     int spinner2Id;
+    Button btnMyLike;
 
 
     @Override
@@ -73,7 +74,7 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
         editSearch = findViewById(R.id.editSearch);
         imgSearch = findViewById(R.id.imgSearch);
         btnRequest = findViewById(R.id.btnRequest);
-
+        btnMyLike=findViewById(R.id.btnMyLike);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(DogamActivity.this));
@@ -181,6 +182,14 @@ public class DogamActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
+
+        btnMyLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DogamActivity.this, MyDogamActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         imgSearch.setOnClickListener(new View.OnClickListener() {
