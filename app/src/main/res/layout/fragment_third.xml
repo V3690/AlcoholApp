@@ -59,7 +59,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="5dp">
+            android:backgroundTint="#2B3D63"
+            android:outlineProvider="none"
+            android:textColor="#F7CC2B"
+            android:textSize="16sp"
+            app:cardCornerRadius="5dp"
+            app:iconSize="20dp"
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,11 +78,11 @@
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:fontFamily="sans-serif-black"
                     android:gravity="center_vertical"
                     android:padding="8dp"
                     android:text="손님 : "
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
                 <EditText
@@ -83,23 +90,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
+                    android:background="@android:color/transparent"
                     android:ems="5"
                     android:fontFamily="sans-serif-black"
                     android:hint="Name"
                     android:inputType="textPersonName"
                     android:paddingLeft="5dp"
-                    android:textColor="#D7554C4C"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#EDE1E1"
+                    android:backgroundTint="#98A0AD"
                     android:fontFamily="sans-serif-black"
                     android:text="변경"
-                    android:textColor="#D7554C4C"
+                    android:textColor="#051D3E"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -109,42 +117,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:paddingLeft="5dp"
             android:text="닉네임은 언제든지 변경할 수 있습니다."
-            android:textColor="#FED224" />
+            android:textColor="#B3FED224" />
 
         <Button
             android:id="@+id/btnMyRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="150dp"
-            android:backgroundTint="#FFFFFF"
+            android:layout_marginRight="200dp"
+            android:backgroundTint="#1A000000"
             android:fontFamily="sans-serif-black"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text=" 나의 레시피"
-            android:textColor="#D7554C4C"
+            android:gravity="left"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="  나의 레시피"
+            android:textColor="#F7CC2B"
             android:textSize="16sp"
             app:icon="@drawable/icon_0_edit"
-            app:iconSize="30dp"
-            app:iconTint="@color/pointColor"/>
+            app:iconSize="20dp"
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/btnMyDogam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="200dp"
+            android:backgroundTint="#1A000000"
+            android:fontFamily="sans-serif-black"
+            android:gravity="left"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="  나의 도감"
+            android:textColor="#F7CC2B"
+            android:textSize="16sp"
+            app:icon="@drawable/icon_0_key"
+            app:iconSize="20dp"
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp" />
 
         <Button
             android:id="@+id/btnPassEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="150dp"
-            android:backgroundTint="#FFFFFF"
+            android:layout_marginRight="200dp"
+            android:backgroundTint="#1A000000"
             android:fontFamily="sans-serif-black"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text=" 비밀번호 변경"
-            android:textColor="#D7554C4C"
+            android:gravity="left"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="  비밀번호 변경"
+            android:textColor="#F7CC2B"
             android:textSize="16sp"
             app:icon="@drawable/icon_0_key"
-            app:iconSize="30dp"
-            app:iconTint="@color/pointColor" />
+            app:iconSize="20dp"
+            app:strokeColor="#6D5C71"
+            app:strokeWidth="2dp" />
 
 
     </LinearLayout>
@@ -209,7 +241,7 @@
             android:gravity="right|center_vertical"
             android:padding="8dp"
             android:text="탈퇴하기"
-            android:textColor="#B3FFFFFF"
+            android:textColor="#80FFFFFF"
             android:textSize="14sp" />
     </LinearLayout>
 

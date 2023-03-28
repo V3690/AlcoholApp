@@ -106,97 +106,107 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:backgroundTint="#66FFFFFF"
                 android:outlineProvider="none"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:cardMaxElevation="2dp">
-
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <LinearLayout
+
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#FFFFFF"
-                        android:orientation="horizontal">
+                        app:cardCornerRadius="5dp">
 
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:background="#BEAEEB"
-                            android:fontFamily="@font/puradak_gentle_gothic"
-                            android:gravity="center_horizontal"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="선창"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#FFFFFF"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/txtOutputFirst"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/puradak_gentle_gothic"
-                            android:gravity="center_vertical"
-                            android:text="first"
-                            android:textColor="#404040"
-                            android:textSize="16sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/textView04"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="10dp"
+                                android:background="#0B2347"
+                                android:fontFamily="@font/puradak_gentle_gothic"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="선창"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
-                    <LinearLayout
+                            <TextView
+                                android:id="@+id/txtOutputFirst"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/puradak_gentle_gothic"
+                                android:gravity="center_vertical"
+                                android:text="first"
+                                android:textColor="#404040"
+                                android:textSize="16sp"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="5dp"
+                        app:cardCornerRadius="5dp">
 
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:background="#BEAEEB"
-                            android:fontFamily="@font/puradak_gentle_gothic"
-                            android:gravity="center_horizontal"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="후창"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#FFFFFF"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/txtOutputLast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/puradak_gentle_gothic"
-                            android:gravity="center_vertical"
-                            android:text="last"
-                            android:textColor="#404040"
-                            android:textSize="16sp"
-                            android:textStyle="normal" />
+                            <TextView
+                                android:id="@+id/textView05"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="10dp"
+                                android:background="#0B2347"
+                                android:fontFamily="@font/puradak_gentle_gothic"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="후창"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/txtOutputLast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/puradak_gentle_gothic"
+                                android:gravity="center_vertical"
+                                android:text="last"
+                                android:textColor="#404040"
+                                android:textSize="16sp"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -261,7 +271,7 @@
                         android:layout_marginTop="30dp"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:text="+ 자동으로 건배사를 읽어주는 서비스까지!"
-                        android:textColor="#E57E22"
+                        android:textColor="#A6550C"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -276,7 +286,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="120dp"
                 android:layout_marginBottom="30dp"
-                android:backgroundTint="#8C404040"
+                android:backgroundTint="#0B2347"
                 android:text="제조기 가동"
                 android:textColor="#FFC107"
                 android:textSize="16sp"

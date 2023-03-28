@@ -214,7 +214,7 @@
                 app:cardCornerRadius="10dp">
 
                 <Spinner
-                    android:id="@+id/spinnerRecipe"
+                    android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
