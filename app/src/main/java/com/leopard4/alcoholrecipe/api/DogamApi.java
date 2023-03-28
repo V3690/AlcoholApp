@@ -50,5 +50,19 @@ public interface DogamApi extends Serializable {
                                         @Query("offset") int offset,
                                         @Query("limit") int limit);
 
+    // 좋아요한 도감 api
+    @GET("/alcohol/favorite")
+    Call<DogamList> getFavoriteDogam( @Header("Authorization") String token,
+                                @Query("percent") int percent,
+                                @Query("order") String order,
+                                @Query("offset") int offset,
+                                @Query("limit") int limit);
+
+    //좋아요한거중에 검색하기api
+    @GET("/alcohol/favorite/search")
+    Call<DogamList> getFavoriteDogamSearch(@Header("Authorization") String token,
+                                           @Query("keyword") String Keyword,
+                                           @Query("offset") int offset,
+                                           @Query("limit") int limit);
 
 }
