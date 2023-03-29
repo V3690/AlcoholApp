@@ -145,7 +145,7 @@
                                     android:paddingLeft="5dp"
                                     android:paddingTop="2dp"
                                     android:text="999"
-                                    android:textColor="#DE5179"
+                                    android:textColor="#062045"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -264,21 +264,20 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:outlineProvider="none"
-                app:cardBackgroundColor="#66FFFFFF"
+                app:cardBackgroundColor="#99FFFFFF"
                 app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtProduce"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="#66E0E0E0"
                     android:backgroundTintMode="screen"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:padding="10dp"
                     android:shadowRadius="30"
                     android:text="TextView"
-                    android:textStyle="normal"
                     android:textColor="#062045"
+                    android:textStyle="normal"
                     app:layout_constraintBottom_toTopOf="@+id/textView44"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -307,19 +306,18 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:outlineProvider="none"
-                app:cardBackgroundColor="#66FFFFFF"
+                app:cardBackgroundColor="#99FFFFFF"
                 app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtSupply"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:background="#66E0E0E0"
                     android:fontFamily="@font/puradak_gentle_gothic"
                     android:padding="10dp"
                     android:text="TextView"
-                    android:textStyle="normal"
                     android:textColor="#062045"
+                    android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
