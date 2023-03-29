@@ -40,7 +40,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="378dp"
-        android:layout_height="614dp"
+        android:layout_height="630dp"
         android:layout_below="@id/topLayout"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="20dp"
@@ -275,7 +275,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="5">
 
                 <TextView
                     android:id="@+id/textView97"
@@ -292,25 +293,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#0B2347"
+                    android:fontFamily="sans-serif-black"
+                    android:text="작성 완료"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/scrollView"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="#0B2347"
-        android:fontFamily="sans-serif-black"
-        android:text="작성 완료"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
 
 </RelativeLayout>

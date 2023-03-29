@@ -212,6 +212,9 @@ public class RecipeInfoActivity extends AppCompatActivity {
                         if (recipeOne.getIntro() == null) {
                             recipeOne.setIntro("");
                         }
+                        if (recipeOne.getIngredient() == null) {
+                            recipeOne.setIngredient("");
+                        }
                         // 닉네임 뿌려주기
                         if (recipeOne.getUserId() == 1) {
                             txtUserId.setText("주인장의시크릿");
