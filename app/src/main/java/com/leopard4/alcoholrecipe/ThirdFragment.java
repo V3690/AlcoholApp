@@ -50,7 +50,7 @@ public class ThirdFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button btnPassEdit, btnMyRecipe, btnLisence, btnSecession, btnEdit;
+    Button btnPassEdit, btnMyRecipe, btnLisence, btnSecession, btnEdit , btnMyDogam;
     ImageView btnBack, btnLogout;
     TextView txtAppVersion;
     EditText editName;
@@ -100,6 +100,7 @@ public class ThirdFragment extends Fragment {
         btnSecession = view.findViewById(R.id.btnSecession);
         btnEdit = view.findViewById(R.id.btnEdit);
         editName = view.findViewById(R.id.editName);
+        btnMyDogam=view.findViewById(R.id.btnMyDogam);
 
         // 화면이 보여질때 닉네임을 세팅
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.PREFERENCE_NAME, getActivity().MODE_PRIVATE); // mode_private : 해당 앱에서만 사용
@@ -110,6 +111,14 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MyRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMyDogam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyDogamActivity.class);
                 startActivity(intent);
             }
         });
