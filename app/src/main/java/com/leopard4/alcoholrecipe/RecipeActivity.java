@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -57,6 +58,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
     private boolean isloading = false;
     ArrayAdapter<CharSequence> adapterOrder = null;
     ArrayAdapter<CharSequence> adapterPercent = null;
+    private ProgressDialog dialog;
 
     // 페이징 처리를 위한 변수
     int count = 0;
@@ -106,6 +108,32 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
         spinnerRecipe.setAdapter(adapterPercent);
         spinnerRecipe2.setAdapter(adapterOrder);
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                // 맨 마지막 데이터가 화면에 보이면!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태
+                if (lastPosition + 1 == totalCount && !isloading) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                    isloading = true;
+                    addNetworkData();
+
+                }
+            }
+        });
+
 
 
         // 뒤로가기 버튼
@@ -269,6 +297,8 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         });
 
 
+
+
         //검색
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,6 +335,54 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+    private void addNetworkData() {
+        showProgress("술도감 불러오는 중...");
+        Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
+
+        RecipeApi api = retrofit.create(RecipeApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        Call<RecipeLabList> call = api.getRecipeMasterList(accessToken,order,offset,limit,percent);
+        call.enqueue(new Callback<RecipeLabList>() {
+            @Override
+            public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
+                dismissProgress();
+
+                if(response.isSuccessful()){
+                    Log.i(TAG,"가지고옴"+response);
+
+                    offset = offset + count;
+
+                    RecipeLabList.addAll(response.body().getItems());
+                    Log.i(TAG,"가저옴"+RecipeLabList.addAll(response.body().getItems()));
+                    adapter.notifyDataSetChanged();
+                    isloading=false;
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeLabList> call, Throwable t) {
+                dismissProgress();
+            }
+        });
+
+
+    }
+
+    void showProgress(String message){
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+    }
+    void dismissProgress(){
+        dialog.dismiss();
+    }
     //유저가눌린상태에서 스피너
     private void toggle2spinner() {
         spinnerRecipe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
