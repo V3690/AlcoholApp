@@ -18,4 +18,12 @@ public interface RecipeFavoriteApi extends Serializable {
                                                @Query("strength") int strength,
                                                @Query("offset") int offset,
                                                @Query ("limit") int limit);
+
+
+    @GET("/recipe/favorite/search")
+    Call<RecipeFavoriteList> getRecipeSearchFavorite(@Header("Authorization") String token,
+                                               @Query("keyword") String keyword,
+                                               @Query("offset") int offset,
+                                               @Query ("limit") int limit);
+
 }
