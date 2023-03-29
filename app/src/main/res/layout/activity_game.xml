@@ -167,7 +167,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
-                    android:text="매일 똑같은 벌칙이 지겨울 때 ! 다양한 랜덤 벌칙"
+                    android:text="벌칙이 필요한 모든 순간! \n다양한 랜덤 벌칙"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
@@ -215,7 +215,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
-                    android:text="지금 내 얼굴은 어떤 술이 어울릴까?"
+                    android:text="지금 내 얼굴에는 \n어떤 술이 어울릴까 ?"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
