@@ -1,5 +1,7 @@
 package com.leopard4.alcoholrecipe;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,10 +22,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.leopard4.alcoholrecipe.adapter.DogamAdapter;
 import com.leopard4.alcoholrecipe.adapter.RecipeFavoriteAdapter;
+import com.leopard4.alcoholrecipe.api.DogamApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.api.RecipeFavoriteApi;
 import com.leopard4.alcoholrecipe.config.Config;
+import com.leopard4.alcoholrecipe.model.dogam.DogamList;
 import com.leopard4.alcoholrecipe.model.recipe.RecipeFavorite;
 import com.leopard4.alcoholrecipe.model.recipe.RecipeFavoriteList;
 
@@ -59,6 +66,9 @@ public class SecondFragment extends Fragment {
     RecipeFavoriteAdapter adapter;
     ArrayList<RecipeFavorite> recipeFavoriteList = new ArrayList<>();
 
+    ImageButton imgSearch;
+    EditText editSearch;
+
     // 쿼리 스트링
     int order  = 1;
     int type = 1;
@@ -74,6 +84,8 @@ public class SecondFragment extends Fragment {
     int first3 = 0;
     // 스크롤이 자꾸 데이터를 두번씩 가져오므로 중복을 막기 위한 변수
     private boolean isLoading = false;
+
+    String keyword;
 
 
     public SecondFragment() {
@@ -123,6 +135,10 @@ public class SecondFragment extends Fragment {
         String accessToken;
         progressBar2 = rootView.findViewById(R.id.progressBar2);
 
+        imgSearch = rootView.findViewById(R.id.imgSearch);
+        editSearch = rootView.findViewById(R.id.editSearch);
+
+
         // 리사이클러뷰 연결
         recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -132,33 +148,6 @@ public class SecondFragment extends Fragment {
         // 이 플래그먼트를 띄웠을때 데이터를 불러온다.
         getNetworkData();
 
-        // 스크롤 리스너를 설정한다.
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) { // 스크롤이 멈추면
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) { // 스크롤이 되면
-                super.onScrolled(recyclerView, dx, dy);
-
-                int lastPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition(); // 마지막으로 보여지는 아이템의 위치
-                int totalCount = recyclerView.getAdapter().getItemCount(); // 아이템의 총 개수
-                if(lastPosition+1 == totalCount && !isLoading){ // 마지막 아이템이 보여지고 && 데이터를 불러오고 있지 않다면
-
-                    // 네트워크 통해서 데이터를 더 불러온다.
-                    if(count == limit ){
-                         // 데이터를 불러오고 있다.
-                        isLoading = true;
-                        addNetworkData();
-
-                    }
-
-                }
-
-            }
-        });
 
         //문자열 배열과 기본 스피너 레이아웃을 사용하여 ArrayAdapter 만들기
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_item1, R.layout.layout_spinner);
@@ -230,8 +219,187 @@ public class SecondFragment extends Fragment {
             }
         });
 
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                keyword = editSearch.getText().toString().trim();
+
+                if (keyword.isEmpty()){
+                    return;
+                }
+
+                searchKeyword();
+
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+
+                        // 맨 마지막 데이터가 화면에 보이면!!
+                        // 네트워크 통해서 데이터를 추가로 받아와라!!
+                        int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                        int totalCount = recyclerView.getAdapter().getItemCount();
+
+                        // 스크롤을 데이터 맨 끝까지 한 상태
+                        if (lastPosition + 1 == totalCount && !isLoading) {
+                            // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                            isLoading = true;
+                            addSearchKeyword();
+
+
+                        }
+
+
+                    }
+                });
+
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
         return rootView;
     }
+
+    private void searchKeyword() {
+
+        progressBar2.setVisibility(View.VISIBLE);
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
+
+        RecipeFavoriteApi api = retrofit.create(RecipeFavoriteApi.class);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME, getActivity().MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        offset = 0;
+        count = 0;
+
+        Call<RecipeFavoriteList> call = api.getRecipeSearchFavorite(accessToken, keyword, offset, limit);
+        call.enqueue(new Callback<RecipeFavoriteList>() {
+            @Override
+            public void onResponse(Call<RecipeFavoriteList> call, Response<RecipeFavoriteList> response) {
+
+                progressBar2.setVisibility(View.GONE);
+
+                recipeFavoriteList.clear(); // 초기화
+
+                if(response.isSuccessful()){
+                    count = response.body().getCount();
+                    recipeFavoriteList.addAll(response.body().getResult());
+
+                    offset = offset+count;
+                    adapter = new RecipeFavoriteAdapter(getActivity(),recipeFavoriteList );
+                    adapter.setOnItemClickListener(new RecipeFavoriteAdapter.onItemClickListener() {
+                        @Override
+                        public void onItemClick(int index) {
+                            Intent intent = new Intent(getActivity(), RecipeInfoActivity.class);
+                            intent.putExtra("recipeId", recipeFavoriteList.get(index).getId());
+                            startActivity(intent);
+                        }
+                    });
+
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeFavoriteList> call, Throwable t) {
+                progressBar2.setVisibility(View.GONE);
+                Log.d("TAG", "onFailure: " + t.getMessage());
+            }
+        });
+
+
+
+
+
+    }
+
+
+    private void addSearchKeyword(){
+        progressBar2.setVisibility(View.VISIBLE);
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(getActivity());
+
+        RecipeFavoriteApi api = retrofit.create(RecipeFavoriteApi.class);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME, getActivity().MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+
+
+
+        Call<RecipeFavoriteList> call = api.getRecipeSearchFavorite(accessToken, keyword, offset, limit);
+        call.enqueue(new Callback<RecipeFavoriteList>() {
+            @Override
+            public void onResponse(Call<RecipeFavoriteList> call, Response<RecipeFavoriteList> response) {
+                progressBar2.setVisibility(View.GONE);
+
+                // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
+                // 초기화 코드가 필요.
+//                alcoholList.clear();
+
+
+                if (response.isSuccessful()) {
+                    progressBar2.setVisibility(View.GONE);
+                    offset = offset + count;
+//                    alcoholList.clear();
+
+//                    count = response.body().getCount();
+//
+//                    offset = offset + count;
+
+                    recipeFavoriteList.addAll(response.body().getResult());
+
+//                    alcoholAdapter = new AlcoholAdapter(MyRecipeWriteSecondActivity.this, alcoholList);
+//                    alcoholRecyclerView.setAdapter(alcoholAdapter);
+
+                    adapter.notifyDataSetChanged();
+
+                    adapter.setOnItemClickListener(new RecipeFavoriteAdapter.onItemClickListener() {
+                        @Override
+                        public void onItemClick(int index) {
+                            Intent intent = new Intent(getActivity(), RecipeInfoActivity.class);
+                            intent.putExtra("recipeId", recipeFavoriteList.get(index).getId());
+                            startActivity(intent);
+                        }
+                    });
+
+
+                    isLoading = false;
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeFavoriteList> call, Throwable t) {
+                progressBar2.setVisibility(View.GONE);
+
+
+            }
+        });
+
+    }
+
+
     private void addNetworkData(){
         progressBar2.setVisibility(View.VISIBLE);
 
@@ -313,6 +481,39 @@ public class SecondFragment extends Fragment {
                     });
 
                     recyclerView.setAdapter(adapter);
+
+
+                    // 스크롤 리스너를 설정한다.
+                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) { // 스크롤이 멈추면
+                            super.onScrollStateChanged(recyclerView, newState);
+                        }
+
+                        @Override
+                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) { // 스크롤이 되면
+                            super.onScrolled(recyclerView, dx, dy);
+
+                            int lastPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition(); // 마지막으로 보여지는 아이템의 위치
+                            int totalCount = recyclerView.getAdapter().getItemCount(); // 아이템의 총 개수
+                            if(lastPosition+1 == totalCount && !isLoading){ // 마지막 아이템이 보여지고 && 데이터를 불러오고 있지 않다면
+
+                                // 네트워크 통해서 데이터를 더 불러온다.
+                                if(count == limit ){
+                                    // 데이터를 불러오고 있다.
+                                    isLoading = true;
+                                    addNetworkData();
+
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+
+
                 }
             }
 
