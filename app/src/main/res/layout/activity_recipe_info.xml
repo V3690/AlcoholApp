@@ -72,18 +72,16 @@
                     android:id="@+id/btnEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#F29B12"
-                    android:fontFamily="@font/puradak_gentle_gothic"
+                    android:backgroundTint="#0B2347"
+                    android:fontFamily="sans-serif-black"
                     android:text="수정"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-                    app:layout_constraintEnd_toStartOf="@+id/btnReturnRecipe"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/txtRecipeTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/btnReturnRecipe"
-                    app:layout_constraintVertical_bias="0.222"
-                    tools:visibility="invisible" />
+                    app:strokeColor="#6D5C71"
+                    app:strokeWidth="2dp" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -113,9 +111,9 @@
 
                             <ImageView
                                 android:id="@+id/imgUrl"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:scaleType="fitCenter"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
                                 app:srcCompat="@drawable/a_0_row_1" />
                         </androidx.cardview.widget.CardView>
 

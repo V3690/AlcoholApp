@@ -53,7 +53,8 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_vertical"
-                android:text="아이디" />
+                android:text="아이디"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editEmail"
@@ -90,7 +91,8 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_vertical"
-                android:text="닉네임" />
+                android:text="닉네임"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editNickName"
@@ -130,7 +132,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_vertical"
-                android:text="비밀번호" />
+                android:text="비밀번호"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editPassword"
@@ -169,7 +172,8 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="center_vertical"
-                android:text="비밀번호 확인" />
+                android:text="비밀번호 확인"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editPassword2"

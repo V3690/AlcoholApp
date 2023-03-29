@@ -13,33 +13,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="#B3FFFFFF"
-        app:cardCornerRadius="30dp">
+        app:cardCornerRadius="20dp">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/imgMaster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/imgMaster"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@drawable/baseline_favorite_border_24" />
-
-        </FrameLayout>
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/baseline_favorite_border_24" />
 
         <TextView
             android:id="@+id/txtRecipeTitle"
             android:layout_width="150dp"
-            android:layout_height="28dp"
+            android:layout_height="22dp"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="#E6FFFFFF"
             android:duplicateParentState="false"
             android:fontFamily="@font/puradak_gentle_gothic"
             android:gravity="center"
+            android:maxEms="7"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:text="Title"
-            android:textColor="#404040" />
+            android:textColor="#404040"
+            android:textSize="12sp" />
+
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

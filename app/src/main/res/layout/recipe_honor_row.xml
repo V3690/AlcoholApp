@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:cardBackgroundColor="#B3FFFFFF"
-        app:cardCornerRadius="30dp">
+        app:cardCornerRadius="20dp">
 
         <ImageView
             android:id="@+id/imgHonor"
