@@ -4,11 +4,16 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +40,9 @@ public class GameToastFactoryActivity extends AppCompatActivity {
     EditText editUserInput1,editUserInput2;
 
     ImageView imgSpeaker, imgSpeaker2, imgBack, btnStart1,btnStart2; ;
+
+    Button btnShare;
+
     private TextToSpeech tts;
 
 
@@ -53,6 +61,7 @@ public class GameToastFactoryActivity extends AppCompatActivity {
         imgBack=findViewById(R.id.imgBack);
         imgSpeaker=findViewById(R.id.imgSpeaker);
         imgSpeaker2=findViewById(R.id.imgSpeaker2);
+        btnShare = findViewById(R.id.btnShare);
 
         btnStart1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +88,33 @@ public class GameToastFactoryActivity extends AppCompatActivity {
                             Log.i(TAG,"정상 쓸내용"+response.body().getItem().getFirst());
                             txtOutputFirst.setText( response.body().getItem().getFirst() );
                             txtOutputLast.setText( response.body().getItem().getLast() );
+
+                            btnShare.setVisibility(View.VISIBLE);
+                            btnShare.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    // 현재화면을 캡쳐해서 공유하기
+
+                                    View view1 = getWindow().getDecorView(); // 현재 화면을 가져옴 // 현재 화면을 가져오는 방법은 여러가지가 있지만, 여기서는 가장 간단한 방법을 사용
+                                    view1.setDrawingCacheEnabled(true); // 캐시를 사용하도록 설정 // 캐시를 사용하면, 화면이 바뀌어도 캐시를 사용하기 때문에 화면이 바뀌지 않는다.
+                                    Bitmap captureView = view1.getDrawingCache(); // 캐시를 비트맵으로 변환 // 비트맵이란 픽셀로 이루어진 이미지를 의미
+                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null); // 갤러리에 저장 // 갤러리에 저장하기 위해서는 Uri가 필요하다.
+                                    Uri uri = Uri.parse(path); // 저장한 경로를 Uri로 변환 // Uri는 경로를 의미
+                                    Intent intent = new Intent(Intent.ACTION_SEND); // 공유하기 위한 인텐트 생성
+                                    intent.setType("image/*"); // 이미지를 공유하기 위해 타입을 이미지로 설정 // 이미지를 공유하기 위해 타입을 이미지로 설정
+                                    intent.putExtra(Intent.EXTRA_STREAM, uri); // 공유할 이미지를 추가
+                                    startActivity(Intent.createChooser(intent, "공유하기")); // 공유하기 창 띄우기
+//                텍스트 보내기
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "알코올 레시피");
+//                intent.putExtra(Intent.EXTRA_TEXT, "알코올 레시피 앱에서 "+txtAlchol.getText().toString()+"를 추천합니다.");
+//                startActivity(Intent.createChooser(intent, "알코올 레시피"));
+
+                                }
+                            });
+
+
                         }else{
 
                             txtOutputFirst.setText("다른 단어 또는 문장을 입력해주세요");
@@ -112,12 +148,39 @@ public class GameToastFactoryActivity extends AppCompatActivity {
                     public void onResponse(Call<CheersMentRes> call, Response<CheersMentRes> response) {
                         if(response.isSuccessful()){
                             txtOutput.setText(response.body().getItem().getFirst());
+
+                            btnShare.setVisibility(View.VISIBLE);
+                            btnShare.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    // 현재화면을 캡쳐해서 공유하기
+
+                                    View view1 = getWindow().getDecorView(); // 현재 화면을 가져옴 // 현재 화면을 가져오는 방법은 여러가지가 있지만, 여기서는 가장 간단한 방법을 사용
+                                    view1.setDrawingCacheEnabled(true); // 캐시를 사용하도록 설정 // 캐시를 사용하면, 화면이 바뀌어도 캐시를 사용하기 때문에 화면이 바뀌지 않는다.
+                                    Bitmap captureView = view1.getDrawingCache(); // 캐시를 비트맵으로 변환 // 비트맵이란 픽셀로 이루어진 이미지를 의미
+                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null); // 갤러리에 저장 // 갤러리에 저장하기 위해서는 Uri가 필요하다.
+                                    Uri uri = Uri.parse(path); // 저장한 경로를 Uri로 변환 // Uri는 경로를 의미
+                                    Intent intent = new Intent(Intent.ACTION_SEND); // 공유하기 위한 인텐트 생성
+                                    intent.setType("image/*"); // 이미지를 공유하기 위해 타입을 이미지로 설정 // 이미지를 공유하기 위해 타입을 이미지로 설정
+                                    intent.putExtra(Intent.EXTRA_STREAM, uri); // 공유할 이미지를 추가
+                                    startActivity(Intent.createChooser(intent, "공유하기")); // 공유하기 창 띄우기
+//                텍스트 보내기
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "알코올 레시피");
+//                intent.putExtra(Intent.EXTRA_TEXT, "알코올 레시피 앱에서 "+txtAlchol.getText().toString()+"를 추천합니다.");
+//                startActivity(Intent.createChooser(intent, "알코올 레시피"));
+
+                                }
+                            });
+
+
                         }else{
                             txtOutput.setText("다른 단어 또는 문장을 입력해주세요");
 
                         }
-
                     }
+
 
                     @Override
                     public void onFailure(Call<CheersMentRes> call, Throwable t) {
@@ -179,6 +242,7 @@ public class GameToastFactoryActivity extends AppCompatActivity {
         imgBack.setOnClickListener(v -> {
             finish();
         });
+
 
     }
 
