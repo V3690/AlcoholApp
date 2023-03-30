@@ -62,7 +62,7 @@ import retrofit2.Retrofit;
 public class GameFaceActivity extends AppCompatActivity {
 
     Button btnResult;
-    Button btnFace;
+    Button btnFace, btnShare;
     ImageView imgFace ,imgAlchol , imgBack;
     File photoFile;
     TextView txtResult , txtAlchol;
@@ -83,6 +83,7 @@ public class GameFaceActivity extends AppCompatActivity {
         txtAlchol = findViewById(R.id.txtAlchol);
         imgAlchol = findViewById(R.id.imgAlchol);
         imgBack = findViewById(R.id.imgBack);
+        btnShare = findViewById(R.id.btnShare);
 
 
         btnFace.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +133,32 @@ public class GameFaceActivity extends AppCompatActivity {
                             String imgurl = response.body().getResult().getImgUrl();
                             Log.i(TAG,"이미지url은"+imgurl);
 
-
                             Glide.with(GameFaceActivity.this).load(imgurl.replace("http://", "https://")).override(500,300).into(imgAlchol);
 
+                            btnShare.setVisibility(View.VISIBLE);
+                            btnShare.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    // 현재화면을 캡쳐해서 공유하기
+
+                                    View view1 = getWindow().getDecorView(); // 현재 화면을 가져옴 // 현재 화면을 가져오는 방법은 여러가지가 있지만, 여기서는 가장 간단한 방법을 사용
+                                    view1.setDrawingCacheEnabled(true); // 캐시를 사용하도록 설정 // 캐시를 사용하면, 화면이 바뀌어도 캐시를 사용하기 때문에 화면이 바뀌지 않는다.
+                                    Bitmap captureView = view1.getDrawingCache(); // 캐시를 비트맵으로 변환 // 비트맵이란 픽셀로 이루어진 이미지를 의미
+                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null); // 갤러리에 저장 // 갤러리에 저장하기 위해서는 Uri가 필요하다.
+                                    Uri uri = Uri.parse(path); // 저장한 경로를 Uri로 변환 // Uri는 경로를 의미
+                                    Intent intent = new Intent(Intent.ACTION_SEND); // 공유하기 위한 인텐트 생성
+                                    intent.setType("image/*"); // 이미지를 공유하기 위해 타입을 이미지로 설정 // 이미지를 공유하기 위해 타입을 이미지로 설정
+                                    intent.putExtra(Intent.EXTRA_STREAM, uri); // 공유할 이미지를 추가
+                                    startActivity(Intent.createChooser(intent, "공유하기")); // 공유하기 창 띄우기
+//                텍스트 보내기
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "알코올 레시피");
+//                intent.putExtra(Intent.EXTRA_TEXT, "알코올 레시피 앱에서 "+txtAlchol.getText().toString()+"를 추천합니다.");
+//                startActivity(Intent.createChooser(intent, "알코올 레시피"));
+
+                                }
+                            });
 
 
                         }else{

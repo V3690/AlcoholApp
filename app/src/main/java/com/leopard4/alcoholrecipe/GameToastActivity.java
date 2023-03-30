@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -88,10 +91,10 @@ public class GameToastActivity extends AppCompatActivity {
             }
         });
 
-
         imgBack.setOnClickListener(v -> {
             finish();
         });
+
     }
 
     @Override
