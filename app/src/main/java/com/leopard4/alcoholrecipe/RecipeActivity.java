@@ -67,6 +67,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
     int percent;
     String order;
+    int type;
 
     String keyword;
     int spinner2Id;
@@ -110,29 +111,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         spinnerRecipe2.setAdapter(adapterOrder);
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                // 맨 마지막 데이터가 화면에 보이면!!
-                // 네트워크 통해서 데이터를 추가로 받아와라!!
-                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-                int totalCount = recyclerView.getAdapter().getItemCount();
-
-                // 스크롤을 데이터 맨 끝까지 한 상태
-                if (lastPosition + 1 == totalCount && !isloading) {
-                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
-                    isloading = true;
-                    addNetworkData();
-
-                }
-            }
-        });
 
 
 
@@ -161,7 +140,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         //1번째 주인장레시피
         //2번째 유저레시피
         //3번째 모두레시피
-        // n~번 업는경우: 스피너 no조작 n-1번: 스피너 도수조작 n-2 : 스피너 목록 조작
+        // n~번 없는경우: 스피너 no조작 n-1번: 스피너 도수조작 n-2 : 스피너 목록 조작
 
         // 들어가자마자 레시피보여주는 조건
         if(isToggleButton1Checked){
@@ -176,6 +155,42 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
             toggle1spinner();
         }
 
+        // 키워드가 있으면 추가데이터 못가저옴
+        if(keyword == null){
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                }
+
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    // 맨 마지막 데이터가 화면에 보이면!!
+                    // 네트워크 통해서 데이터를 추가로 받아와라!!
+                    int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                    int totalCount = recyclerView.getAdapter().getItemCount();
+
+                    // 스크롤을 데이터 맨 끝까지 한 상태
+                    //조건에 맞게 데이터 가지고옴
+                    if (isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false && keyword == null) {
+                        // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                        isloading = true;
+                        addNetworkData1();
+                        Log.i(TAG,"1번 스크롤추가");
+                        
+                    } else if (isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true && keyword == null) {
+                        isloading = true;
+                        addNetworkData2();
+                    } else if (isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true && keyword == null) {
+                        isloading = true;
+                        addNetworkData3();
+                    }
+                }
+            });
+
+        }
+        
 
         //이후 주인장레시피 눌렀을때
        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -189,22 +204,20 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    percent=0;
-                    order="cnt";
 
                     //주인장 레시피 api
                     getNetworkData();
                     Log.i(TAG,"1번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
                     //주인장만 눌렸을때 스피너조작
                     toggle1spinner();
-
+                    
+           
+                    
                 //주인장하고 유저가 같은 상태이며 유저는 켜져있는경우(둘다켜진경우)
-                }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true){
+                }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true ){
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
-                    percent=0;
-                    order="cnt";
                     //모든 레시피 불러오는 api
                     getNetworkData3();
 
@@ -212,10 +225,11 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
                     //모든 레시피 상태에서 스피너조작
                     toggle3spinner();
+                    
 
                 }
                 //유저만 켜진상황
-                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true){
+                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true ){
                     toggleButton.setTextColor(Color.WHITE);
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
@@ -224,13 +238,13 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                         toggleButton.setTextColor(Color.WHITE);
                         toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                         recyclerView.setVisibility(View.VISIBLE);
-                        percent=0;
-                        order="cnt";
+
                         //유저 목록만 가저오는 api
                         getNetworkData2();
                         Log.i(TAG,"1-3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
                         // 유저 목록 켜진 상황에서 가저오는 스피너
                         toggle2spinner();
+                        
 
                     }
                 }
@@ -250,31 +264,31 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                     toggleButton.setTextColor(Color.WHITE);
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
-                    percent=0;
-                    order="cnt";
+
                     //유저레시피 가저오는api
                     getNetworkData2();
                     Log.i(TAG,"2번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
 
                     //유저상황에서 스피너
                     toggle2spinner();
+                    
+
 
                     //주인장과 유저버튼이 같은상황이며 유저는 켜진경우(둘다켜짐)
-                }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true ){
+                }else if(isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true  ){
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.parseColor("#FFC107"));
                     recyclerView.setVisibility(View.VISIBLE);
-                    percent=0;
-                    order="cnt";
+
                     //둘다켜진 api
                     getNetworkData3();
 
                     Log.i(TAG,"3번째 조건입니다"+isToggleButton2Checked+isToggleButton1Checked);
                     //둘다켜졌을때 스피너
                     toggle3spinner();
-
+                    
                 }//주인장과 유저가 같지않으며 유저는 켜저있지않음(주인장만)
-                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false){
+                else if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false ){
                     toggleButton.setTextColor(Color.parseColor("#FFC107"));
                     toggleButton2.setTextColor(Color.WHITE);
                     recyclerView.setVisibility(View.GONE);
@@ -282,24 +296,20 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                     if(isToggleButton1Checked){
                         toggleButton.setTextColor(Color.parseColor("#FFC107"));
                         recyclerView.setVisibility(View.VISIBLE);
-                        percent=0;
-                        order="cnt";
                         //
                         //주인장api
                         getNetworkData();
                         Log.i(TAG,"2-3번째 조건입니다 1번 "+isToggleButton1Checked+"2번 "+isToggleButton2Checked);
                         //주인장 스피너
                         toggle1spinner();
+
                     }
                 }
 
             }
         });
 
-
-
-
-        //검색
+        //검색시 토글버튼에 맞게 type이 바뀌며 맞는 검색결과 가저옴
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -309,25 +319,38 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                     Toast.makeText(RecipeActivity.this, "검색어를 입력해 주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                searchKeyword();
 
-                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                        super.onScrollStateChanged(recyclerView, newState);
-                        int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-                        int totalCount = recyclerView.getAdapter().getItemCount();
-                        if (lastPosition + 1 == totalCount && !isloading) {
-                            // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
-                            isloading = true;
-                            addSearchKeyword();
+                if(isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==false && keyword != null ){
+                    type=0;
+                    searchKeyword();
+                    
 
+                } else if (isToggleButton1Checked != isToggleButton2Checked && isToggleButton2Checked==true && keyword != null) {
+                    type=1;
+                    searchKeyword();
+                    
 
+                } else if (isToggleButton1Checked == isToggleButton2Checked && isToggleButton2Checked==true && keyword != null) {
+                    type = 2;
+                    searchKeyword();
+                }
+                   //검색후 이후 스크롤
+                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                            super.onScrollStateChanged(recyclerView, newState);
+                            int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                            int totalCount = recyclerView.getAdapter().getItemCount();
+                            if (lastPosition + 1 == totalCount && !isloading) {
+                                // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                                isloading = true;
+                                addSearchKeyword();
+
+                                Log.i(TAG,"검색하다가 추가");
+
+                            }
                         }
-
-                    }
-                });
-
+                    });
 
             }
         });
@@ -335,8 +358,9 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    private void addNetworkData() {
-        showProgress("술도감 불러오는 중...");
+    //주인장상태에서 스크롤
+    private void addNetworkData1() {
+
         Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
 
         RecipeApi api = retrofit.create(RecipeApi.class);
@@ -345,6 +369,84 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
         Call<RecipeLabList> call = api.getRecipeMasterList(accessToken,order,offset,limit,percent);
+        call.enqueue(new Callback<RecipeLabList>() {
+            @Override
+            public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
+
+
+                if(response.isSuccessful()){
+                    Log.i(TAG,"가지고옴"+response);
+
+                    offset = offset + count;
+
+                    RecipeLabList.addAll(response.body().getItems());
+                    Log.i(TAG,"가저옴"+RecipeLabList.addAll(response.body().getItems()));
+                    adapter.notifyDataSetChanged();
+                    isloading=false;
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeLabList> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    //유저상태에서 스크롤
+    private void addNetworkData2() {
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
+
+        RecipeApi api = retrofit.create(RecipeApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        Call<RecipeLabList> call = api.getRecipeuserList(accessToken,order,offset,limit,percent);
+        call.enqueue(new Callback<RecipeLabList>() {
+            @Override
+            public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
+
+
+                if(response.isSuccessful()){
+                    Log.i(TAG,"가지고옴"+response);
+
+                    offset = offset + count;
+
+                    RecipeLabList.addAll(response.body().getItems());
+                    Log.i(TAG,"가저옴"+RecipeLabList.addAll(response.body().getItems()));
+                    adapter.notifyDataSetChanged();
+                    isloading=false;
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeLabList> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    //전부 상태에서 스크롤
+    private void addNetworkData3() {
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(RecipeActivity.this);
+
+        RecipeApi api = retrofit.create(RecipeApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        Call<RecipeLabList> call = api.getRecipeAllList(accessToken,order,offset,limit,percent);
         call.enqueue(new Callback<RecipeLabList>() {
             @Override
             public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
@@ -381,7 +483,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         dialog.show();
     }
     void dismissProgress(){
-        dialog.dismiss();
+
     }
     //유저가눌린상태에서 스피너
     private void toggle2spinner() {
@@ -531,7 +633,7 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         offset = 0;
         count = 0;
 
-        Call<RecipeLabList> call = api.getRecipeKeyword(accessToken, keyword, offset, limit);
+        Call<RecipeLabList> call = api.getRecipeKeyword(accessToken, keyword, offset, limit,type);
         call.enqueue(new Callback<RecipeLabList>() {
             @Override
             public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
@@ -577,32 +679,25 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
         String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
-        offset = 0;
-        count = 0;
 
-        Call<RecipeLabList> call = api.getRecipeKeyword(accessToken, keyword, offset, limit);
+        Call<RecipeLabList> call = api.getRecipeKeyword(accessToken, keyword, offset, limit,type);
         call.enqueue(new Callback<RecipeLabList>() {
             @Override
             public void onResponse(Call<RecipeLabList> call, Response<RecipeLabList> response) {
-
+                dismissProgress();
                 // getNetworkData 함수는, 항상 처음에 데이터를 가져오는 동작이므로
                 // 초기화 코드가 필요.
-                RecipeLabList.clear();
-
 
                 if (response.isSuccessful()) {
-
-                    count = response.body().getCount();
-
+                    dismissProgress();
+//                    count = response.body().getCount();
                     offset = offset + count;
-
                     RecipeLabList.addAll(response.body().getItems());
 
-                    adapter = new RecipeLabAdapter(RecipeActivity.this,RecipeLabList );
-                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    isloading = false;
 
                 }
-
             }
 
             @Override
@@ -642,8 +737,6 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                             Log.i(TAG,"가저옴"+RecipeLabList.addAll(response.body().getItems()));
                             adapter = new RecipeLabAdapter(RecipeActivity.this,RecipeLabList );
                             recyclerView.setAdapter(adapter);
-
-
 
                         }else{
                             Log.i(TAG,"하나도 못가저옴");
@@ -689,8 +782,6 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
                     adapter = new RecipeLabAdapter(RecipeActivity.this,RecipeLabList );
                     recyclerView.setAdapter(adapter);
 
-
-
                 }
             }
 
@@ -732,8 +823,6 @@ public class RecipeActivity extends AppCompatActivity implements AdapterView.OnI
 
                     adapter = new RecipeLabAdapter(RecipeActivity.this,RecipeLabList );
                     recyclerView.setAdapter(adapter);
-
-
 
                 }
             }

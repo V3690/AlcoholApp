@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.DogamInfoActivity;
 import com.leopard4.alcoholrecipe.R;
 import com.leopard4.alcoholrecipe.model.dogam.Dogam;
@@ -22,6 +24,7 @@ public class DogamFavoriteAdapter extends RecyclerView.Adapter<DogamFavoriteAdap
     Context context;
     ArrayList<Dogam> dogamList;
 
+
     public DogamFavoriteAdapter(Context context, ArrayList<Dogam> dogamList) {
         this.context = context;
         this.dogamList = dogamList;
@@ -31,15 +34,17 @@ public class DogamFavoriteAdapter extends RecyclerView.Adapter<DogamFavoriteAdap
     @Override
     public DogamFavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recipe_favorite_row, parent, false);
+                .inflate(R.layout.dogam_row, parent, false);
         return new DogamFavoriteAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Dogam dogam = dogamList.get(position);
-        holder.txtTitle.setText(dogam.getName());
 
+        Glide.with(context).load(dogam.getImgUrl().replace("http://", "https://"))
+                .placeholder(R.drawable.outline_image_24)
+                .into(holder.imgAlcohol);
     }
 
 
@@ -51,16 +56,14 @@ public class DogamFavoriteAdapter extends RecyclerView.Adapter<DogamFavoriteAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        CardView cardView;
-        TextView txtTitle;
+        ImageView imgAlcohol;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cardView = itemView.findViewById(R.id.cardView);
-            txtTitle=itemView.findViewById(R.id.txtTitle);
-
-            cardView.setOnClickListener(new View.OnClickListener() {
+            imgAlcohol = itemView.findViewById(R.id.imgAlcohol);
+            imgAlcohol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int index = getAdapterPosition();

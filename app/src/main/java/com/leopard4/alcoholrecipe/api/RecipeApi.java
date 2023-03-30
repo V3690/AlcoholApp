@@ -80,7 +80,8 @@ public interface RecipeApi extends Serializable {
     Call<RecipeLabList> getRecipeKeyword(@Header("Authorization") String token,
                                          @Query("keyword") String keyword,
                                          @Query("offset") int offset,
-                                         @Query("limit") int limit);
+                                         @Query("limit") int limit,
+                                         @Query("type") int type);
 
 
 
