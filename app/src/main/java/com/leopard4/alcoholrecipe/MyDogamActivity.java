@@ -2,6 +2,7 @@ package com.leopard4.alcoholrecipe;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,6 +74,9 @@ public class MyDogamActivity extends AppCompatActivity implements AdapterView.On
 
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
