@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".GameChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyDogamActivity"
             android:exported="false" />
 
