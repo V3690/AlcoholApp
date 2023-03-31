@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class GameActivity extends AppCompatActivity {
 
-    ImageButton ibtnFace, ibtnToast, ibtnDice;
+    ImageButton ibtnFace, ibtnToast, ibtnDice, ibtnChat;
     ImageView imgBack;
 
     @Override
@@ -20,6 +20,7 @@ public class GameActivity extends AppCompatActivity {
         ibtnFace = findViewById(R.id.ibtnFace);
         ibtnToast = findViewById(R.id.ibtnToast);
         ibtnDice = findViewById(R.id.ibtnDice);
+        ibtnChat = findViewById(R.id.ibtnChat);
         imgBack = findViewById(R.id.imgBack);
 
         ibtnFace.setOnClickListener(view -> {
@@ -34,6 +35,11 @@ public class GameActivity extends AppCompatActivity {
 
         ibtnDice.setOnClickListener(view -> {
             Intent intent = new Intent(GameActivity.this, GameDiceActivity.class);
+            startActivity(intent);
+        });
+
+        ibtnChat.setOnClickListener(view -> {
+            Intent intent = new Intent(GameActivity.this, GameChatActivity.class);
             startActivity(intent);
         });
 
