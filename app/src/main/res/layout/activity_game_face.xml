@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/basic"
@@ -46,188 +47,206 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:fontFamily="@font/puradak_gentle_gothic"
+                        android:text="술과 얼굴"
+                        android:textColor="#FFD324"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="얼굴 사진을 촬영해서 올리면"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="지금 내 얼굴에 어울리는 술을 알 수 있다 !"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/puradak_gentle_gothic"
+                            android:text="얼굴"
+                            android:textColor="#FFFFFF"
+                            android:textSize="22sp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="180dp"
+                            android:layout_height="180dp"
+                            android:layout_gravity="center_horizontal"
+                            android:outlineProvider="none"
+                            app:cardBackgroundColor="#33FFFFFF"
+                            app:cardCornerRadius="30dp">
+
+                            <ImageView
+                                android:id="@+id/imgFace"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop" />
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:id="@+id/btnFace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"
+                            android:backgroundTint="#A6323232"
+                            android:outlineProvider="none"
+                            android:text="얼굴 올리기"
+                            android:textColor="#FFC107"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/puradak_gentle_gothic"
+                            android:text="술"
+                            android:textColor="#FFFFFF"
+                            android:textSize="22sp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="180dp"
+                            android:layout_height="180dp"
+                            android:layout_gravity="center_horizontal"
+                            android:outlineProvider="none"
+                            app:cardBackgroundColor="#33FFFFFF"
+                            app:cardCornerRadius="30dp">
+
+                            <ImageView
+                                android:id="@+id/imgAlchol"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY" />
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:id="@+id/btnResult"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"
+                            android:backgroundTint="#A6323232"
+                            android:outlineProvider="none"
+                            android:text="결과 보기"
+                            android:textColor="#FFC107"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtAlchol"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/puradak_gentle_gothic"
-                    android:text="술과 얼굴"
-                    android:textColor="#FFD324"
-                    android:textSize="32sp" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:text="얼굴 사진을 촬영해서 올리면"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="나와 어울리는 술"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="28sp" />
 
-                <TextView
-                    android:id="@+id/textView25"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:text="지금 내 얼굴에 어울리는 술을 알 수 있다 !"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:outlineProvider="none"
+                    app:cardBackgroundColor="#4DFFFFFF"
+                    app:cardCornerRadius="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView55"
+                    <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/puradak_gentle_gothic"
-                        android:text="얼굴"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center_horizontal"
-                        android:outlineProvider="none"
-                        app:cardBackgroundColor="#B3FFFFFF"
-                        app:cardCornerRadius="30dp">
-
-                        <ImageView
-                            android:id="@+id/imgFace"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            tools:srcCompat="@drawable/icon_2_face" />
-                    </androidx.cardview.widget.CardView>
-
-                    <Button
-                        android:id="@+id/btnFace"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="30dp"
-                        android:backgroundTint="#8C404040"
-                        android:text="얼굴 올리기"
-                        android:textColor="#FFC107"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                        android:layout_marginRight="15dp"
+                        android:alpha="0.4"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/a_0_0_logo_ver2" />
 
                     <TextView
-                        android:id="@+id/textView56"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/puradak_gentle_gothic"
-                        android:text="술"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center_horizontal"
-                        android:outlineProvider="none"
-                        app:cardBackgroundColor="#B3FFFFFF"
-                        app:cardCornerRadius="30dp">
-
-                        <ImageView
-                            android:id="@+id/imgAlchol"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            tools:srcCompat="@drawable/icon_2_alcohol" />
-                    </androidx.cardview.widget.CardView>
-
-                    <Button
-                        android:id="@+id/btnResult"
+                        android:id="@+id/txtResult"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="30dp"
-                        android:backgroundTint="#8C404040"
-                        android:text="결과 보기"
-                        android:textColor="#FFC107"
-                        android:textSize="16sp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_marginLeft="70dp"
+                        android:text="[결과 보기] 를 누르면 여기에 결과나 나타납니다."
+                        android:textSize="20sp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtAlchol"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/puradak_gentle_gothic"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="나와 어울리는 술"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:outlineProvider="none"
-                app:cardBackgroundColor="#66FFFFFF"
-                app:cardCornerRadius="10dp">
-
-                <TextView
-                    android:id="@+id/txtResult"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_marginLeft="70dp"
-                    android:text="[결과 보기] 를 누르면 여기에 결과나 나타납니다."
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnShare"
@@ -239,6 +258,7 @@
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="#660B2347"
                 android:fontFamily="sans-serif-black"
+                android:outlineProvider="none"
                 android:text="  SNS 공유"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
@@ -246,7 +266,6 @@
                 app:icon="@drawable/icon_0_sharing"
                 app:iconGravity="textStart"
                 app:iconSize="20dp" />
-
         </LinearLayout>
     </ScrollView>
 
