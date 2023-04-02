@@ -2,16 +2,8 @@ package com.leopard4.alcoholrecipe;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.GameManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +26,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.leopard4.alcoholrecipe.api.GameApi;
@@ -139,17 +138,31 @@ public class GameFaceActivity extends AppCompatActivity {
                             btnShare.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    // 현재화면을 캡쳐해서 공유하기
 
-                                    View view1 = getWindow().getDecorView(); // 현재 화면을 가져옴 // 현재 화면을 가져오는 방법은 여러가지가 있지만, 여기서는 가장 간단한 방법을 사용
-                                    view1.setDrawingCacheEnabled(true); // 캐시를 사용하도록 설정 // 캐시를 사용하면, 화면이 바뀌어도 캐시를 사용하기 때문에 화면이 바뀌지 않는다.
-                                    Bitmap captureView = view1.getDrawingCache(); // 캐시를 비트맵으로 변환 // 비트맵이란 픽셀로 이루어진 이미지를 의미
-                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null); // 갤러리에 저장 // 갤러리에 저장하기 위해서는 Uri가 필요하다.
-                                    Uri uri = Uri.parse(path); // 저장한 경로를 Uri로 변환 // Uri는 경로를 의미
+                                    View layoutView;
+                                    layoutView = findViewById(R.id.layoutView);
+                                    // 특정 뷰 캡쳐
+                                    layoutView.buildDrawingCache();
+                                    Bitmap captureView = layoutView.getDrawingCache();
+                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null);
+                                    Uri uri = Uri.parse(path);
                                     Intent intent = new Intent(Intent.ACTION_SEND); // 공유하기 위한 인텐트 생성
                                     intent.setType("image/*"); // 이미지를 공유하기 위해 타입을 이미지로 설정 // 이미지를 공유하기 위해 타입을 이미지로 설정
                                     intent.putExtra(Intent.EXTRA_STREAM, uri); // 공유할 이미지를 추가
                                     startActivity(Intent.createChooser(intent, "공유하기")); // 공유하기 창 띄우기
+
+
+//                                    // 현재화면을 캡쳐해서 공유하기
+//
+//                                    View view1 = getWindow().getDecorView(); // 현재 화면을 가져옴 // 현재 화면을 가져오는 방법은 여러가지가 있지만, 여기서는 가장 간단한 방법을 사용
+//                                    view1.setDrawingCacheEnabled(true); // 캐시를 사용하도록 설정 // 캐시를 사용하면, 화면이 바뀌어도 캐시를 사용하기 때문에 화면이 바뀌지 않는다.
+//                                    Bitmap captureView = view1.getDrawingCache(); // 캐시를 비트맵으로 변환 // 비트맵이란 픽셀로 이루어진 이미지를 의미
+//                                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), captureView, "title", null); // 갤러리에 저장 // 갤러리에 저장하기 위해서는 Uri가 필요하다.
+//                                    Uri uri = Uri.parse(path); // 저장한 경로를 Uri로 변환 // Uri는 경로를 의미
+//                                    Intent intent = new Intent(Intent.ACTION_SEND); // 공유하기 위한 인텐트 생성
+//                                    intent.setType("image/*"); // 이미지를 공유하기 위해 타입을 이미지로 설정 // 이미지를 공유하기 위해 타입을 이미지로 설정
+//                                    intent.putExtra(Intent.EXTRA_STREAM, uri); // 공유할 이미지를 추가
+//                                    startActivity(Intent.createChooser(intent, "공유하기")); // 공유하기 창 띄우기
 //                텍스트 보내기
 //                Intent intent = new Intent(Intent.ACTION_SEND);
 //                intent.setType("text/plain");
@@ -258,7 +271,7 @@ public class GameFaceActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(GameFaceActivity.this,
                     new String[]{Manifest.permission.CAMERA},
                     1000);
-            Toast.makeText(GameFaceActivity.this, "카메라 권한 필요합니다.",
+            Toast.makeText(GameFaceActivity.this, "카메라 권한이 필요합니다.",
                     Toast.LENGTH_SHORT).show();
             return;
         } else {
@@ -275,7 +288,7 @@ public class GameFaceActivity extends AppCompatActivity {
                 startActivityForResult(i, 100);
 
             } else {
-                Toast.makeText(GameFaceActivity.this, "이폰에는 카메라 앱이 없습니다.",
+                Toast.makeText(GameFaceActivity.this, "카메라 앱이 필요합니다.",
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -349,7 +362,6 @@ public class GameFaceActivity extends AppCompatActivity {
             photo = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
             imgFace.setImageBitmap(photo);
-            imgFace.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             // 네트워크로 데이터 보낸다.
 
@@ -387,7 +399,6 @@ public class GameFaceActivity extends AppCompatActivity {
                 }
 
                 imgFace.setImageBitmap(photo);
-                imgFace.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 //                imageView.setImageBitmap( getBitmapAlbum( imageView, albumUri ) );
 
@@ -459,7 +470,6 @@ public class GameFaceActivity extends AppCompatActivity {
             return null;
         }
     }
-
 
 
     }
