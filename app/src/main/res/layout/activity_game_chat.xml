@@ -66,7 +66,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/txtAnswer"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:background="@drawable/d_game_chat_bot_word"
@@ -120,7 +120,7 @@
                 app:tint="#CCFED224" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/txtQuestion"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:background="@drawable/d_game_chat_user_word"
@@ -170,7 +170,7 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editUserInput2"
+                android:id="@+id/editUserInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -185,7 +185,7 @@
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/btnStart2"
+            android:id="@+id/imgBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
