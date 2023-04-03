@@ -7,20 +7,20 @@
     android:background="@drawable/basic">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
         android:paddingLeft="10dp"
         android:scaleType="fitStart"
-        app:srcCompat="@drawable/a_0_title2" />
+        app:srcCompat="@drawable/a_0_0_logo_ver2" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView3"
+        android:layout_below="@id/imgLogo"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"

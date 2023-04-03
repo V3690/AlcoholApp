@@ -186,12 +186,13 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@id/linearLayout"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
         android:layout_weight="0"
         android:alpha="0.3"
         android:scaleType="fitStart"
-        android:src="@drawable/a_0_0_logo"
+        android:src="@drawable/a_0_0_logo_ver2"
         android:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
