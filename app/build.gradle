@@ -51,8 +51,11 @@ dependencies {
     // 하단바
     implementation 'com.google.android.material:material:1.0.0'
 
-    //카카오 로그인 라이브러리(이건 모든 카카오api 다설치)
+    // 카카오 로그인 라이브러리(이건 모든 카카오api 다설치)
     implementation "com.kakao.sdk:v2-all:2.13.0"
+
+    // 애니메이션 효과
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
 //    // 이미지 라운딩을 위한 라이브러리
 //    implementation 'com.makeramen:roundedimageview:2.3.0'
