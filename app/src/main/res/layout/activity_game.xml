@@ -65,13 +65,21 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/topLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title">
+        android:layout_below="@id/topLine">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,33 +93,36 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="12dp"
-                android:orientation="vertical">
+                android:background="#1AFFFFFF"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="400dp"
+                    android:layout_height="170dp"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="20dp">
 
                     <ImageButton
                         android:id="@+id/ibtnToast"
-                        android:layout_width="400dp"
-                        android:layout_height="170dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/b_0_1" />
+                        android:background="@drawable/d_game_icon_1" />
 
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#66020202"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#99020202"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:gravity="center"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:text="건배사 제조기"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
+                        android:textColor="#FFC534"
+                        android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -120,11 +131,18 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
                     android:gravity="center_horizontal"
-                    android:text="당신이 원하는 그 느낌 그대로 건배사를 뽑아드립니다 !"
+                    android:text="당신이 원하는 그 느낌 그대로 건배사를 뽑아드립니다.\n\n오늘 술자리의 주인공은... 바로 당신 !"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟" />
 
             <LinearLayout
                 android:id="@+id/layout2"
@@ -133,31 +151,35 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
-                android:orientation="horizontal">
+                android:background="#1AFFFFFF"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="180dp"
+                    android:layout_height="130dp"
+
                     app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnDice"
-                        android:layout_width="200dp"
-                        android:layout_height="130dp"
-                        android:background="@drawable/b_0_2" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/d_game_icon_2" />
 
                     <TextView
                         android:id="@+id/textView15"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="#66020202"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#99020202"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:gravity="center"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:text="명령 상자"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
+                        android:textColor="#FFC534"
+                        android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -167,11 +189,18 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
-                    android:text="벌칙이 필요한 모든 순간! \n다양한 랜덤 벌칙"
+                    android:text="벌칙이 필요한 모든 순간! \n\n편하고 빠르게 명령하자"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟" />
 
             <LinearLayout
                 android:id="@+id/layout3"
@@ -180,31 +209,34 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
-                android:orientation="horizontal">
+                android:background="#1AFFFFFF"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="180dp"
+                    android:layout_height="130dp"
                     app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnFace"
-                        android:layout_width="200dp"
-                        android:layout_height="130dp"
-                        android:background="@drawable/b_0_2" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/d_game_icon_3" />
 
                     <TextView
                         android:id="@+id/textView14"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="#66020202"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#99020202"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:gravity="center"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:text="술과 얼굴"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
+                        android:textColor="#FFC534"
+                        android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -214,11 +246,18 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
-                    android:text="지금 내 얼굴에는 \n어떤 술이 어울릴까 ?"
+                    android:text="지금 내 얼굴에는 \n어떤 술이 어울릴까 ?\n\n오늘은 이걸로 한 잔 할까"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟" />
 
             <LinearLayout
                 android:id="@+id/layout4"
@@ -227,32 +266,35 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginBottom="30dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="100dp"
+                android:background="#1AFFFFFF"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="180dp"
+                    android:layout_height="130dp"
                     app:cardCornerRadius="10dp">
 
                     <ImageButton
                         android:id="@+id/ibtnChat"
-                        android:layout_width="200dp"
-                        android:layout_height="130dp"
-                        android:background="@drawable/b_0_2" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/d_game_icon_4" />
 
                     <TextView
                         android:id="@+id/textView16"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="#66020202"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#99020202"
                         android:fontFamily="@font/puradak_gentle_gothic"
                         android:gravity="center"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:text="비밀(술)친구"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
+                        android:textColor="#FFC534"
+                        android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -262,7 +304,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/kai_gen_gothic_kr_bold"
-                    android:text="단 둘이 나누는 은밀한 대화 ! \n요즘 대세는 인공지능 친구 !"
+                    android:text="아무도 모르는 은밀한 대화 ! \n\n인공지능 친구 어때 ?\n어떤 말이든 대답할 수 있어"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
