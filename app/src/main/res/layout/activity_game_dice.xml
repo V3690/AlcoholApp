@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:backgroundTint="#8C404040"
+                    android:backgroundTint="#A6323232"
                     android:text="음성재생"
                     android:textColor="#FFC107"
                     android:textSize="14sp"
