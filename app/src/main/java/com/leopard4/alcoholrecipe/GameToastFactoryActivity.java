@@ -80,6 +80,8 @@ public class GameToastFactoryActivity extends AppCompatActivity {
         imgSpeaker=findViewById(R.id.imgSpeaker);
         imgSpeaker2=findViewById(R.id.imgSpeaker2);
         btnShare = findViewById(R.id.btnShare);
+
+        // 라디오 버튼으로 변경 필요
         btnMan=findViewById(R.id.btnMan);
         btnWoman=findViewById(R.id.btnWoman);
 

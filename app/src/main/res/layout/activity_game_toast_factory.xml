@@ -50,33 +50,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/txtExplanation"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="음성 모드로 실행하면 결과가 바로 재생됩니다.\n일부만 재생하길 원하시는 경우에는\n음성모드를 해제하고 각각의 재생 버튼을 사용해주세요."
+                android:textColor="#FFFFFF" />
 
-                <Button
-                    android:id="@+id/btnMan"
+            <LinearLayout
+                android:id="@+id/btnType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/txtExplanation"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="#33000000"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
+
+                <Switch
+                    android:id="@+id/switch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="false"
+                    android:text="음성 모드 "
+                    android:textColor="#FFFFFF"
+                    android:thumbTint="#FFFFFF"
+                    android:track="@drawable/setting_switch_track" />
+
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="남성" />
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnWoman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="여성" />
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#AFAFAF"
+                        android:text="여자목소리"
+                        android:textColor="#FFFFFF" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#AFAFAF"
+                        android:text="남자목소리"
+                        android:textColor="#FFFFFF" />
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -88,13 +128,6 @@
                     android:text="@string/선창후창"
                     android:textColor="#FFD324"
                     android:textSize="32sp" />
-
-                <ImageView
-                    android:id="@+id/imgSpeaker"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="15dp"
-                    app:srcCompat="@drawable/baseline_volume_up_24" />
 
             </LinearLayout>
 
@@ -158,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="12dp"
                 android:backgroundTint="#66FFFFFF"
                 android:outlineProvider="none"
@@ -260,11 +293,77 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSound1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#33000000"
+                    android:outlineProvider="none"
+                    android:text="선창"
+                    android:textColor="#FFC107"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/d_game_speaker"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="#FFC107" />
+
+                <Button
+                    android:id="@+id/btnSound2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#33000000"
+                    android:outlineProvider="none"
+                    android:text="후창"
+                    android:textColor="#FFC107"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/d_game_speaker"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="#FFC107" />
+
+                <Button
+                    android:id="@+id/btnSound3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#33000000"
+                    android:outlineProvider="none"
+                    android:text="전체"
+                    android:textColor="#FFC107"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/d_game_speaker"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="#FFC107" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="70dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -347,7 +446,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="12dp"
                 android:backgroundTint="#66FFFFFF"
                 android:outlineProvider="none"
@@ -378,6 +477,30 @@
                         android:textSize="16sp" />
                 </androidx.cardview.widget.CardView>
             </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="#33000000"
+                    android:outlineProvider="none"
+                    android:text="건배사 재생"
+                    android:textColor="#FFC107"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/d_game_speaker"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="#FFC107" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnShare"

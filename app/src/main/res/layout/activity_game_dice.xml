@@ -39,7 +39,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="651dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/topLayout">
 
         <LinearLayout
@@ -72,63 +72,66 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/txtExplanation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="30dp"
-                android:orientation="horizontal">
+                android:text="음성 모드로 편하게 명령할 수 있습니다."
+                android:textColor="#FFFFFF" />
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/d_game_speaker"
-                    app:tint="#CCFED224" />
+            <LinearLayout
+                android:id="@+id/btnType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/txtExplanation"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="#33000000"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
 
-                <Button
-                    android:id="@+id/btnSound"
+                <Switch
+                    android:id="@+id/switch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="false"
+                    android:text="음성 모드 "
+                    android:textColor="#FFFFFF"
+                    android:thumbTint="#FFFFFF"
+                    android:track="@drawable/setting_switch_track" />
+
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#A6323232"
-                    android:outlineProvider="none"
-                    android:text="음성재생"
-                    android:textColor="#FFC107"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#AFAFAF"
+                        android:text="여자목소리"
+                        android:textColor="#FFFFFF" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#AFAFAF"
+                        android:text="남자목소리"
+                        android:textColor="#FFFFFF" />
+                </RadioGroup>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="명령을 음성으로 재생할 수 있어요."
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="버튼을 눌러보세요."
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtHuman"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/d_game_pick_1"
                 android:fontFamily="@font/puradak_gentle_gothic"
                 android:gravity="bottom"
@@ -154,9 +157,34 @@
                 android:textSize="16sp"
                 android:visibility="visible" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="#33000000"
+                    android:outlineProvider="none"
+                    android:text="결과 재생"
+                    android:textColor="#FFC107"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/d_game_speaker"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="#FFC107" />
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/뽑기버튼설명"
                 android:textColor="#FFFFFF"
@@ -166,7 +194,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="50dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
