@@ -1,6 +1,9 @@
 package com.leopard4.alcoholrecipe.api;
 
 
+import com.leopard4.alcoholrecipe.model.AlcoholFriendRes;
+import com.leopard4.alcoholrecipe.model.QuestionMent;
+import com.leopard4.alcoholrecipe.model.alcohol.Alcohol;
 import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
 import com.leopard4.alcoholrecipe.model.DiceRes;
 import com.leopard4.alcoholrecipe.model.EmotionRes;
@@ -34,4 +37,9 @@ public interface GameApi extends Serializable {
     @GET("/game/dice/{subjectTypeId}/{penaltyTypeId}")
     Call<DiceRes> diceRes(@Header("Authorization") String token,
                           @Path("subjectTypeId") int subjectTypeId , @Path("penaltyTypeId") int penaltyTypeId) ;
+
+    // 비밀 술 친구
+    @POST("/game/chatbot")
+    Call<AlcoholFriendRes> getAnswer (@Header("Authorization") String token,
+                                      @Body QuestionMent questionMent);
 }
