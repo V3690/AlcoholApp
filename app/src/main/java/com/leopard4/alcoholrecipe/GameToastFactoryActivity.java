@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,18 +20,26 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.leopard4.alcoholrecipe.api.ClovaNetworkClient;
+import com.leopard4.alcoholrecipe.api.ClovaVoiceService;
 import com.leopard4.alcoholrecipe.api.GameApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
 import com.leopard4.alcoholrecipe.model.cheers.CheersMentRes;
 import com.leopard4.alcoholrecipe.model.cheers.Ment;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.Field;
 import retrofit2.http.Tag;
 
 public class GameToastFactoryActivity extends AppCompatActivity {
@@ -41,9 +50,18 @@ public class GameToastFactoryActivity extends AppCompatActivity {
 
     ImageView imgSpeaker, imgSpeaker2, imgBack, btnStart1,btnStart2; ;
 
-    Button btnShare;
+    Button btnShare , btnMan , btnWoman;
 
     private TextToSpeech tts;
+    private String ment;
+    private String speaker = "nminyoung";
+    private int speed= -1;
+    private int volume= 5;
+    private int pitch= 1;
+    private int emotionst= 0;
+    private int emotion= 0;
+    private int alpha= 0;
+    private int end_pitch= 0;
 
 
     @Override
@@ -62,6 +80,9 @@ public class GameToastFactoryActivity extends AppCompatActivity {
         imgSpeaker=findViewById(R.id.imgSpeaker);
         imgSpeaker2=findViewById(R.id.imgSpeaker2);
         btnShare = findViewById(R.id.btnShare);
+        btnMan=findViewById(R.id.btnMan);
+        btnWoman=findViewById(R.id.btnWoman);
+
 
         btnStart1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,46 +214,69 @@ public class GameToastFactoryActivity extends AppCompatActivity {
             }
         });
 
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int result = tts.setLanguage(Locale.KOREA);
+//        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if (status == TextToSpeech.SUCCESS) {
+//                    int result = tts.setLanguage(Locale.KOREA);
+//
+//                    if (result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA) {
+//                        Log.e("TTS", "Language not supported.");
+//                    }
+//                } else {
+//                    Log.e("TTS", "Initialization failed.");
+//                }
+//            }
+//        });
 
-                    if (result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA) {
-                        Log.e("TTS", "Language not supported.");
-                    }
-                } else {
-                    Log.e("TTS", "Initialization failed.");
-                }
+        btnMan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speaker = "nwoosik";
+                speed = -1;
+                volume = 5;
+                pitch = 2;
+                emotionst = 0;
+                emotion = 0;
+                alpha = 0;
+                end_pitch = 0;
+
+
             }
         });
+
+        btnWoman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speaker = "nminyoung";
+                speed = -1;
+                volume = 5;
+                pitch = 1;
+                emotionst = 0;
+                emotion = 0;
+                alpha = 0;
+                end_pitch = 0;
+            }
+        });
+
 
         imgSpeaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CharSequence ment = txtOutputFirst.getText().toString();
-                tts.setPitch((float)0.5); // 톤조절
-                tts.setSpeechRate((float)0.8); // 속도
+               ment = txtOutputFirst.getText().toString();
+                clova();
+//                googletts();
 
-                tts.speak(ment, TextToSpeech.QUEUE_FLUSH, null, "uid");
-                // 첫 번째 매개변수: 음성 출력을 할 텍스트
-                // 두 번째 매개변수: 1. TextToSpeech.QUEUE_FLUSH - 진행중인 음성 출력을 끊고 이번 TTS의 음성 출력
-                //                 2. TextToSpeech.QUEUE_ADD - 진행중인 음성 출력이 끝난 후에 이번 TTS의 음성 출력
             }
         });
 
         imgSpeaker2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CharSequence ment = txtOutput.getText().toString();
-                tts.setPitch((float)0.5); // 톤조절
-                tts.setSpeechRate((float)0.8); // 속도
+                ment = txtOutput.getText().toString();
+                clova();
 
-                tts.speak(ment, TextToSpeech.QUEUE_FLUSH, null, "uid");
-                // 첫 번째 매개변수: 음성 출력을 할 텍스트
-                // 두 번째 매개변수: 1. TextToSpeech.QUEUE_FLUSH - 진행중인 음성 출력을 끊고 이번 TTS의 음성 출력
-                //                 2. TextToSpeech.QUEUE_ADD - 진행중인 음성 출력이 끝난 후에 이번 TTS의 음성 출력
+//                googletts();
 
             }
         });
@@ -246,17 +290,80 @@ public class GameToastFactoryActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        if (tts != null) {
-            tts.stop();
-            // Interrupts the current utterance (whether played or rendered to file) and
-            // discards other utterances in the queue.
-            tts.shutdown();
-            // Releases the resources used by the TextToSpeech engine.
-        }
-        super.onDestroy();
+    public void clova() {
+
+        Retrofit retrofit = ClovaNetworkClient.getRetrofitClient(GameToastFactoryActivity.this);
+        ClovaVoiceService api = retrofit.create(ClovaVoiceService.class);
+
+
+        Call<ResponseBody> call = api.synthesize(speaker, speed,volume ,pitch,emotionst,emotion,alpha,end_pitch,ment);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if (response.isSuccessful()) {
+                    try {
+                        File tempMp3 = File.createTempFile("temp","mp3",getCacheDir());
+                        tempMp3.deleteOnExit();;
+
+                        InputStream inputStream = response.body().byteStream();
+                        FileOutputStream fos = new FileOutputStream(tempMp3);
+                        byte[] buffer = new byte[1024];
+                        int read;
+                        while ((read = inputStream.read(buffer))!=-1){
+                            fos.write(buffer,0,read);
+                        }
+                        fos.flush();
+                        fos.close();
+                        inputStream.close();
+
+                        MediaPlayer mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(tempMp3.getPath());
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("TAG", "onFailure: " + t.getMessage());
+            }
+        });
+
     }
+
+
+
+//구글 tts
+//    @Override
+//    protected void onDestroy() {
+//        if (tts != null) {
+//            tts.stop();
+//            // Interrupts the current utterance (whether played or rendered to file) and
+//            // discards other utterances in the queue.
+//            tts.shutdown();
+//            // Releases the resources used by the TextToSpeech engine.
+//        }
+//        super.onDestroy();
+//    }
+
+    //구글tts실행시 사용설정
+//    public void googletts() {
+//        tts.setPitch((float)0.5); // 톤조절
+//        tts.setSpeechRate((float)0.8); // 속도
+//
+//        tts.speak(ment, TextToSpeech.QUEUE_FLUSH, null, "uid");
+//        // 첫 번째 매개변수: 음성 출력을 할 텍스트
+//        // 두 번째 매개변수: 1. TextToSpeech.QUEUE_FLUSH - 진행중인 음성 출력을 끊고 이번 TTS의 음성 출력
+//        //                 2. TextToSpeech.QUEUE_ADD - 진행중인 음성 출력이 끝난 후에 이번 TTS의 음성 출력
+//    }
+//
 
 
 }
