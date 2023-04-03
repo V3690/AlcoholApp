@@ -59,7 +59,7 @@ public class GameChatActivity extends AppCompatActivity {
 
                 QuestionMent questionMent = new QuestionMent();
 
-                questionMent.setQuestion(question);
+                questionMent.setQuestion(question+",답장은 20글자 이내로 해줘.");
 
                 txtAnswer.setText("생각 중 입니다...");
 
