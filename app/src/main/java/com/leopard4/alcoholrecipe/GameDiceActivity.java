@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.leopard4.alcoholrecipe.api.GameApi;
 import com.leopard4.alcoholrecipe.api.NetworkClient;
 import com.leopard4.alcoholrecipe.config.Config;
@@ -36,7 +38,7 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
 
     TextView txtHuman , txtRule;
 
-    ImageView imgBack ;
+    ImageView imgBack, imgBox1, imgBox2 ;
     Button btnSelect1,btnSelect2, btnSound ;
     private TextToSpeech tts;
 
@@ -53,9 +55,11 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
         txtHuman = findViewById(R.id.txtHuman);
         txtRule = findViewById(R.id.txtRule);
         btnSound=findViewById(R.id.btnSound);
+        imgBox1 = findViewById(R.id.imgBox1);
+        imgBox2 = findViewById(R.id.imgBox2);
 
-        ArrayAdapter<CharSequence> adapterHuman = ArrayAdapter.createFromResource(this,R.array.spinner_item6 , R.layout.layout_spinner);;
-        ArrayAdapter<CharSequence> adapterRule = ArrayAdapter.createFromResource(this,R.array.spinner_item7 , R.layout.layout_spinner);;
+        ArrayAdapter<CharSequence> adapterHuman = ArrayAdapter.createFromResource(this,R.array.spinner_item6 , R.layout.layout_spinner2);;
+        ArrayAdapter<CharSequence> adapterRule = ArrayAdapter.createFromResource(this,R.array.spinner_item7 , R.layout.layout_spinner2);;
 
         spinner10.setOnItemSelectedListener(GameDiceActivity.this);
         spinner11.setOnItemSelectedListener(GameDiceActivity.this);
@@ -87,6 +91,12 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
         btnSelect1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                YoYo.with(Techniques.RubberBand).duration(600)
+                        .repeat(0).playOn(imgBox1);
+
+                YoYo.with(Techniques.SlideInRight).duration(400)
+                        .repeat(0).playOn(txtHuman);
 
                 int subjectTypeId = spinner10.getSelectedItemPosition() + 1;
                 int penaltyTypeId = spinner11.getSelectedItemPosition() + 1;
@@ -126,6 +136,12 @@ public class GameDiceActivity extends AppCompatActivity implements AdapterView.O
         btnSelect2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                YoYo.with(Techniques.RubberBand).duration(600)
+                        .repeat(0).playOn(imgBox2);
+
+                YoYo.with(Techniques.SlideInLeft).duration(400)
+                        .repeat(0).playOn(txtRule);
 
                 int subjectTypeId = spinner10.getSelectedItemPosition() + 1;
                 int penaltyTypeId = spinner11.getSelectedItemPosition() + 1;
