@@ -93,7 +93,7 @@
                 android:paddingLeft="20dp">
 
                 <Switch
-                    android:id="@+id/switch2"
+                    android:id="@+id/switchVoice"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:checked="false"
@@ -109,7 +109,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/btnWoman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="#AFAFAF"
@@ -117,7 +117,7 @@
                         android:textColor="#FFFFFF" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/btnMan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
