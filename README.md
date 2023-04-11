@@ -83,12 +83,12 @@
 #### Android Studio에서 개발하고 실행한 화면입니다..<br/>
 |건배사|얼굴인식|Gpt 기반 실시간 채팅|
 |---|---|---|
-|&nbsp;&nbsp;![Screen_Recording_20220914_213944_MatchRun_6](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EA%B1%B4%EB%B0%B0%EC%82%AC_AdobeExpress.gif)|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%96%BC%EA%B5%B4%EC%9D%B8%EC%8B%9D_AdobeExpress.gif)|![Screen_Recording_jooinjang]()|
+|![Screen_Recording_20220914_213944_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EA%B1%B4%EB%B0%B0%EC%82%AC.gif)|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%96%BC%EA%B5%B4%EC%9D%B8%EC%8B%9D.gif)|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%20%EC%A1%B0%ED%9A%8C.gif)|
 <br/>
 
 |레시피 작성|술 도감 조회|레시피 조회|
 |---|---|---|
-|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%EC%9E%91%EC%84%B1_AdobeExpress.gif)|![Screen_Recording_jooinjang_](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%88%A0%EB%8F%84%EA%B0%90_AdobeExpress.gif)|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%EC%9E%91%EC%84%B1_AdobeExpress.gif)|
+|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%20%EC%9E%91%EC%84%B1.gif)|![Screen_Recording_jooinjang_](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%88%A0%EB%8F%84%EA%B0%90.gif)|![Screen_Recording_jooinjang](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%20%EC%A1%B0%ED%9A%8C.gif)|
 <br/>
 ## 기술 특장점<br/>
 - Rulebase-chat bot을 활용한 건배사 추천 : 유저가 특정 키워드를 입력하면 그와 관련된 건배사를 제시합니다.<br/>
