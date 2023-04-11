@@ -52,7 +52,7 @@
 
 |:rabbit:[김지은]|:dog:[장유경]|:snake:[정만희]|:mouse:[한건희]|
 |:---:|:---:|:---:|:---:|
-|![지은](https://avatars.githubusercontent.com/u/120348534?v=4)|![유경](https://avatars.githubusercontent.com/u/104052659?v=4)|![만희](https://avatars.githubusercontent.com/u/95200973?v=4)|![건희](https://avatars.githubusercontent.com/u/120348599?s=400&u=d9328cd54a6110a9220b9f63d0d0f55cada143bc&v=4)|
+|![지은](https://github.com/V3690/Design/blob/develop/%EC%A0%9C%EC%9E%91/%EC%A7%80%EC%9D%80%ED%94%84%EB%A1%9C%ED%95%84.png)|![유경](https://github.com/V3690/Design/blob/develop/%EC%A0%9C%EC%9E%91/%EC%9C%A0%EA%B2%BD%20%ED%94%84%EB%A1%9C%ED%95%84.png)|![만희](https://github.com/V3690/Design/blob/develop/%EC%A0%9C%EC%9E%91/%EB%A7%8C%ED%9D%AC%20%ED%94%84%EB%A1%9C%ED%95%84.png)|![건희](https://github.com/V3690/Design/blob/develop/%EC%A0%9C%EC%9E%91/%EA%B1%B4%ED%9D%AC%20%ED%94%84%EB%A1%9C%ED%95%84.png)|
 |끊임없이 소통하는<br/>개발자|거침없이 도전하는<br/>개발자|포기란 없는<br/>개발자|새로움을 찾아가는<br/>개발자|
 
 [김지은]:https://github.com/kimjieun990525
@@ -81,9 +81,15 @@
 
 ## 실행 화면 <br/>
 #### Android Studio에서 개발하고 실행한 화면입니다..<br/>
-
+|건배사|얼굴인식|Gpt 기반 실시간 채팅|
+|---|---|---|
+|![Screen_Recording_20220914_213944_MatchRun_6](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EA%B1%B4%EB%B0%B0%EC%82%AC_AdobeExpress.gif)|![Screen_Recording_20220914_213944_MatchRun_1](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%96%BC%EA%B5%B4%EC%9D%B8%EC%8B%9D_AdobeExpress.gif)|![Screen_Recording_20220914_213944_MatchRun_5]()|
 <br/>
 
+|레시피 작성|술 도감 조회|레시피 조회|
+|---|---|---|
+|![Screen_Recording_20220914_213944_MatchRun_2](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%EC%9E%91%EC%84%B1_AdobeExpress.gif)|![Screen_Recording_20220914_213944_MatchRun_3](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EC%88%A0%EB%8F%84%EA%B0%90_AdobeExpress.gif)|![Screen_Recording_20220914_213944_MatchRun_4](https://github.com/V3690/Design/blob/develop/%EC%98%81%EC%83%81/gif/%EB%A0%88%EC%8B%9C%ED%94%BC%EC%9E%91%EC%84%B1_AdobeExpress.gif)|
+<br/>
 ## 기술 특장점<br/>
 - Rulebase-chat bot을 활용한 건배사 추천 : 유저가 특정 키워드를 입력하면 그와 관련된 건배사를 제시합니다.<br/>
 - 인공지능 AWS Recognition 얼굴 인식 :얼굴에서 인식된 감정 데이터를 기반으로 유저에게 어울리는 술과 멘트를 제시합니다.<br/>
