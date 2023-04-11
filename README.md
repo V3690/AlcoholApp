@@ -1,4 +1,4 @@
-![매치런 텍스트 이펙트1](https://raw.githubusercontent.com/V3690/Design/develop/%EA%B9%83%ED%97%88%EB%B8%8C%EB%A1%9C%EA%B3%A0.PNG)
+![텍스트 이펙트1](https://raw.githubusercontent.com/V3690/Design/develop/%EA%B9%83%ED%97%88%EB%B8%8C%EB%A1%9C%EA%B3%A0.PNG)
 <br/>
 # 즐거움과 함께 행복한 감정을 느낄 수 있는<br/> 한국식 칵테일과 오락 요소를 더해서 모두가 즐길 수 있는 앱 입니다.
 
