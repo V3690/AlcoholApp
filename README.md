@@ -81,14 +81,7 @@
 
 ## 실행 화면 <br/>
 #### Android Studio에서 개발하고 실행한 화면입니다..<br/>
-|내 팀 정보 화면|상대팀 추천 기능|체육시설 검색 기능|
-|---|---|---|
-|![Screen_Recording_20220914_213944_MatchRun_6](https://user-images.githubusercontent.com/105832364/190191483-cbd0146c-d0b5-491a-859e-5e8f1fdc32ee.gif)|![Screen_Recording_20220914_213944_MatchRun_1](https://user-images.githubusercontent.com/105832364/190189507-c6a48b77-f630-4d12-9ab3-2fc470b050c1.gif)|![Screen_Recording_20220914_213944_MatchRun_5](https://user-images.githubusercontent.com/105832364/190189550-ff2cfa7e-dece-4614-a558-0a305bef233e.gif)|
-<br/>
 
-|포스팅 기능|포스팅 검색 기능|팀별 채팅 기능|
-|---|---|---|
-|![Screen_Recording_20220914_213944_MatchRun_2](https://user-images.githubusercontent.com/105832364/190190317-2cda0877-7e53-4309-ad3e-484aad546c47.gif)|![Screen_Recording_20220914_213944_MatchRun_3](https://user-images.githubusercontent.com/105832364/190190379-b721808e-7ded-4469-9268-a67fd86ec05a.gif)|![Screen_Recording_20220914_213944_MatchRun_4](https://user-images.githubusercontent.com/105832364/190189593-dfd841dc-6b83-44f2-8373-722794ce67e1.gif)|
 <br/>
 
 ## 기술 특장점<br/>
